@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson Player</title>
+<link rel="stylesheet" href="../style/nav-img-profile.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<link rel="stylesheet" href="../style/lesson-player.css">
+</head>
+
+<body>
+    <script src="../script/nav.js" defer></script>
+    <header>
+        <nav>
+            <a class="logo" href="#">CodeCraft</a>
+
+            <ul class="list">
+                <li><a href="/html/home.html">home</a></li>
+                <li><a href="/html/track.html">tracks</a></li>
+                <li><a href="/html/courses.html">courses</a></li>
+                <li><a href="/html/roadmap.html">road maps</a></li>
+                <li><a href="/html/resources.html">resources</a></li>
+                <li><a href="/html/home.html#contact">contact us</a></li>
+            </ul>
+
+            
+            <div class="nav-auth-container" style="display: flex; align-items: center;">
+                <!-- Guest -->
+                <div class="guest-only acount" style="display: flex; gap: 10px;">
+                    <button><a href="/html/login.html" style="color: inherit; text-decoration: none;">log in</a></button>
+                    <button><a href="/html/signup-st.html" style="color: inherit; text-decoration: none;">sign up</a></button>
+                </div>
+                <!-- Student -->
+                <div class="student-only" style="display: flex; align-items: center; gap: 15px;">
+                    <a href="/html/st-profile.html" style="display: flex; align-items: center;">
+                        <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
+                    </a>
+                    <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+                <!-- Doctor -->
+                <div class="doctor-only" style="display: flex; align-items: center; gap: 15px;">
+                    <a href="/html/dr-dashboard.html" style="display: flex; align-items: center;">
+                        <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
+                    </a>
+                    <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+                <!-- Admin -->
+                <div class="admin-only" style="display: flex; align-items: center; gap: 15px;">
+                    <a href="/html/admin-dashboard.html" style="display: flex; align-items: center;">
+                        <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
+                    </a>
+                    <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+                
+                <!-- Dark Mode Toggle -->
+                <button id="darkModeToggle" title="Toggle Dark Mode" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer; margin-left: 15px; transition: 0.3s;">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+
+
+        </nav>
+    </header>
+
+<div class="title">Lesson Player Screen</div>
+
+<div class="container">
+    <div class="sidebar">
+        <h3 id="courseTitle">Course Content</h3>
+        <div id="lesson-list">
+            <p>Loading lessons...</p>
+        </div>
+        <div class="quiz-button-container" id="quiz-container" style="display: none;">
+             <p id="quiz-message" style="font-size: 13px; color: #666; text-align: center; margin-bottom: 10px;">Complete all lessons to unlock the quiz.</p>
+            <a href="#" id="quiz-btn" class="quiz-btn" style="pointer-events: none; background: #ccc;">Take Final Quiz</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="video-box">
+            <video id="mainVideo" controls controlsList="nodownload">
+                <!-- Video source will be set by JS -->
+            </video>
+        </div>
+
+        <div class="instructor">
+            <div>
+                <b id="lessonTitle">Loading...</b><br>
+                <span id="instructorName" style="color: #666; font-size: 14px;">Programming Instructor</span>
+            </div>
+            <div class="rating-area">
+                <div class="stars">★★★★★ <span class="eval-def">(4.9/5 - Excellent)</span></div>
+            </div>
+            <img id="instructorAvatar" src="https://via.placeholder.com/50" alt="Instructor">
+        </div>
+
+        <div class="resources">
+            <!-- <h3 style="margin-top: 0;">Course Resources</h3> -->
+            <div class="download-btns">
+                <!--  -->
+                <!-- <a href="#" download class="download"><i class="fas fa-file-pdf"></i> Download PDF</a>
+                <a href="#" download class="download"><i class="fas fa-video"></i> Download Video</a> -->
+                        <div class="next-session-container">
+            <button class="next-session-btn" onclick="goToNextLesson()">
+                Next Session
+            </button>
+        
+            <button class="next-session-btn" id="quiz-btn-bottom" style="opacity: 0.5; pointer-events: none;" title="Complete all videos to unlock">
+                <a href="#" id="quiz-link-bottom" style="color: #fff; text-decoration: none;">Take Final Quiz</a>
+            </button>
+        </div>
+            </div>
+        </div>
+
+        <div class="requirements">
+            <h3 style="margin-top: 0;">Course Requirements</h3>
+            <div class="req"><span>Understand programming basics</span><input type="checkbox"></div>
+            <div class="req"><span>Practice coding regularly</span><input type="checkbox"></div>
+            <div class="req"><span>Build small projects</span><input type="checkbox"></div>
+        </div>
+
+        <div class="comments">
+            <h3 style="margin-top: 0;">Lesson Comment</h3>
+            <textarea id="commentInput" placeholder="Write your comment here..."></textarea>
+            <br>
+            <button class="comment-btn" onclick="addComment()">Post Comment</button>
+            <div id="commentBox"></div>
+        </div>
+
+        <!-- <div class="next-session-container">
+            <button class="next-session-btn" onclick="goToNextLesson()">
+                Next Session
+            </button>
+        
+            <button class="next-session-btn" id="quiz-btn-bottom" style="opacity: 0.5; pointer-events: none;" title="Complete all videos to unlock">
+                <a href="#" id="quiz-link-bottom" style="color: #fff; text-decoration: none;">Take Final Quiz</a>
+            </button>
+        </div> -->
+    </div>
+
+    <!-- Right Sidebar for Notes -->
+    <div class="sidebar sidebar-right">
+        <h3>My Notes <i class="fas fa-edit" style="float: right; color: #7b3fe4;"></i></h3>
+        <div class="notes-area">
+            <textarea id="lessonNotes" placeholder="Take notes here while watching the lesson..."></textarea>
+            <button class="note-save-btn" onclick="saveNotes()">Save Notes</button>
+        </div>
+        <p id="noteSaveStatus" style="color: #28a745; font-size: 12px; display: none; text-align: center; margin-top: 10px;">Saved Successfully!</p>
+    </div>
+</div>
+<footer class="footer">
+    <div class="footer-container">
+
+        <!-- Logo -->
+        <div class="footer-col">
+            <div class="logo">
+                <img src="../img/logo.png" alt="Logo">
+            </div>
+        </div>
+
+        <!-- Links -->
+        <div class="footer-col">
+            <h5>Quick Links</h5>
+            <ul>
+                <li><a href="home.html">Home</a></li> 
+                <li><a href="support.html">Support</a></li>
+                <li><a href="terms.html">Terms & Conditions</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-col">
+            <h5>Contact Us</h5>
+            <div class="contact-list">
+                <a href="https://wa.me/201104895301" target="_blank">
+  <i class="fab fa-whatsapp"></i> WhatsApp
+</a>
+              <a href="tel:+201104895301">
+  <i class="fas fa-phone"></i> Call Us
+</a>
+             <a href="mailto:mohamedleqaa13@gmail.com">
+  <i class="fas fa-envelope"></i> Email
+</a>
+            </div>
+        </div>
+
+        <!-- Form -->
+        <div class="footer-col">
+            <h5>Send Message</h5>
+            <form class="contact-form">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        Copyright &copy; 2026 CODECRAFT. All rights reserved.
+    </div>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const courseId = urlParams.get('courseId');
+
+        const mainVideo = document.getElementById('mainVideo');
+        const lessonListContainer = document.getElementById('lesson-list');
+        const courseTitleEl = document.getElementById('courseTitle');
+        const lessonTitleEl = document.getElementById('lessonTitle');
+        const instructorNameEl = document.getElementById('instructorName');
+        const instructorAvatarEl = document.getElementById('instructorAvatar');
+        const notesTextArea = document.getElementById('lessonNotes');
+        const noteSaveStatus = document.getElementById('noteSaveStatus');
+
+        if (!courseId) {
+            document.querySelector('.container').innerHTML = '<h1>Error: Course ID is missing. Please go back to the courses page.</h1>';
+            return;
+        }
+
+        let courseData = null;
+        let currentVideoIndex = 0;
+        let completedVideoIds = new Set();
+
+        window.changeLesson = function(index) {
+            if (!courseData || !courseData.videos[index]) return;
+            
+            currentVideoIndex = index;
+            
+            const items = lessonListContainer.querySelectorAll(".lesson");
+            items.forEach(i => i.classList.remove("active"));
+            items[index].classList.add("active");
+
+            const videoPath = courseData.videos[index].path;
+            const encodedPath = videoPath.split('/').map(seg => encodeURIComponent(seg)).join('/');
+            mainVideo.src = `http://localhost:5000${encodedPath}`;
+            mainVideo.load();
+            mainVideo.play().catch(e => console.log("Auto-play prevented", e));
+            
+            lessonTitleEl.textContent = courseData.videos[index].title;
+
+            // Load notes for the current video
+            loadNotes(courseData.videos[index].id);
+
+            // Add event listener for when the video finishes playing
+            mainVideo.onended = () => {
+                markVideoAsComplete(courseData.videos[index].id);
+                goToNextLesson(); // Automatically play the next video
+            };
+        }
+
+        window.goToNextLesson = function() {
+            if (currentVideoIndex < courseData.videos.length - 1) {
+                changeLesson(currentVideoIndex + 1);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                alert("This is the last session!");
+            }
+        }
+
+        window.addComment = function() {
+            let text = document.getElementById("commentInput").value;
+            if(text.trim() !== ""){
+                let div = document.createElement("div");
+                div.className = "comment-item";
+                div.innerText = text;
+                document.getElementById("commentBox").appendChild(div);
+                document.getElementById("commentInput").value = "";
+            }
+        }
+
+        async function markVideoAsComplete(videoId) {
+            const token = localStorage.getItem('authToken');
+            // Don't send request if user is not logged in or video is already marked complete
+            if (!token || completedVideoIds.has(videoId)) return;
+
+            try {
+                const response = await fetch(`http://localhost:5000/api/videos/${videoId}/complete`, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (response.ok) {
+                    console.log(`Video ${videoId} marked as complete.`);
+                    // Update UI to reflect completion
+                    const lessonEl = document.querySelector(`.lesson[data-video-id="${videoId}"]`);
+                    if (lessonEl) {
+                        lessonEl.querySelector('span').classList.add('completed');
+                        lessonEl.classList.add('completed-lesson');
+                        completedVideoIds.add(videoId); // Update local state
+
+                        // Re-check if quiz can be unlocked
+                        if (completedVideoIds.size === courseData.videos.length) {
+                             const quizBtn = document.getElementById('quiz-btn');
+                            quizBtn.style.pointerEvents = 'auto';
+                            quizBtn.style.background = 'linear-gradient(135deg, #11998e, #38ef7d)';
+                            quizBtn.href = `quiz.html?courseId=${courseId}&courseName=${encodeURIComponent(courseData.title)}`;
+                            document.getElementById('quiz-message').style.display = 'none';
+
+                            const quizBtnBottom = document.getElementById('quiz-btn-bottom');
+                            quizBtnBottom.style.opacity = '1';
+                            quizBtnBottom.style.pointerEvents = 'auto';
+                            document.getElementById('quiz-link-bottom').href = `quiz.html?courseId=${courseId}&courseName=${encodeURIComponent(courseData.title)}`;
+                        }
+                    }
+                }
+            } catch (error) {
+                console.error("Failed to mark video as complete:", error);
+            }
+        }
+
+        window.saveNotes = function() {
+            if (!courseData || !courseData.videos[currentVideoIndex]) return;
+            const videoId = courseData.videos[currentVideoIndex].id;
+            localStorage.setItem(`notes_video_${videoId}`, notesTextArea.value);
+            
+            noteSaveStatus.style.display = 'block';
+            setTimeout(() => { noteSaveStatus.style.display = 'none'; }, 2000);
+        }
+
+        function loadNotes(videoId) {
+            const savedNotes = localStorage.getItem(`notes_video_${videoId}`);
+            notesTextArea.value = savedNotes || '';
+        }
+
+        try {
+            const response = await fetch(`http://localhost:5000/api/courses/${courseId}`);
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(result.message || 'Failed to load course data.');
+            }
+            
+            courseData = result.data;
+
+            // Fetch user's progress for this course
+            const token = localStorage.getItem('authToken');
+            if (token) {
+                const progressResponse = await fetch(`http://localhost:5000/api/users/progress/${courseId}`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (progressResponse.ok) {
+                    const progressResult = await progressResponse.json();
+                    completedVideoIds = new Set(progressResult.data);
+                }
+            }
+            
+            // Populate course info
+            courseTitleEl.textContent = courseData.title;
+            instructorNameEl.textContent = `by ${courseData.instructor ? courseData.instructor.name : 'Unknown'}`;
+            if (courseData.instructor && courseData.instructor.profilePic && courseData.instructor.profilePic !== 'default-avatar.png') {
+                instructorAvatarEl.src = `http://localhost:5000${courseData.instructor.profilePic}`;
+            } else {
+                instructorAvatarEl.src = `../img/circle-user-solid-full.svg`;
+            }
+
+            // Populate lesson list
+            lessonListContainer.innerHTML = '';
+            if (courseData.videos.length > 0) {
+                courseData.videos.forEach((video, index) => {
+                    const lessonEl = document.createElement('div');
+                    const isCompleted = completedVideoIds.has(video.id);
+                    lessonEl.className = 'lesson';
+                    lessonEl.innerHTML = `<span></span> ${video.title}`;
+                    if (isCompleted) lessonEl.classList.add('completed-lesson');
+                    
+                    lessonEl.dataset.videoId = video.id; // Store video ID for later
+                    lessonEl.innerHTML = `<span class="${isCompleted ? 'completed' : ''}"></span> ${video.title}`;
+                    
+                    lessonEl.onclick = () => changeLesson(index);
+                    lessonListContainer.appendChild(lessonEl);
+                });
+                // Load the first lesson
+                changeLesson(0);
+            } else {
+                // If there are no videos, maybe hide the quiz button or show a message
+                document.getElementById('quiz-container').style.display = 'none';
+                lessonListContainer.innerHTML = '<p>No videos available for this course yet.</p>';
+                mainVideo.parentElement.innerHTML = '<h2 style="color: white; text-align: center;">No videos to display.</h2>';
+            }
+
+            // Check progress to enable quiz button
+            const totalVideos = courseData.videos.length;
+            if (totalVideos > 0) {
+                document.getElementById('quiz-container').style.display = 'block';
+                if (completedVideoIds.size === totalVideos) {
+                    const quizBtn = document.getElementById('quiz-btn');
+                    quizBtn.style.pointerEvents = 'auto';
+                    quizBtn.style.background = 'linear-gradient(135deg, #11998e, #38ef7d)';
+                    quizBtn.href = `quiz.html?courseId=${courseId}&courseName=${encodeURIComponent(courseData.title)}`;
+                    document.getElementById('quiz-message').style.display = 'none';
+                    
+                    const quizBtnBottom = document.getElementById('quiz-btn-bottom');
+                    quizBtnBottom.style.opacity = '1';
+                    quizBtnBottom.style.pointerEvents = 'auto';
+                    document.getElementById('quiz-link-bottom').href = `quiz.html?courseId=${courseId}&courseName=${encodeURIComponent(courseData.title)}`;
+                }
+            }
+
+        } catch (error) {
+            document.querySelector('.container').innerHTML = `<h1>Error: ${error.message}</h1>`;
+            console.error(error);
+        }
+    });
+</script>
+    <script src="../script/auth.js" defer></script>
+</body>
+</html>

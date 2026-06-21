@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Quiz & Certificate</title>
+    <!-- You can include your header file here later -->
+    <link rel="stylesheet" href="../style/quiz.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <div class="page-wrapper">
+        
+        <!-- 1. Quiz Section -->
+        <div id="quiz-section" class="glass-card active-section">
+            <div class="quiz-header">
+                <h2>Course Completion Quiz</h2>
+                <span id="question-tracker">Question 1 of 3</span>
+            </div>
+            <div class="progress-bar"><div id="progress"></div></div>
+            
+            <h3 id="question-text">Loading question...</h3>
+            <div id="options-container" class="options-grid">
+                <!-- Options will be rendered here by JavaScript -->
+            </div>
+            <button id="next-btn" class="neon-btn hidden">Next Question</button>
+        </div>
+
+        <!-- 2. Certificate Form Section -->
+        <div id="form-section" class="glass-card hidden">
+            <h2 class="success-title">🎉 Congratulations! You passed the test.</h2>
+            <p class="score-text">Your score: <span id="final-score"></span></p>
+            <p>Please rate this course and generate your official certificate.</p>
+            
+            <form id="certificate-form">
+                <div class="input-group" style="text-align: left; margin-bottom: 15px;">
+                    <label>Course Rating (1 to 5 Stars)</label>
+                    <select id="course-rating" required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;">
+                        <option value="5">★★★★★ (5/5 - Excellent)</option>
+                        <option value="4">★★★★☆ (4/5 - Very Good)</option>
+                        <option value="3">★★★☆☆ (3/5 - Good)</option>
+                        <option value="2">★★☆☆☆ (2/5 - Fair)</option>
+                        <option value="1">★☆☆☆☆ (1/5 - Poor)</option>
+                    </select>
+                </div>
+                <div class="input-group" style="text-align: left; margin-bottom: 15px;">
+                    <label>Leave a comment (Optional)</label>
+                    <textarea id="course-comment" placeholder="Tell us what you liked about the course..." rows="3" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;"></textarea>
+                </div>
+                <button type="submit" class="neon-btn w-100">Submit Review & Generate Certificate</button>
+            </form>
+        </div>
+
+        <!-- Fail Section -->
+        <div id="fail-section" class="glass-card hidden">
+            <h2 class="fail-title">😔 Unfortunately, you did not pass the test.</h2>
+            <p class="score-text">Your score: <span id="fail-score"></span></p>
+            <p>You must score at least half to pass the test and get the certificate.</p>
+            <button id="retry-btn" class="neon-btn w-100 mt-20" style="background: linear-gradient(135deg, #dc3545, #ff6b81);">Retry Test</button>
+        </div>
+
+        <!-- 3. Certificate View Section -->
+        <div id="certificate-section" class="hidden">
+            <div class="certificate-wrapper" id="certificate-wrapper">
+                <div class="cert-border">
+                    <div class="cert-content">
+                        <h1 class="cert-title">Certificate of Completion</h1>
+                        <p class="cert-subtitle">This is to certify that:</p>
+                        <h2 id="cert-student-name" class="cert-name">Student Name</h2>
+                        <p class="cert-desc">has successfully completed the course and passed the test on <span id="cert-date"></span>.</p>
+                        <div class="cert-signature">Platform Management Signature <br> <span>Craft Code</span></div>
+                    </div>
+                </div>
+            </div>
+            <button id="download-btn" class="neon-btn mt-20">🖨️ Print or Save as PDF</button>
+        </div>
+    </div>
+    <script>
+        // This script is based on the original quiz.js functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const courseId = urlParams.get('courseId');
+            const courseName = urlParams.get('courseName');
+
+            if (!courseId || !courseName) {
+                document.getElementById('quiz-section').innerHTML = '<h1>Error: Course information is missing.</h1>';
+                return;
+            }
+
+            const quizSection = document.getElementById('quiz-section');
+            const formSection = document.getElementById('form-section');
+            const failSection = document.getElementById('fail-section');
+            const certificateSection = document.getElementById('certificate-section');
+
+            const questionText = document.getElementById('question-text');
+            const optionsContainer = document.getElementById('options-container');
+            const nextBtn = document.getElementById('next-btn');
+            const progress = document.getElementById('progress');
+            const questionTracker = document.getElementById('question-tracker');
+
+            let currentQuestionIndex = 0;
+            let score = 0;
+            let questions = [];
+
+            async function fetchQuestions() {
+                try {
+                    const token = localStorage.getItem('authToken');
+                    questionText.textContent = "AI is generating 30 questions... please wait.";
+                    const response = await fetch(`http://localhost:5000/api/quiz/generate?track=${encodeURIComponent(courseName)}&courseId=${courseId}`, {
+                        headers: { 'Authorization': `Bearer ${token}` }
+                    });
+                    const data = await response.json();
+                    
+                    if (!response.ok) {
+                        if (data.maxAttemptsReached) {
+                            alert(data.error || "You have exceeded the maximum attempts. Restarting course...");
+                            window.location.href = `lesson-player.html?courseId=${courseId}`;
+                            return;
+                        }
+                        questionText.textContent = 'Failed to load quiz questions. ' + (data.error || '');
+                        return;
+                    }
+                    questions = data.questions;
+                    if (questions && questions.length > 0) {
+                        displayQuestion();
+                    } else {
+                        questionText.textContent = 'No quiz questions available for this course yet.';
+                    }
+                } catch (error) {
+                    questionText.textContent = 'Error loading quiz. Please check your connection.';
+                }
+            }
+
+            function displayQuestion() {
+                const question = questions[currentQuestionIndex];
+                questionText.textContent = question.question;
+                optionsContainer.innerHTML = '';
+                question.options.forEach((option, idx) => {
+                    const button = document.createElement('button');
+                    button.textContent = option;
+                    button.className = 'option-btn';
+                    // Gemini generates "correct": 0, 1, 2, 3 usually, or gives text. Handling both:
+                    let isCorrect = (question.correct === idx || question.correct === option || parseInt(question.correct) === idx);
+                    button.onclick = () => selectOption(button, isCorrect);
+                    optionsContainer.appendChild(button);
+                });
+                updateProgress();
+            }
+
+            function selectOption(button, isCorrect) {
+                Array.from(optionsContainer.children).forEach(btn => {
+                    btn.disabled = true;
+                    // Optional: show correct/incorrect visually
+                });
+
+                if (isCorrect) {
+                    button.classList.add('correct');
+                    score++;
+                } else {
+                    button.classList.add('incorrect');
+                }
+                nextBtn.classList.remove('hidden');
+            }
+
+            function updateProgress() {
+                const progressPercentage = ((currentQuestionIndex + 1) / questions.length) * 100;
+                progress.style.width = `${progressPercentage}%`;
+                questionTracker.textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
+            }
+
+            nextBtn.addEventListener('click', () => {
+                currentQuestionIndex++;
+                if (currentQuestionIndex < questions.length) {
+                    displayQuestion();
+                    nextBtn.classList.add('hidden');
+                } else {
+                    showResults();
+                }
+            });
+
+            async function showResults() {
+                quizSection.classList.add('hidden');
+                const token = localStorage.getItem('authToken');
+                
+                try {
+                    questionText.textContent = "Submitting your score...";
+                    const response = await fetch(`http://localhost:5000/api/quiz/submit`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                        body: JSON.stringify({ track: courseName, score: score, total: questions.length, courseId: courseId })
+                    });
+                    const data = await response.json();
+
+                    if (!response.ok) {
+                        alert("Error submitting quiz: " + (data.message || 'Server error'));
+                        return;
+                    }
+
+                    if (data.passed) {
+                        formSection.classList.remove('hidden');
+                        
+                        const profileResponse = await fetch(`http://localhost:5000/api/auth/me`, {
+                            headers: { 'Authorization': `Bearer ${token}` }
+                        });
+                        const profileData = await profileResponse.json();
+                        
+                        document.getElementById('cert-student-name').textContent = profileData.success ? profileData.data.name : "Student";
+                        document.getElementById('cert-date').textContent = new Date().toLocaleDateString();
+                        document.getElementById('final-score').textContent = `${score} / ${questions.length}`;
+
+                        document.getElementById('certificate-form').addEventListener('submit', async (e) => {
+                            e.preventDefault();
+                            const rating = document.getElementById('course-rating').value;
+                            const comment = document.getElementById('course-comment').value;
+
+                            // Submit review
+                            try {
+                                await fetch(`http://localhost:5000/api/reviews/${courseId}`, {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                                    body: JSON.stringify({ rating, comment })
+                                });
+                            } catch(err) {
+                                console.error("Error submitting review", err);
+                            }
+
+                            // Show certificate
+                            formSection.classList.add('hidden');
+                            certificateSection.classList.remove('hidden');
+                        });
+                    } else {
+                        failSection.classList.remove('hidden');
+                        document.getElementById('fail-score').textContent = `${score} / ${questions.length}`;
+                        
+                        if (data.maxAttemptsReached) {
+                            const retryBtn = document.getElementById('retry-btn');
+                            retryBtn.textContent = "Course Reset - Go Back";
+                            document.querySelector('#fail-section p').textContent = "You failed 3 times. Your progress has been reset.";
+                            retryBtn.onclick = () => window.location.href = `lesson-player.html?courseId=${courseId}`;
+                        } else {
+                            document.querySelector('#fail-section p').textContent += ` Attempts left: ${data.attemptsLeft}`;
+                            document.getElementById('retry-btn').onclick = () => window.location.reload();
+                        }
+                    }
+                } catch(e) {
+                    console.error("Submit error", e);
+                }
+            }
+
+            document.getElementById('download-btn').addEventListener('click', () => {
+                const element = document.getElementById('certificate-wrapper');
+                html2pdf().from(element).set({
+                    margin: 0,
+                    filename: `${courseName}_Certificate.pdf`,
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2 },
+                    jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' }
+                }).save();
+            });
+
+            fetchQuestions();
+        });
+    </script>
+    <script src="../script/auth.js" defer></script>
+</body>
+</html>

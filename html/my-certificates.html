@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeCraft | My Certificates</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        header {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            background: #0F0C29;
+            height: 100px;
+            border-radius: 0px 0px 20px 20px;
+        }
+
+        nav {
+            grid-column: 1 / -1;
+            grid-row: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            background: linear-gradient(90deg, #6C5CE7, #FF00FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .list {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            transition: all 1s;
+        }
+
+        .list li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 1s;
+        }
+
+        .list li a:hover {
+            background: linear-gradient(90deg, #6C5CE7, #FF00FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .user-profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            transition: all 1s;
+        }
+
+        .user-profile img:hover {
+            transform: rotateY(360deg);
+        }
+
+        /* ===== Main Content Section ===== */
+        .main-section {
+            padding: 80px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .page-title {
+            text-align: center;
+            font-weight: 800;
+            font-size: 36px;
+            margin-bottom: 40px;
+            color: #0F0C29;
+        }
+
+        .certificates-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .cert-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid #eee;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.04);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: 0.3s;
+        }
+        .cert-card h3 { color: #6C5CE7; }
+        .cert-card p { color: #777; font-size: 14px; }
+        }
+
+        .form-card {
+            background-color: #FFFFFF;
+            /* الأبيض الصريح للكروت */
+            border: 1px solid rgba(108, 92, 231, 0.15);
+            border-radius: 24px;
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 20px 40px rgba(15, 12, 41, 0.06);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-card h2 {
+            text-align: center;
+            font-weight: 800;
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #0F0C29;
+        }
+
+        .form-card hr {
+            border: 0;
+            height: 3px;
+            width: 50px;
+            background: linear-gradient(90deg, #6C5CE7, #FF00FF);
+            margin: 0 auto 30px;
+            border-radius: 10px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 14px;
+            color: #6C5CE7;
+            /* الـ 30% موف نيون */
+            margin-bottom: 8px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #F0F2F9;
+            border-radius: 12px;
+            background: #F8F9FF;
+            font-size: 15px;
+            font-family: inherit;
+            transition: 0.3s;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: #6C5CE7;
+            background: #FFFFFF;
+            box-shadow: 0 0 12px rgba(108, 92, 231, 0.1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(90deg, #6C5CE7, #FF00FF);
+            /* الـ 10% نيون */
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(108, 92, 231, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <script src="../script/nav.js" defer></script>
+    <header>
+        <nav>
+
+            <a class="logo" href="#">CodeCraft</a>
+
+            <ul class="list">
+                <li><a href="/html/home.html">home</a></li>
+                <li><a href="/html/track.html">tracks</a></li>
+                <li><a href="/html/courses.html">courses</a></li>
+                <li><a href="/html/roadmap.html">road maps</a></li>
+                <li><a href="/html/resources.html">resources</a></li>
+                <li><a href="/html/home.html#contact">contact us</a></li>
+            </ul>
+
+            
+            <div class="nav-auth-container" style="display: flex; align-items: center;">
+                <!-- Guest -->
+                <div class="guest-only acount" style="display: flex; gap: 10px;">
+                    <button><a href="/html/login.html" style="color: inherit; text-decoration: none;">log in</a></button>
+                    <button><a href="/html/signup-st.html" style="color: inherit; text-decoration: none;">sign up</a></button>
+                </div>
+                <!-- Student -->
+                <div class="student-only" style="display: flex; align-items: center; gap: 15px;">
+                    <a href="/html/st-profile.html" style="display: flex; align-items: center;">
+                        <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
+                    </a>
+                    <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+                <!-- Doctor -->
+                <div class="doctor-only" style="display: flex; align-items: center; gap: 15px;">
+                    <a href="/html/dr-dashboard.html" style="display: flex; align-items: center;">
+                        <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
+                    </a>
+                    <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+                <!-- Admin -->
+                <div class="admin-only" style="display: flex; align-items: center; gap: 15px;">
+                    <a href="/html/admin-dashboard.html" style="display: flex; align-items: center;">
+                        <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
+                    </a>
+                    <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+                
+                <!-- Dark Mode Toggle -->
+                <button id="darkModeToggle" title="Toggle Dark Mode" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer; margin-left: 15px; transition: 0.3s;">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+
+
+        </nav>
+    </header>
+    <section class="main-section">
+        <h1 class="page-title">My Certificates</h1>
+        <div class="certificates-container" id="certificates-list">
+            <p>Loading your certificates...</p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-container">
+
+            <div class="footer-col">
+                <div class="logo">
+                    <img src="../img/logo.png" alt="Logo">
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h5>Quick Links</h5>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="support.html">Support</a></li>
+                    <li><a href="terms.html">Terms & Conditions</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h5>Contact Us</h5>
+                <div class="contact-list">
+                    <a href="https://wa.me/201104895301" target="_blank">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+
+                    <a href="tel:+201104895301">
+                        <i class="fas fa-phone"></i> Call Us
+                    </a>
+
+                    <a href="mailto:mohamedleqaa13@gmail.com">
+                        <i class="fas fa-envelope"></i> Email
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-col" id="contact">
+                <h5>Send Message</h5>
+                <form class="contact-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Your Message" required></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            Copyright © 2026 CODECRAFT. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const token = localStorage.getItem('authToken');
+            if (!token) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const certificatesContainer = document.getElementById('certificates-list');
+            try {
+                const response = await fetch('http://localhost:5000/api/certificates/me', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const result = await response.json();
+
+                if (response.ok && result.data.length > 0) {
+                    certificatesContainer.innerHTML = '';
+                    result.data.forEach(cert => {
+                        const certCard = document.createElement('div');
+                        certCard.className = 'cert-card';
+                        const issueDate = new Date(cert.createdAt).toLocaleDateString();
+                        certCard.innerHTML = `
+                            <h3>${cert.courseName}</h3>
+                            <p>Issued on: ${issueDate}</p>
+                            <a href="certificate-view.html?id=${cert.uniqueId}" target="_blank" class="submit-btn" style="text-align: center; text-decoration: none; margin-top: auto;">View Certificate</a>
+                        `;
+                        certificatesContainer.appendChild(certCard);
+                    });
+                } else {
+                    certificatesContainer.innerHTML = '<p>You have not earned any certificates yet.</p>';
+                }
+            } catch (error) {
+                certificatesContainer.innerHTML = '<p>Failed to load your certificates.</p>';
+            }
+        });
+    </script>
+
+    <script src="../script/auth.js" defer></script>
+</body>
+</html>

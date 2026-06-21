@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - CodeCraft</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-color: #f8f9ff; margin: 0; display: flex; }
+        .sidebar { width: 250px; background: #0F0C29; color: white; height: 100vh; padding: 20px; position: fixed; }
+        .sidebar h2 { text-align: center; color: #FF00FF; }
+        .sidebar ul { list-style: none; padding: 0; margin-top: 40px; }
+        .sidebar ul li a { color: #ccc; text-decoration: none; display: block; padding: 12px; border-radius: 8px; margin-bottom: 5px; display: flex; align-items: center; gap: 10px; }
+        .sidebar ul li a:hover, .sidebar ul li a.active { background: rgba(255,255,255,0.1); color: white; }
+        .main-content { margin-left: 250px; padding: 30px; width: calc(100% - 250px); }
+        .stat-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .stat-card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .stat-card h3 { margin: 0; font-size: 16px; color: #6C5CE7; }
+        .stat-card p { font-size: 36px; font-weight: 700; margin: 5px 0 0; }
+        table { width: 100%; border-collapse: collapse; background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        th, td { padding: 15px; text-align: left; border-bottom: 1px solid #f0f0f0; }
+        th { background: #fafafa; }
+        .btn-delete { background: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; }
+        .btn-edit { background: #007bff; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; margin-right: 5px; }
+        .btn-login-as { background: #28a745; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; margin-right: 5px; }
+
+        @media (max-width: 992px) {
+            body { display: block; }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+                border-bottom: 2px solid #FF00FF;
+            }
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+            }
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 25px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+            position: relative;
+        }
+        .modal-content h2 { margin-top: 0; }
+        .close-btn {
+            color: #aaa;
+            position: absolute;
+            top: 5px;
+            right: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; }
+        .form-group input, .form-group select { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+        .btn-save { background: #28a745; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; width: 100%; margin-top: 10px; }
+
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <h2>Admin Panel</h2>
+        <ul>
+            <li><a href="#" class="active" onclick="showTab('overview')"><i class="fas fa-tachometer-alt"></i> Overview</a></li>
+            <li><a href="#" onclick="showTab('users')"><i class="fas fa-users"></i> Users</a></li>
+            <li><a href="#" onclick="showTab('courses')"><i class="fas fa-book"></i> Courses</a></li>
+            <li><a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <!-- Overview Tab -->
+        <div id="overview-tab" class="tab-content">
+            <h1>Dashboard Overview</h1>
+            <div class="stat-cards">
+                <div class="stat-card">
+                    <h3>Total Users</h3>
+                    <p id="stats-users">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Courses</h3>
+                    <p id="stats-courses">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Enrollments</h3>
+                    <p id="stats-enrollments">0</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Users Tab -->
+        <div id="users-tab" class="tab-content" style="display: none;">
+            <h1>User Management</h1>
+            <table>
+                <thead>
+                    <tr><th>ID</th><th>Name</th><th>Email</th><th>Role</th><th>Verified</th><th>Actions</th></tr>
+                </thead>
+                <tbody id="users-table-body"></tbody>
+            </table>
+        </div>
+
+        <!-- Courses Tab -->
+        <div id="courses-tab" class="tab-content" style="display: none;">
+            <h1>Course Management</h1>
+            <table>
+                <thead>
+                    <tr><th>ID</th><th>Title</th><th>Instructor</th><th>Created At</th><th>Actions</th></tr>
+                </thead>
+                <tbody id="courses-table-body"></tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- User Edit Modal -->
+    <div id="editUserModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeEditModal()">&times;</span>
+            <h2>Edit User</h2>
+            <form id="editUserForm" style="margin-top: 20px;">
+                <input type="hidden" id="editUserId">
+                <div class="form-group">
+                    <label for="editUserName">Name</label>
+                    <input type="text" id="editUserName" required>
+                </div>
+                <div class="form-group">
+                    <label for="editUserEmail">Email</label>
+                    <input type="email" id="editUserEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="editUserRole">Role</label>
+                    <select id="editUserRole" required>
+                        <option value="student">Student</option>
+                        <option value="doctor">Doctor</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="editUserVerified">Verified</label>
+                    <select id="editUserVerified" required>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-save">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Check auth immediately
+        fetch('/api/auth/me', { credentials: 'include' }).then(res => {
+            if (!res.ok) window.location.href = '/html/login.html';
+        });
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.style.display = 'none');
+            document.getElementById(`${tabName}-tab`).style.display = 'block';
+            document.querySelectorAll('.sidebar a').forEach(a => a.classList.remove('active'));
+            document.querySelector(`.sidebar a[onclick="showTab('${tabName}')"]`).classList.add('active');
+        }
+
+        async function fetchWithAuth(url, options = {}) {
+            options.credentials = 'include';
+            const response = await fetch(url, options);
+            if (response.status === 401 || response.status === 403) {
+                window.location.href = '/html/login.html';
+                throw new Error('Unauthorized');
+            }
+            return response.json();
+        }
+
+        async function loadStats() {
+            const result = await fetchWithAuth('/api/admin/stats');
+            if (result.success) {
+                document.getElementById('stats-users').textContent = result.data.users;
+                document.getElementById('stats-courses').textContent = result.data.courses;
+                document.getElementById('stats-enrollments').textContent = result.data.enrollments;
+            }
+        }
+
+        async function loadUsers() {
+            const result = await fetchWithAuth('/api/admin/users');
+            const tbody = document.getElementById('users-table-body');
+            tbody.innerHTML = '';
+            if (result.success) {
+                result.data.forEach(user => {
+                    const tr = document.createElement('tr');
+                    tr.dataset.user = JSON.stringify(user); // Store user data on the row
+                    tr.innerHTML = `
+                        <td>${user.id}</td><td>${user.name}</td><td>${user.email}</td><td>${user.role}</td><td>${user.isVerified ? 'Yes' : 'No'}</td>
+                        <td>
+                            <button class="btn-login-as">Login As</button> <button class="btn-edit">Edit</button> <button class="btn-delete">Delete</button>
+                        </td>`;
+                    tbody.appendChild(tr);
+                });
+            }
+        }
+
+        async function loadCourses() {
+            const result = await fetchWithAuth('/api/admin/courses');
+            const tbody = document.getElementById('courses-table-body');
+            tbody.innerHTML = '';
+            if (result.success) {
+                result.data.forEach(course => {
+                    const tr = document.createElement('tr');
+                    tr.dataset.courseId = course.id; // Store course id on the row
+                    tr.innerHTML = `
+                        <td>${course.id}</td><td>${course.title}</td><td>${course.instructor.name}</td><td>${new Date(course.createdAt).toLocaleDateString()}</td>
+                        <td><button class="btn-delete">Delete</button></td>`;
+                    tbody.appendChild(tr);
+                });
+            }
+        }
+
+        // Using Event Delegation for table actions
+        document.getElementById('users-table-body').addEventListener('click', async (e) => {
+            if (e.target.classList.contains('btn-delete')) {
+                const userId = JSON.parse(e.target.closest('tr').dataset.user).id;
+                deleteUser(userId);
+            }
+            if (e.target.classList.contains('btn-edit')) {
+                const user = JSON.parse(e.target.closest('tr').dataset.user);
+                openEditUserModal(user);
+            }
+            if (e.target.classList.contains('btn-login-as')) {
+                const user = JSON.parse(e.target.closest('tr').dataset.user);
+                await impersonateUser(user);
+            }
+        });
+
+        async function impersonateUser(user) {
+            try {
+                const response = await fetch(`/api/admin/users/${user.id}/impersonate`, {
+                    credentials: 'include'
+                });
+                const result = await response.json();
+                if (result.success) {
+                    // To return to admin, we will need to re-login or use a "return" endpoint
+                    // For now we will alert that return to admin requires logging out.
+                    alert(`Successfully logged in as ${user.name}. To return to admin, you must log out and log in again.`);
+                    if (result.role === 'student') window.location.href = '/html/st-dashboard.html';
+                    else if (result.role === 'doctor') window.location.href = '/html/dr-dashboard.html';
+                    else window.location.href = '/html/admin-dashboard.html';
+                } else {
+                    alert('Could not impersonate user: ' + result.message);
+                }
+            } catch (error) {
+                alert('Error impersonating user.');
+            }
+        }
+
+        document.getElementById('courses-table-body').addEventListener('click', (e) => {
+            if (e.target.classList.contains('btn-delete')) {
+                const courseId = e.target.closest('tr').dataset.courseId;
+                deleteCourse(courseId);
+            }
+        });
+
+        async function deleteUser(userId) { // Now accepts userId
+            if (!confirm(`Are you sure you want to delete user ${userId}?`)) return;
+            const response = await fetch(`/api/admin/users/${userId}`, { method: 'DELETE', credentials: 'include' });
+            const result = await response.json();
+            alert(result.message);
+            if (response.ok) loadUsers();
+        }
+
+        async function deleteCourse(courseId) { // Now accepts courseId
+            if (!confirm(`Are you sure you want to delete course ${courseId}?`)) return;
+            const response = await fetch(`/api/admin/courses/${courseId}`, { method: 'DELETE', credentials: 'include' });
+            const result = await response.json();
+            alert(result.message);
+            if (response.ok) loadCourses();
+        }
+
+        // --- User Edit Modal Logic ---
+        const editModal = document.getElementById('editUserModal');
+
+        function openEditUserModal(user) {
+            document.getElementById('editUserId').value = user.id;
+            document.getElementById('editUserName').value = user.name;
+            document.getElementById('editUserEmail').value = user.email;
+            document.getElementById('editUserRole').value = user.role;
+            document.getElementById('editUserVerified').value = user.isVerified.toString();
+            editModal.style.display = 'block';
+        }
+
+        function closeEditModal() {
+            editModal.style.display = 'none';
+        }
+
+        document.getElementById('editUserForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const userId = document.getElementById('editUserId').value;
+            const updatedData = {
+                name: document.getElementById('editUserName').value,
+                email: document.getElementById('editUserEmail').value,
+                role: document.getElementById('editUserRole').value,
+                isVerified: document.getElementById('editUserVerified').value === 'true'
+            };
+
+            const response = await fetch(`/api/admin/users/${userId}`, {
+                method: 'PUT',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedData)
+            });
+
+            const result = await response.json();
+            alert(result.message);
+
+            if (response.ok) {
+                closeEditModal();
+                loadUsers(); // Refresh the user list
+            }
+        });
+
+        // Close modal if clicked outside
+        window.addEventListener('click', (event) => { if (event.target == editModal) { closeEditModal(); } });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadStats();
+            loadUsers();
+            loadCourses();
+
+            document.getElementById('logout-btn').addEventListener('click', async () => {
+                try {
+                    await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' });
+                } catch(e) {}
+                window.location.href = '/html/login.html';
+            });
+        });
+    </script>
+    <script src="../script/auth.js" defer></script>
+</body>
+</html>

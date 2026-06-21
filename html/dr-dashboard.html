@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeCraft Dashboard - Final Version</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* الناف بار الخاص بك حرفياً */
+        header {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            background: #0F0C29;
+            height: 100px;
+            border-radius: 0px 0px 20px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        header nav {
+            grid-column: 1 / -1;
+            grid-row: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        .logo {
+            background: linear-gradient(90deg, #6C5CE7, #FF00FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .list {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            transition: all 1s;
+        }
+        .list li a { color: #fff; text-decoration: none; font-size: 18px; transition: all 1s; }
+        .list li a:hover { background: linear-gradient(90deg, #6C5CE7, #FF00FF); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .user-profile-nav img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid #6C5CE7; transition: all 1s; }
+        .user-profile-nav img:hover { transform: rotateY(360deg); }
+
+        @media (max-width: 992px) {
+            .flex.flex-1 {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+            }
+        }
+
+        /* تنسيق الداشبورد */
+        body { background-color: #F8F9FF; font-family: 'Inter', sans-serif; margin: 0; }
+        .sidebar { background: #FFFFFF; border-right: 1px solid #E5E7EB; width: 260px; height: calc(100vh - 100px); }
+        .nav-item { color: #8E8E93; transition: 0.3s; }
+        .nav-item.active { background: #F4F4FF; color: #6C5CE7; border-radius: 12px; }
+        .card { background: #FFFFFF; border: 1px solid rgba(108, 92, 231, 0.15); border-radius: 20px; }
+        .progress-bar-fill { background: linear-gradient(90deg, #6C5CE7, #FF00FF); }
+        
+        /* زر البروفايل العلوي اللي كان ناقص */
+        .profile-chip {
+            background: #FFFFFF;
+            padding: 6px 18px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid #F0F0F0;
+        }
+    
+    *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    transition:0.3s;
+}
+
+body{
+    font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+    background:#f4f4f4;
+
+    /* 🔥 الحل بتاع الفوتر */
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+/* ===== Footer ===== */
+.footer{
+    background:#1A1642;
+    color:#FFFFFF;
+    padding:40px 0;
+
+    margin-top:auto; /* 🔥 يخليه تحت */
+}
+
+.footer-container{
+    max-width:1400px; 
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    padding:0 40px;
+    flex-wrap:wrap;
+    gap:30px;
+}
+
+/* الأعمدة */
+.footer-col{
+    flex:1;
+    min-width:200px;
+}
+
+.footer-col:last-child{
+    flex:1.5;
+    min-width:260px;
+    max-width:400px;
+}
+
+/* اللوجو */
+.footer .logo img{ 
+    width:250px; 
+    height:auto;
+  
+    margin-top: -100px;
+}
+
+/* العناوين */
+h5{ 
+    font-size:22px; 
+    margin-bottom:20px; 
+    font-weight:700;
+}
+
+/* الروابط */
+ul{ list-style:none; }
+ul li{ margin-bottom:12px; }
+
+ul li a{ 
+    color:rgba(255,255,255,0.85); 
+    text-decoration:none; 
+    font-size:15px; 
+}
+
+ul li a:hover{
+    color:#6C5CE7;
+    padding-left:4px;
+}
+
+/* Contact */
+.contact-list{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.contact-list a{ 
+    display:flex; 
+    align-items:center; 
+    gap:10px; 
+    font-size:15px; 
+    text-decoration:none; 
+    color:#FFFFFF; 
+}
+
+.contact-list a i{ font-size:18px; }
+
+.contact-list a:hover{
+    color:#6C5CE7;
+}
+
+/* الفورم */
+.contact-form{ 
+    display:flex; 
+    flex-direction:column; 
+    gap:12px; 
+} 
+
+.contact-form input, 
+.contact-form textarea{ 
+    padding:10px; 
+    border-radius:10px; 
+    border:none; 
+    font-size:14px; 
+    outline:none; 
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus{
+    outline:2px solid #6C5CE7;
+}
+
+.contact-form textarea{ 
+    height:90px; 
+    resize:none; 
+}
+
+.contact-form button{ 
+    padding:12px; 
+    border:none; 
+    border-radius:10px; 
+    background:linear-gradient(135deg,#6C5CE7,#FF00FF); 
+    color:#fff; 
+    font-size:15px; 
+    font-weight:bold;
+    cursor:pointer; 
+}
+
+.contact-form button:hover{
+    transform:scale(1.05);
+    opacity:0.9;
+}
+
+/* footer bottom */
+.footer-bottom{ 
+    border-top:1px solid rgba(255,255,255,0.1); 
+    margin-top:30px; 
+    padding-top:15px; 
+    text-align:center; 
+    font-size:14px; 
+    color:#ccc; 
+}
+
+/* 📱 موبايل */
+@media (max-width:768px){
+    .footer-container{
+        flex-direction:column;
+        gap:20px;
+        padding:0 20px;
+    }
+    
+    
+    </style>
+</head>
+<body class="flex flex-col">
+
+    <header>
+        <nav>
+            <a class="logo" href="#">CodeCraft</a>
+            <ul class="list">
+                <li><a href="/html/home.html">home</a></li>
+                <li><a href="/html/track.html">tracks</a></li>
+                <li><a href="/html/courses.html">courses</a></li>
+                <li><a href="/html/roadmap.html">road maps</a></li>
+                <li><a href="/html/resources.html">resources</a></li>
+                <li><a href="/html/home.html#contact">contact us</a></li>
+            </ul>
+            
+            <div class="nav-auth-container" style="display: flex; align-items: center;">
+                <!-- Guest -->
+                <div class="guest-only acount" style="display: flex; gap: 10px;">
+                    <button><a href="/html/login.html" style="color: inherit; text-decoration: none;">log in</a></button>
+                    <button><a href="/html/signup-st.html" style="color: inherit; text-decoration: none;">sign up</a></button>
+                </div>
+                <!-- Student -->
+                <div class="student-only" style="display: flex; align-items: center; gap: 15px;">
+                    <a href="/html/st-profile.html" style="display: flex; align-items: center;">
+                        <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
+                    </a>
+                    <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+                <!-- Doctor -->
+                <div class="doctor-only" style="display: flex; align-items: center; gap: 15px;">
+                    <a href="/html/dr-dashboard.html" style="display: flex; align-items: center;">
+                        <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
+                    </a>
+                    <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+                <!-- Admin -->
+                <div class="admin-only" style="display: flex; align-items: center; gap: 15px;">
+                    <a href="/html/admin-dashboard.html" style="display: flex; align-items: center;">
+                        <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
+                    </a>
+                    <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+                
+                <!-- Dark Mode Toggle -->
+                <button id="darkModeToggle" title="Toggle Dark Mode" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer; margin-left: 15px; transition: 0.3s;">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+
+        </nav>
+    </header>
+
+    <div class="flex flex-1">
+        <aside class="sidebar flex flex-col p-6">
+            <nav class="flex-1 space-y-2">
+                <a href="#" id="btn-overview" class="nav-item active flex items-center gap-4 p-3 font-semibold">
+                    <i class="fas fa-th-large w-5"></i> Dashboard
+                </a>
+                <a href="dr-profile.html" class="nav-item flex items-center gap-4 p-3"><i class="fas fa-user w-5"></i> Profile</a>
+                <a href="#" id="btn-students" class="nav-item flex items-center gap-4 p-3"><i class="fas fa-user-friends w-5"></i> Students</a>
+                
+            </nav>
+            <div class="border-t pt-6">
+                <a href="#" id="btn-settings" class="nav-item flex items-center gap-4 p-3"><i class="fas fa-cog w-5"></i> Settings</a>
+                <a href="#" class="nav-item flex items-center gap-4 p-3" id="logoutBtn"><i class="fas fa-sign-out-alt w-5"></i> Log out</a>
+            </div>
+        </aside>
+
+        <main class="flex-1 p-10 overflow-y-auto">
+            <div id="panel-overview">
+            <div class="flex justify-between items-start mb-10">
+                <div>
+                    <h1 class="text-3xl font-bold text-[#0F0C29]">Overview</h1>
+                    <p class="text-gray-400 mt-1">Manage your courses and upload videos</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button onclick="document.getElementById('createCourseModal').classList.remove('hidden')" class="bg-[#6C5CE7] text-white px-6 py-2 rounded-lg font-bold shadow-lg hover:scale-105 transition-transform">
+                        <i class="fas fa-plus mr-2"></i> Create New Course
+                    </button>
+                    <div class="profile-chip">
+                        <span class="font-semibold text-gray-700" id="dashInstructorName">Instructor</span>
+                        <img id="dashInstructorPic" src="../img/circle-user-solid-full.svg" class="w-10 h-10 rounded-full border border-gray-100 object-cover">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Create Course Modal -->
+            <div id="createCourseModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center">
+                <div class="bg-white p-8 rounded-xl w-[500px] max-w-[90%] relative">
+                    <button onclick="document.getElementById('createCourseModal').classList.add('hidden')" class="absolute top-4 right-4 text-gray-500 hover:text-red-500"><i class="fas fa-times text-xl"></i></button>
+                    <h2 class="text-2xl font-bold mb-6 text-[#0F0C29]">Create New Course</h2>
+                    <form id="createCourseForm" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">Course Title</label>
+                            <input type="text" id="newCourseTitle" required class="w-full border p-2 rounded-lg outline-none focus:border-[#6C5CE7]">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">Description</label>
+                            <textarea id="newCourseDesc" required rows="3" class="w-full border p-2 rounded-lg outline-none focus:border-[#6C5CE7] resize-none"></textarea>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex-1">
+                                <label class="block text-sm font-bold text-gray-700 mb-1">Category</label>
+                                <select id="newCourseCategory" required class="w-full border p-2 rounded-lg outline-none focus:border-[#6C5CE7]">
+                                    <option value="Web Development">Web Development</option>
+                                    <option value="Data Science">Data Science</option>
+                                    <option value="Security">Security</option>
+                                    <option value="Mobile Development">Mobile Development</option>
+                                    <option value="Cloud Computing">Cloud Computing</option>
+                                    <option value="Networking">Networking</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="flex-1">
+                                <label class="block text-sm font-bold text-gray-700 mb-1">Level</label>
+                                <select id="newCourseLevel" required class="w-full border p-2 rounded-lg outline-none focus:border-[#6C5CE7]">
+                                    <option value="Beginner">Beginner</option>
+                                    <option value="Intermediate">Intermediate</option>
+                                    <option value="Advanced">Advanced</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="w-full bg-gradient-to-r from-[#6C5CE7] to-[#FF00FF] text-white py-3 rounded-lg font-bold hover:opacity-90 transition-opacity mt-4">
+                            Create Course
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Bulk Video Upload Section -->
+            <div class="card p-8 mb-10" id="upload-section">
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <h3 class="text-xl font-bold">Bulk Video Upload</h3>
+                        <p class="text-sm text-gray-400">Upload multiple videos at once. Select a course and drag your files.</p>
+                    </div>
+                    <select id="courseSelect" class="border p-2 rounded-lg outline-none focus:border-[#6C5CE7]">
+                        <option value="">Select Course...</option>
+                        <!-- Options will be populated by JS -->
+                    </select>
+                </div>
+
+                <div id="drop-zone" class="border-2 border-dashed border-gray-300 rounded-xl p-10 text-center hover:border-[#6C5CE7] transition-colors cursor-pointer bg-[#fbfbfe]">
+                    <i class="fas fa-cloud-upload-alt text-5xl text-[#6C5CE7] mb-4"></i>
+                    <p class="text-lg font-semibold text-gray-700">Drag & Drop your videos here</p>
+                    <p class="text-sm text-gray-400 mt-1">or click to browse files (MP4, WEBM, MKV)</p>
+                    <input type="file" id="fileInput" multiple accept="video/*" class="hidden">
+                </div>
+
+                <div id="file-list" class="mt-6 space-y-3">
+                    <!-- Uploaded files will appear here -->
+                </div>
+
+                <div class="mt-6 flex justify-end">
+                    <button id="uploadBtn" class="bg-gradient-to-r from-[#6C5CE7] to-[#FF00FF] text-white px-8 py-3 rounded-lg font-bold shadow-lg hover:scale-105 transition-transform disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                        Upload All Videos
+                    </button>
+                </div>
+            </div>
+
+            <script>
+                const dropZone = document.getElementById('drop-zone');
+                const fileInput = document.getElementById('fileInput');
+                const fileList = document.getElementById('file-list');
+                const uploadBtn = document.getElementById('uploadBtn');
+                const courseSelect = document.getElementById('courseSelect');
+                let selectedFiles = [];
+
+                dropZone.addEventListener('click', () => fileInput.click());
+
+                dropZone.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    dropZone.classList.add('border-[#6C5CE7]', 'bg-blue-50');
+                });
+
+                dropZone.addEventListener('dragleave', () => {
+                    dropZone.classList.remove('border-[#6C5CE7]', 'bg-blue-50');
+                });
+
+                dropZone.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    dropZone.classList.remove('border-[#6C5CE7]', 'bg-blue-50');
+                    handleFiles(e.dataTransfer.files);
+                });
+
+                fileInput.addEventListener('change', () => {
+                    handleFiles(fileInput.files);
+                });
+
+                function handleFiles(files) {
+                    Array.from(files).forEach(file => {
+                        if (file.type.startsWith('video/')) {
+                            selectedFiles.push({ file, customTitle: file.name.replace(/\.[^.]+$/, '') });
+                        }
+                    });
+                    renderFileList();
+                }
+
+                function renderFileList() {
+                    fileList.innerHTML = '';
+                    uploadBtn.disabled = selectedFiles.length === 0 || !courseSelect.value;
+
+                    selectedFiles.forEach((item, index) => {
+                        const div = document.createElement('div');
+                        div.className = 'flex items-center gap-4 bg-gray-50 p-3 rounded-lg border';
+                        div.innerHTML = `
+                            <div class="bg-[#1C1C1C] p-2 rounded text-[#6C5CE7]"><i class="fas fa-video"></i></div>
+                            <div class="flex-1">
+                                <input type="text" value="${item.customTitle}" onchange="updateTitle(${index}, this.value)" class="w-full bg-transparent font-semibold outline-none border-b focus:border-[#6C5CE7]" placeholder="Video Title">
+                                <p class="text-xs text-gray-400 mt-1">${(item.file.size / (1024 * 1024)).toFixed(2)} MB</p>
+                            </div>
+                            <button onclick="removeFile(${index})" class="text-red-500 hover:text-red-700 p-2"><i class="fas fa-trash"></i></button>
+                        `;
+                        fileList.appendChild(div);
+                    });
+                }
+
+                window.updateTitle = (index, value) => { selectedFiles[index].customTitle = value; };
+                window.removeFile = (index) => { selectedFiles.splice(index, 1); renderFileList(); };
+                courseSelect.addEventListener('change', renderFileList);
+
+                // Fetch instructor's courses and populate dropdown
+                async function loadInstructorCourses(selectedCourseId = null) {
+                    const token = localStorage.getItem('authToken');
+                    if (!token) {
+                        window.location.href = 'login.html';
+                        return;
+                    }
+                    try {
+                        const response = await fetch('http://localhost:5000/api/courses/mycourses', {
+                            headers: { 'Authorization': `Bearer ${token}` }
+                        });
+                        const result = await response.json();
+                        if (response.ok && result.data) {
+                            courseSelect.innerHTML = '<option value="">Select Course...</option>';
+                            result.data.forEach(course => {
+                                const option = document.createElement('option');
+                                option.value = course.id;
+                                option.textContent = course.title;
+                                courseSelect.appendChild(option);
+                            });
+                            
+                            if (selectedCourseId) {
+                                courseSelect.value = selectedCourseId;
+                                renderFileList();
+                            }
+                        }
+                        
+                        // Also fetch profile info for dashboard
+                        const meResponse = await fetch('http://localhost:5000/api/auth/me', {
+                            headers: { 'Authorization': `Bearer ${token}` }
+                        });
+                        const meResult = await meResponse.json();
+                        if (meResponse.ok) {
+                            document.getElementById('dashInstructorName').textContent = meResult.data.name;
+                            if (meResult.data.profilePic && meResult.data.profilePic !== 'default-avatar.png') {
+                                document.getElementById('dashInstructorPic').src = `http://localhost:5000${meResult.data.profilePic}`;
+                            }
+                        }
+                    } catch (error) {
+                        console.error('Error fetching courses for upload:', error);
+                    }
+                }
+                loadInstructorCourses();
+
+                // Handle Course Creation
+                const createCourseForm = document.getElementById('createCourseForm');
+                createCourseForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const token = localStorage.getItem('authToken');
+                    const btn = createCourseForm.querySelector('button[type="submit"]');
+                    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating...';
+                    btn.disabled = true;
+
+                    try {
+                        const res = await fetch('http://localhost:5000/api/courses', {
+                            method: 'POST',
+                            headers: { 
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${token}`
+                            },
+                            body: JSON.stringify({
+                                title: document.getElementById('newCourseTitle').value,
+                                description: document.getElementById('newCourseDesc').value,
+                                category: document.getElementById('newCourseCategory').value,
+                                level: document.getElementById('newCourseLevel').value
+                            })
+                        });
+                        const data = await res.json();
+                        if (res.ok) {
+                            alert('✅ Course created successfully!');
+                            document.getElementById('createCourseModal').classList.add('hidden');
+                            createCourseForm.reset();
+                            loadInstructorCourses(data.data.id); // Refresh the dropdown and auto-select new course
+                        } else {
+                            alert('❌ Error: ' + data.message);
+                        }
+                    } catch (err) {
+                        alert('Server error creating course.');
+                    } finally {
+                        btn.innerHTML = 'Create Course';
+                        btn.disabled = false;
+                    }
+                });
+
+                uploadBtn.addEventListener('click', async () => {
+                    if (selectedFiles.length === 0 || !courseSelect.value) return;
+
+                    const formData = new FormData();
+                    const titles = [];
+                    
+                    selectedFiles.forEach(item => {
+                        formData.append('videos', item.file);
+                        titles.push(item.customTitle);
+                    });
+                    formData.append('titles', JSON.stringify(titles));
+
+                    const token = localStorage.getItem('authToken');
+                    const originalText = uploadBtn.innerHTML;
+                    uploadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
+                    uploadBtn.disabled = true;
+
+                    try {
+                        const response = await fetch(`http://localhost:5000/api/videos/upload/${courseSelect.value}`, {
+                            method: 'POST',
+                            headers: { 'Authorization': `Bearer ${token}` },
+                            body: formData
+                        });
+                        const data = await response.json();
+                        
+                        if (response.ok) {
+                            alert(`✅ ${data.message}`);
+                            selectedFiles = [];
+                            renderFileList();
+                        } else {
+                            alert(`❌ Error: ${data.message}`);
+                        }
+                    } catch (error) {
+                        alert('Server error during upload.');
+                        console.error(error);
+                    } finally {
+                        uploadBtn.innerHTML = originalText;
+                        uploadBtn.disabled = selectedFiles.length === 0;
+                    }
+                });
+            </script>
+
+            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-4">Stats</p>
+            <div class="grid grid-cols-3 gap-8 mb-10">
+                <div class="card p-6">
+                    <div class="flex justify-between mb-6">
+                        <h3 class="text-lg font-bold">Completed</h3>
+                        <div class="text-right"><span class="text-3xl font-bold block">63</span><span class="text-[10px] text-gray-400 font-bold uppercase">Progress</span></div>
+                    </div>
+                    <div class="w-full bg-gray-100 h-2 rounded-full overflow-hidden"><div class="progress-bar-fill h-full" style="width: 65%"></div></div>
+                </div>
+                <div class="card p-6">
+                    <div class="flex justify-between mb-6">
+                        <h3 class="text-lg font-bold">Quizzes</h3>
+                        <div class="text-right"><span class="text-3xl font-bold block">27</span><span class="text-[10px] text-gray-400 font-bold uppercase">Progress</span></div>
+                    </div>
+                    <div class="w-full bg-gray-100 h-2 rounded-full overflow-hidden"><div class="progress-bar-fill h-full" style="width: 40%"></div></div>
+                </div>
+                <div class="card p-6">
+                    <div class="flex justify-between mb-6">
+                        <h3 class="text-lg font-bold">Challenges</h3>
+                        <div class="text-right"><span class="text-3xl font-bold block">30</span><span class="text-[10px] text-gray-400 font-bold uppercase">Progress</span></div>
+                    </div>
+                    <div class="w-full bg-gray-100 h-2 rounded-full overflow-hidden"><div class="progress-bar-fill h-full" style="width: 85%"></div></div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-8">
+                <div class="col-span-2 card p-8">
+                    <p class="text-[10px] font-bold text-gray-400 uppercase mb-2">Activity</p>
+                    <h3 class="text-xl font-bold mb-8">Recent Progress</h3>
+                    
+                    <div class="space-y-8">
+                        <div class="flex items-center gap-6">
+                            <div class="bg-[#1C1C1C] p-3 rounded-xl text-blue-400 text-xl"><i class="fab fa-react"></i></div>
+                            <div class="flex-1">
+                                <div class="flex justify-between mb-2"><span class="font-bold">ReactJS Course Progress</span><span class="text-sm text-gray-400">Feb 29</span></div>
+                                <div class="w-[300px] bg-gray-100 h-2 rounded-full overflow-hidden"><div class="progress-bar-fill h-full" style="width: 45%"></div></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-6 border-t pt-6">
+                            <div class="bg-[#1C1C1C] p-3 rounded-xl text-blue-400 text-xl"><i class="fab fa-react"></i></div>
+                            <div class="flex-1">
+                                <div class="flex justify-between mb-2"><span class="font-bold">ReactJS Course Progress</span><span class="text-sm text-gray-400">Feb 29</span></div>
+                                <div class="w-[300px] bg-gray-100 h-2 rounded-full overflow-hidden"><div class="progress-bar-fill h-full" style="width: 70%"></div></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-6 border-t pt-6">
+                            <div class="bg-white border p-3 rounded-xl text-yellow-500 text-xl"><i class="fab fa-python"></i></div>
+                            <div class="flex-1">
+                                <div class="flex justify-between mb-2"><span class="font-bold">Python Course Progress</span><span class="text-sm text-gray-400">Feb 28</span></div>
+                                <div class="w-[300px] bg-gray-100 h-2 rounded-full overflow-hidden"><div class="progress-bar-fill h-full" style="width: 35%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-8">
+                    <p class="text-[10px] font-bold text-gray-400 uppercase mb-2">Tasks</p>
+                    <h3 class="text-xl font-bold mb-8">Upcoming Tasks</h3>
+                    <div class="space-y-8">
+                        <div class="flex items-start gap-4">
+                            <input type="checkbox" class="mt-1 h-5 w-5 rounded border-gray-300 text-[#6C5CE7]">
+                            <div><p class="font-bold">Final Project</p><p class="text-xs text-gray-400">UI/API Integration</p></div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <input type="checkbox" class="mt-1 h-5 w-5 rounded border-gray-300 text-[#6C5CE7]">
+                            <div><p class="font-bold">Final Project</p><p class="text-xs text-gray-400">UI/API Integration</p></div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            </div> <!-- End of panel-overview -->
+
+            <!-- Students Panel -->
+            <div id="panel-students" class="hidden">
+                <h1 class="text-3xl font-bold text-[#0F0C29] mb-10">My Students</h1>
+                <div class="card p-8 text-center text-gray-500">
+                    <i class="fas fa-users text-4xl mb-4"></i>
+                    <p>Students list coming soon!</p>
+                </div>
+            </div>
+
+            <!-- Settings Panel -->
+            <div id="panel-settings" class="hidden">
+                <h1 class="text-3xl font-bold text-[#0F0C29] mb-10">Account Settings</h1>
+                
+                <!-- Update Email / Details -->
+                <div class="card p-8 mb-8">
+                    <h2 class="text-2xl font-bold mb-6 text-[#0F0C29]">Update Information</h2>
+                    <form id="updateDetailsForm" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">Name</label>
+                            <input type="text" id="settingsName" class="w-full border p-2 rounded-lg outline-none focus:border-[#6C5CE7]">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">Email</label>
+                            <input type="email" id="settingsEmail" class="w-full border p-2 rounded-lg outline-none focus:border-[#6C5CE7]">
+                        </div>
+                        <button type="submit" class="bg-[#6C5CE7] text-white px-6 py-2 rounded-lg font-bold hover:opacity-90">Update Info</button>
+                    </form>
+                </div>
+
+                <!-- Update Password -->
+                <div class="card p-8 mb-8">
+                    <h2 class="text-2xl font-bold mb-6 text-[#0F0C29]">Change Password</h2>
+                    <form id="updatePasswordForm" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">Current Password</label>
+                            <input type="password" id="currentPassword" required class="w-full border p-2 rounded-lg outline-none focus:border-[#6C5CE7]">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">New Password</label>
+                            <input type="password" id="newPassword" required class="w-full border p-2 rounded-lg outline-none focus:border-[#6C5CE7]">
+                        </div>
+                        <button type="submit" class="bg-[#6C5CE7] text-white px-6 py-2 rounded-lg font-bold hover:opacity-90">Change Password</button>
+                    </form>
+                </div>
+
+                <!-- Delete Account -->
+                <div class="card p-8 border-red-200 bg-red-50">
+                    <h2 class="text-2xl font-bold mb-4 text-red-600">Danger Zone</h2>
+                    <p class="text-gray-700 mb-4">Once you delete your account, there is no going back. Please be certain.</p>
+                    <button id="deleteAccountBtn" class="bg-red-600 text-white px-6 py-2 rounded-lg font-bold hover:bg-red-700">Delete Account</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    <footer class="footer">
+    <div class="footer-container">
+
+        <!-- Logo -->
+        <div class="footer-col">
+            <div class="logo">
+                <img src="../img/logo.png" alt="Logo">
+            </div>
+        </div>
+
+        <!-- Links -->
+        <div class="footer-col">
+            <h5>Quick Links</h5>
+            <ul>
+                <li><a href="home.html">Home</a></li> 
+                <li><a href="support.html">Support</a></li>
+                <li><a href="terms.html">Terms & Conditions</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-col">
+            <h5>Contact Us</h5>
+            <div class="contact-list">
+                <a href="https://wa.me/201104895301" target="_blank">
+  <i class="fab fa-whatsapp"></i> WhatsApp
+</a>
+              <a href="tel:+201104895301">
+  <i class="fas fa-phone"></i> Call Us
+</a>
+             <a href="mailto:mohamedleqaa13@gmail.com">
+  <i class="fas fa-envelope"></i> Email
+</a>
+            </div>
+        </div>
+
+        <!-- Form -->
+        <div class="footer-col">
+            <h5>Send Message</h5>
+            <form class="contact-form">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        Copyright © 2026 CODECRAFT. All rights reserved.
+    </div>
+</footer>
+    
+    
+    
+    
+    <script src="../script/nav.js" defer></script>
+    <script src="../script/auth.js" defer></script>
+</body>
+</html>

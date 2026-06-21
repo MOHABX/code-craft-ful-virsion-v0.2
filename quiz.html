@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Quiz & Certificate</title>
+    <!-- You can include your header file here later -->
+    <link rel="stylesheet" href="../style/quiz.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        
+        <!-- 1. Quiz Section -->
+        <div id="quiz-section" class="glass-card active-section">
+            <div class="quiz-header">
+                <h2>Course Completion Quiz</h2>
+                <span id="question-tracker">Question 1 of 3</span>
+            </div>
+            <div class="progress-bar"><div id="progress"></div></div>
+            
+            <h3 id="question-text">Loading question...</h3>
+            <div id="options-container" class="options-grid">
+                <!-- Options will be rendered here by JavaScript -->
+            </div>
+            <button id="next-btn" class="neon-btn hidden">Next Question</button>
+        </div>
+
+        <!-- 2. Certificate Form Section -->
+        <div id="form-section" class="glass-card hidden">
+            <h2 class="success-title">🎉 Congratulations! You passed the test.</h2>
+            <p class="score-text">Your score: <span id="final-score"></span></p>
+            <p>Please enter your details to generate your official certificate.</p>
+            
+            <form id="certificate-form">
+                <div class="input-group">
+                    <label>Full Name (as it will appear on the certificate)</label>
+                    <input type="text" id="student-name" placeholder="Enter your full name..." required>
+                </div>
+                <button type="submit" class="neon-btn w-100">Generate Certificate</button>
+            </form>
+        </div>
+
+        <!-- Fail Section -->
+        <div id="fail-section" class="glass-card hidden">
+            <h2 class="fail-title">😔 Unfortunately, you did not pass the test.</h2>
+            <p class="score-text">Your score: <span id="fail-score"></span></p>
+            <p>You must score at least half to pass the test and get the certificate.</p>
+            <button id="retry-btn" class="neon-btn w-100 mt-20" style="background: linear-gradient(135deg, #dc3545, #ff6b81);">Retry Test</button>
+        </div>
+
+        <!-- 3. Certificate View Section -->
+        <div id="certificate-section" class="hidden">
+            <div class="certificate-wrapper" id="certificate-wrapper">
+                <div class="cert-border">
+                    <div class="cert-content">
+                        <h1 class="cert-title">Certificate of Completion</h1>
+                        <p class="cert-subtitle">This is to certify that:</p>
+                        <h2 id="cert-student-name" class="cert-name">Student Name</h2>
+                        <p class="cert-desc">has successfully completed the course and passed the test on <span id="cert-date"></span>.</p>
+                        <div class="cert-signature">Platform Management Signature <br> <span>Craft Code</span></div>
+                    </div>
+                </div>
+            </div>
+            <button id="download-btn" class="neon-btn mt-20">🖨️ Print or Save as PDF</button>
+        </div>
+    </div>
+    <script src="../script/quiz.js"></script>
+</body>
+</html>

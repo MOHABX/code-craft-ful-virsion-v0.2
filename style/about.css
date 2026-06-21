@@ -1,0 +1,345 @@
+/* ===== Navbar ===== */
+.navbar{
+    width:100%;
+    background:#0F0C29;
+}
+
+/* Container داخلي */
+.nav-container{
+    max-width:1300px;
+    margin:auto;
+    padding:22px 70px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+/* Logo */
+.logo{
+    font-size:28px;
+    font-weight:800;
+    background:linear-gradient(90deg,#6C5CE7,#FF00FF);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    text-decoration:none;
+}
+
+/* Capsule */
+.nav-capsule{
+    display:flex;
+    align-items:center;
+    gap:38px; 
+    padding:14px 40px;
+    border:2px solid #6C5CE7;
+    border-radius:50px;
+    white-space:nowrap;
+}
+
+/* Links */
+.nav-capsule a{
+    color:#FFFFFF;
+    text-decoration:none;
+    font-weight:600;
+    font-size:18px;
+    letter-spacing:0.5px;
+    transition:0.3s;
+}
+
+.nav-capsule a:hover{
+    color:#FF00FF;
+}
+
+/* Buttons */
+.nav-buttons{
+    display:flex;
+    align-items:center;
+    gap:22px;
+}
+
+/* Login */
+.login-btn{
+    padding:10px 26px;  
+    border:none;
+    border-radius:10px;
+    font-weight:600;
+    font-size:16px;
+    color:#fff;
+    cursor:pointer;
+    background:linear-gradient(90deg,#6C5CE7,#FF00FF);
+}
+
+/* Sign Up */
+.signup-btn{
+    padding:10px 28px;
+    border-radius:10px;
+    font-weight:600;
+    font-size:16px;
+    color:#0F0C29;
+    background:#E0D4FF;
+    border:none;
+    cursor:pointer;
+    box-shadow:0 4px 14px rgba(108,92,231,0.35);
+    transition:0.3s;
+}
+
+.signup-btn:hover{
+    background:#d4c4ff;
+}
+
+/* ===== Mobile ===== */
+@media(max-width:768px){
+
+.nav-container{
+    flex-wrap:wrap;
+    justify-content:center;
+    padding:18px 20px;
+    gap:15px;
+}
+
+.nav-capsule{
+    margin-top:15px;
+    gap:22px; 
+    padding:12px 24px;
+}
+
+.nav-capsule a{
+    font-size:16px;
+}
+
+.nav-buttons{
+    margin-top:15px;
+}
+
+}
+/* الألوان الأساسية مستوحاة من الصورة */
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background-color: var(--light-bg);
+    margin: 0;
+    color: var(--text-dark);
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.page-header {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: white;
+    margin-bottom: 30px;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--primary-purple);
+}
+
+/* الكروت العامة */
+.card {
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+}
+
+/* قسم النبذة والرؤية */
+.about-vision {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* فريق العمل */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    text-align: center;
+}
+
+.team-card {
+    background: white;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    border: 1px solid #eee;
+    transition: transform 0.3s;
+}
+
+.team-card:hover {
+    transform: translateY(-5px);
+}
+
+.team-card img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+/* آراء الطلاب */
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.test-card {
+    background: #fff;
+    padding: 20px;
+    border-right: 5px solid var(--primary-purple); /* لمسة جمالية */
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+
+.stars {
+    color: #f1c40f;
+    margin-bottom: 10px;
+}
+
+.separator {
+    border: 0;
+    height: 1px;
+    background: #e0e0e0;
+    margin: 40px 0;
+}
+
+/* التوافق مع الموبايل */
+@media (max-width: 768px) {
+    .about-vision, .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* ===== Footer ===== */
+.footer{
+    background:#1A1642;
+    color:#FFFFFF;
+    padding:80px 0 40px;
+}
+
+.footer-container{
+    max-width:1300px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    padding:0 40px;
+    flex-wrap:wrap;
+    align-items:flex-start;
+}
+
+.footer-col{
+    margin-bottom:40px;
+    min-width:200px;
+}
+
+.brand-col{
+    flex:1.5;
+}
+
+/* ===== LOGO FIX ===== */
+.logo img{
+    max-width:160px;   /* 👈 حجم مناسب */
+    height:auto;       /* يحافظ على النسب */
+    display:block;
+    margin-bottom:20px;
+}
+
+/* نص البراند */
+.brand-col h3{
+    font-size:22px;
+    line-height:1.6;
+    font-weight:500;
+    max-width:420px;
+}
+
+/* ===== Titles ===== */
+.footer h5{
+    font-size:20px;
+    margin-bottom:20px;
+    font-weight:800;
+    text-transform:uppercase;
+    color:#6C5CE7;
+}
+
+/* ===== Links ===== */
+.footer ul{
+    list-style:none;
+    padding:0;
+}
+
+.footer ul li{
+    margin-bottom:12px;
+}
+
+.footer ul li a{
+    color:rgba(255,255,255,0.75);
+    text-decoration:none;
+    font-size:18px;
+    transition:0.3s ease;
+}
+
+.footer ul li a:hover{
+    color:#FF00FF;
+    text-shadow:0 0 10px rgba(255,0,255,0.6);
+}
+
+/* ===== Contact Icons ===== */
+.contact-list{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.contact-list a{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:18px;
+    text-decoration:none;
+    color:#6C5CE7;
+    transition:0.3s ease;
+}
+
+.contact-list a i{
+    font-size:20px;
+    width:24px;
+}
+
+.contact-list a:hover{
+    color:#FF00FF;
+    transform:translateX(5px);
+    text-shadow:0 0 12px rgba(255,0,255,0.7);
+}
+
+/* ===== Footer Bottom ===== */
+.footer-bottom{
+    border-top:1px solid rgba(108,92,231,0.25);
+    margin-top:40px;
+    padding-top:20px;
+    text-align:center;
+    font-size:14px;
+    color:rgba(255,255,255,0.6);
+}
+
+/* ===== Responsive ===== */
+@media(max-width:992px){
+    .footer-container{
+        flex-direction:column;
+        text-align:center;
+        align-items:center;
+    }
+
+    .brand-col h3{
+        max-width:100%;
+    }
+
+    .contact-list{
+        align-items:center;
+    }
+}
+  

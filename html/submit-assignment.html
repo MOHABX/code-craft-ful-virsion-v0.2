@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <title>Submit Assignment</title>
+  <style>
+        /* --- style nav --- */
+        header {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            background: #0F0C29;
+            height: 100px;
+            border-radius: 0px 0px 20px 20px;
+        }
+
+        nav {
+            grid-column: 1 / -1;
+            grid-row: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            background: linear-gradient(90deg, #6C5CE7, #FF00FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .list {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            transition: all 1s;
+        }
+
+        .list li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 1s;
+        }
+        .list li a:hover {
+            background: linear-gradient(90deg, #6C5CE7, #FF00FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .user-profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            transition: all 1s;
+        }
+        .user-profile img:hover{
+            transform: rotatey(360deg);
+        }
+        /*style submit*/
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial, sans-serif;
+    }
+    body{
+      background:#f7f7ff;
+      /*padding:40px;*/
+      color:#2d2d44;
+    }
+    h1{
+      margin-bottom:30px;
+      font-size:40px;
+      color:#3a355d;
+    }
+    .header-box{
+      margin-top: 40px;
+      display:flex;
+      align-items:center;
+      gap:25px;
+      border:2px solid #f2b2f8;
+      border-radius:25px;
+      padding:25px 30px;
+      margin-bottom:35px;
+      background:white;
+    }
+    .course-tag{
+      padding:12px 20px;
+      border-right:3px solid #d946ef;
+      color:#555;
+      font-weight:600;
+      background:#faf7ff;
+      border-radius:12px;
+    }
+    .header-box h1{
+      margin:0;
+    }
+    .container{
+      display:flex;
+      gap:30px;
+      align-items:flex-start;
+    }
+    /* Sidebar */
+    .sidebar{
+      width:300px;
+      background:white;
+      padding:25px;
+      border-radius:25px;
+      border:1px solid #ece8ff;
+      box-shadow:0 10px 25px rgba(108,92,231,0.08);
+    }
+    .sidebar h2{
+      margin-bottom:20px;
+      color:#3a355d;
+      font-size:24px;
+    }
+    .sidebar input{
+      width:100%;
+      padding:14px;
+      margin-bottom:15px;
+      border:1px solid #c9c0ff;
+      border-radius:14px;
+      font-size:15px;
+      outline:none;
+      transition:0.3s;
+    }
+    .sidebar input:focus,
+    textarea:focus{
+      border-color:#c93cff;
+      box-shadow:0 0 10px rgba(201,60,255,0.2);
+    }
+    #message{
+      background:#efe7ff;
+      border-left:4px solid #6c5ce7;
+      color:#3a355d;
+      padding:14px;
+      border-radius:12px;
+      margin-top:10px;
+      display:none;
+      line-height:1.8;
+      font-size:14px;
+    }
+    /* Main Section */
+    .main{
+      flex:1;
+    }
+    .upload-box{
+      background:white;
+      border:2px dashed #c96dff;
+      border-radius:30px;
+      padding:70px 20px;
+      text-align:center;
+      cursor:pointer;
+      margin-bottom:20px;
+      box-shadow:0 10px 30px rgba(108,92,231,0.06);
+      transition:0.3s;
+    }
+    .upload-box:hover{
+      background:#fcf7ff;
+      border-color:#ff4df0;
+      transform:translateY(-2px);
+    }
+    .upload-box p{
+      color:#4d4d68;
+      font-size:22px;
+      font-weight:600;
+    }
+    textarea{
+      width:100%;
+      height:90px;
+      border:1px solid #c9c0ff;
+      border-radius:16px;
+      padding:15px;
+      resize:none;
+      margin-bottom:20px;
+      font-size:15px;
+      outline:none;
+    }
+    button{
+      width:100%;
+      padding:18px;
+      border:none;
+      border-radius:16px;
+      background:linear-gradient(to right,#6c5ce7,#ff4df0);
+      color:white;
+      font-size:22px;
+      font-weight:bold;
+      cursor:pointer;
+      box-shadow:0 10px 20px rgba(108,92,231,0.25);
+      transition:0.3s;
+    }
+    button:hover{
+      transform:translateY(-2px);
+      opacity:0.95;
+    }
+    @media(max-width:800px){
+      .container{
+        flex-direction:column;
+      }
+    .sidebar{
+        width:100%;
+      }
+      h1{
+        font-size:30px;
+      }
+    }
+
+    /*style footer*/
+body{
+    /* 🔥 الحل بتاع الفوتر */
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+/* ===== Footer ===== */
+.footer{
+    background:#1A1642;
+    color:#FFFFFF;
+    padding:40px 0;
+
+   margin-top:40px; 
+}
+
+.footer-container{
+    max-width:1400px; 
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    padding:0 40px;
+    flex-wrap:wrap;
+    gap:30px;
+}
+
+/* الأعمدة */
+.footer-col{
+    flex:1;
+    min-width:200px;
+}
+
+.footer-col:last-child{
+    flex:1.5;
+    min-width:260px;
+    max-width:400px;
+}
+
+/* اللوجو */
+.footer .logo img{ 
+    width:250px; 
+    height:auto;
+  
+    margin-top: -100px;
+}
+
+/* العناوين */
+h5{ 
+    font-size:22px; 
+    margin-bottom:20px; 
+    font-weight:700;
+}
+
+/* الروابط */
+ul{ list-style:none; }
+ul li{ margin-bottom:12px; }
+
+ul li a{ 
+    color:rgba(255,255,255,0.85); 
+    text-decoration:none; 
+    font-size:15px; 
+}
+
+ul li a:hover{
+    color:#6C5CE7;
+    padding-left:4px;
+}
+
+/* Contact */
+.contact-list{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.contact-list a{ 
+    display:flex; 
+    align-items:center; 
+    gap:10px; 
+    font-size:15px; 
+    text-decoration:none; 
+    color:#FFFFFF; 
+}
+
+.contact-list a i{ font-size:18px; }
+
+.contact-list a:hover{
+    color:#6C5CE7;
+}
+
+/* الفورم */
+.contact-form{ 
+    display:flex; 
+    flex-direction:column; 
+    gap:12px; 
+} 
+
+.contact-form input, 
+.contact-form textarea{ 
+    padding:10px; 
+    border-radius:10px; 
+    border:none; 
+    font-size:14px; 
+    outline:none; 
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus{
+    outline:2px solid #6C5CE7;
+}
+
+.contact-form textarea{ 
+    height:90px; 
+    resize:none; 
+}
+
+.contact-form button{ 
+    padding:12px; 
+    border:none; 
+    border-radius:10px; 
+    background:linear-gradient(135deg,#6C5CE7,#FF00FF); 
+    color:#fff; 
+    font-size:15px; 
+    font-weight:bold;
+    cursor:pointer; 
+}
+
+.contact-form button:hover{
+    transform:scale(1.05);
+    opacity:0.9;
+}
+
+/* footer bottom */
+.footer-bottom{ 
+    border-top:1px solid rgba(255,255,255,0.1); 
+    margin-top:30px; 
+    padding-top:15px; 
+    text-align:center; 
+    font-size:14px; 
+    color:#ccc; 
+}
+
+/* 📱 موبايل */
+@media (max-width:768px){
+    .footer-container{
+        flex-direction:column;
+        gap:20px;
+        padding:0 20px;
+    }
+}
+  </style>
+</head>
+<body>
+<!--nav-->
+    <header>
+        <nav>
+
+            <a class="logo" href="#">CodeCraft</a>
+
+            <ul class="list">
+                <li><a href="/html/home.html">home</a></li>
+                <li><a href="/html/track.html">tracks</a></li>
+                <li><a href="/html/courses.html">courses</a></li>
+                <li><a href="/html/roadmap.html">road maps</a></li>
+                <li><a href="/html/resources.html">resources</a></li>
+                <li><a href="/html/home.html#contact">contact us</a></li>
+            </ul>
+
+                         
+            <div class="nav-auth-container" style="display: flex; align-items: center;">
+                <!-- Guest -->
+                <div class="guest-only acount" style="display: flex; gap: 10px;">
+                    <button><a href="/html/login.html" style="color: inherit; text-decoration: none;">log in</a></button>
+                    <button><a href="/html/signup-st.html" style="color: inherit; text-decoration: none;">sign up</a></button>
+                </div>
+                <!-- Student -->
+                <div class="student-only" style="display: flex; align-items: center; gap: 15px;">
+                    <a href="/html/st-profile.html" style="display: flex; align-items: center;">
+                        <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
+                    </a>
+                    <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+                <!-- Doctor -->
+                <div class="doctor-only" style="display: flex; align-items: center; gap: 15px;">
+                    <a href="/html/dr-dashboard.html" style="display: flex; align-items: center;">
+                        <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
+                    </a>
+                    <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+                <!-- Admin -->
+                <div class="admin-only" style="display: flex; align-items: center; gap: 15px;">
+                    <a href="/html/admin-dashboard.html" style="display: flex; align-items: center;">
+                        <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
+                    </a>
+                    <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+                
+                <!-- Dark Mode Toggle -->
+                <button id="darkModeToggle" title="Toggle Dark Mode" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer; margin-left: 15px; transition: 0.3s;">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+
+
+        </nav>
+    </header>
+
+
+
+  <div class="header-box" >
+    <div class="course-tag"x>💻 Programming 101</div>
+    <h1>Submit Your Assignment</h1>
+  </div>
+  <div class="container" style="padding-left: 20px;">
+    <div class="sidebar">
+      <h2>Assignment Info</h2>
+      <input type="text" id="studentName" placeholder="Enter Student Name">
+      <input type="text" id="studentId" placeholder="Enter Student ID">
+      <div id="message"></div>
+    </div>
+    <div class="main" style="padding-right: 20px;">
+      <div class="upload-box" onclick="document.getElementById('file').click()">
+        <div style="font-size:70px; margin-bottom:15px;">☁️</div>
+        <p id="fileText">Drag and drop your files here</p>
+        <small style="color:#777; font-size:18px; display:block; margin-top:8px;">
+          Or click to select a file
+        </small>
+        <input type="file" id="file" hidden>
+      </div>
+      <textarea placeholder="Add comments for your instructor..."></textarea>
+      <button id="submitBtn">Submit Assignment</button>
+    </div>
+  </div>
+
+  <!--footer-->
+
+<footer class="footer">
+    <div class="footer-container">
+
+        <!-- Logo -->
+        <div class="footer-col">
+            <div class="logo">
+                <img src="../img/logo.png" alt="Logo">
+            </div>
+        </div>
+
+        <!-- Links -->
+        <div class="footer-col">
+            <h5>Quick Links</h5>
+            <ul>
+                <li><a href="home.html">Home</a></li> 
+                <li><a href="support.html">Support</a></li>
+                <li><a href="terms.html">Terms & Conditions</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-col">
+            <h5>Contact Us</h5>
+            <div class="contact-list">
+                <a href="https://wa.me/201104895301" target="_blank">
+  <i class="fab fa-whatsapp"></i> WhatsApp
+</a>
+              <a href="tel:+201104895301">
+  <i class="fas fa-phone"></i> Call Us
+</a>
+             <a href="mailto:mohamedleqaa13@gmail.com">
+  <i class="fas fa-envelope"></i> Email
+</a>
+            </div>
+        </div>
+
+        <!-- Form -->
+        <div class="footer-col">
+            <h5>Send Message</h5>
+            <form class="contact-form">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        Copyright © 2026 CODECRAFT. All rights reserved.
+    </div>
+</footer>
+
+<!--script nav-->
+<script>
+    const themeBtn = document.getElementById('theme-switch');
+    const themeIcon = document.getElementById('theme-icon');
+
+    themeBtn.onclick = () => {
+        document.body.classList.toggle('dark-mode-active');
+        const isDark = document.body.classList.contains('dark-mode-active');
+        
+        if (isDark) {
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        } else {
+            themeIcon.classList.replace('fa-sun', 'fa-moon');
+        }
+    };
+</script>
+<!-- script submit-->
+  <script>
+    const fileInput = document.getElementById("file");
+    const fileText = document.getElementById("fileText");
+    const submitBtn = document.getElementById("submitBtn");
+    const message = document.getElementById("message");
+    fileInput.addEventListener("change", function(){
+      if(fileInput.files.length > 0){
+        fileText.innerText = fileInput.files[0].name;
+      }
+    });
+    submitBtn.addEventListener("click", function(){
+      const name = document.getElementById("studentName").value;
+      const id = document.getElementById("studentId").value;
+      let fileName = "No file uploaded";
+      if(fileInput.files.length > 0){
+        fileName = fileInput.files[0].name;
+      }
+      message.style.display = "block";
+      message.innerHTML = `
+        ✅ Assignment Submitted <br>
+        Name: ${name} <br>
+        ID: ${id} <br>
+        File: ${fileName}
+      `;
+      submitBtn.innerHTML = "Submitted ✅";
+    });
+  </script>
+    <script src="../script/nav.js" defer></script>
+    <script src="../script/auth.js" defer></script>
+</body>
+</html>

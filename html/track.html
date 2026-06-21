@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Craft - Tracks</title>
+    <link rel="stylesheet" href="../style/track.css">
+
+</head>
+
+<body>
+    <header>
+        <nav>
+
+            <a class="logo" href="#">CodeCraft</a>
+
+            <ul class="list">
+                <li><a href="/html/home.html">home</a></li>
+                <li><a href="/html/track.html">tracks</a></li>
+                <li><a href="/html/courses.html">courses</a></li>
+                <li><a href="/html/roadmap.html">road maps</a></li>
+                <li><a href="/html/resources.html">resources</a></li>
+                <li><a href="/html/home.html#contact">contact us</a></li>
+            </ul>
+            
+            
+            <div class="nav-auth-container" style="display: flex; align-items: center;">
+                <!-- Guest -->
+                <div class="guest-only acount" style="display: flex; gap: 10px;">
+                    <button><a href="/html/login.html" style="color: inherit; text-decoration: none;">log in</a></button>
+                    <button><a href="/html/signup-st.html" style="color: inherit; text-decoration: none;">sign up</a></button>
+                </div>
+                <!-- Student -->
+                <div class="student-only" style="display: flex; align-items: center; gap: 15px;">
+                    <a href="/html/st-profile.html" style="display: flex; align-items: center;">
+                        <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
+                    </a>
+                    <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+                <!-- Doctor -->
+                <div class="doctor-only" style="display: flex; align-items: center; gap: 15px;">
+                    <a href="/html/dr-dashboard.html" style="display: flex; align-items: center;">
+                        <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
+                    </a>
+                    <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+                <!-- Admin -->
+                <div class="admin-only" style="display: flex; align-items: center; gap: 15px;">
+                    <a href="/html/admin-dashboard.html" style="display: flex; align-items: center;">
+                        <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
+                    </a>
+                    <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+                
+                <!-- Dark Mode Toggle -->
+                <button id="darkModeToggle" title="Toggle Dark Mode" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer; margin-left: 15px; transition: 0.3s;">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+
+
+        </nav>
+    </header>
+
+    <main class="main-track">
+        <!-- <section class="banar">
+            <h1>Code Craft</h1>
+            <p>Master the most in-demand tech skills. From Web Development to AI, we have it all.</p>
+            <input type="text" placeholder="Search for your favorite track...">
+        </section> -->
+
+        <section class="track-select-btns">
+            <div class="select-card"><a href="#web">Web Dev</a></div>
+            <div class="select-card"><a href="#mobile">Mobile Apps</a></div>
+            <div class="select-card"><a href="#cyber">Cybersecurity</a></div>
+            <div class="select-card"><a href="#database">Databases</a></div>
+            <div class="select-card"><a href="#os">OS Systems</a></div>
+            <div class="select-card"><a href="#ai">AI Track</a></div>
+        </section>
+
+        <section class="tracks-section" id="web">
+            <h2 class="section-title">Web Development</h2>
+            <div class="tracks-cards-container">
+                <div class="track-card">
+                    <img src="../img/Frontend.png" alt="Frontend">
+                    <a href="./courses.html">
+                        <p>Frontend Mastery (React & Vue)</p>
+                    </a>
+                </div>
+                <div class="track-card">
+                    <img src="../img/Backend .png" alt="Backend">
+                    <a href="./courses.html">
+                        <p>Backend with Node.js & Express</p>
+                    </a>
+                </div>
+                <div class="track-card">
+                    <img src="../img/Fullstack PHP .png" alt="Fullstack">
+                    <a href="./courses.html">
+                        <p>Fullstack PHP / Laravel</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="tracks-section" id="mobile">
+            <h2 class="section-title">Mobile Applications</h2>
+            <div class="tracks-cards-container">
+                <div class="track-card">
+                    <img src="../img/Fullstack PHP .png" alt="Flutter">
+                    <a href="./courses.html">
+                        <p>Flutter & Dart Cross-Platform</p>
+                    </a>
+                </div>
+                <div class="track-card">
+                    <img src="../img/Native Android (Kotlin).png" alt="Android">
+                    <a href="./courses.html">
+                        <p>Native Android (Kotlin)</p>
+                    </a>
+                </div>
+                <div class="track-card">
+                    <img src="../img/Native iOS (Swift).png" alt="iOS">
+                    <a href="./courses.html">
+                        <p>Native iOS (Swift)</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="tracks-section" id="cyber">
+            <h2 class="section-title">Cybersecurity</h2>
+            <div class="tracks-cards-container">
+                <div class="track-card">
+                    <img src="../img/Hacking.png" alt="Ethical Hacking">
+                    <a href="./courses.html">
+                        <p>Ethical Hacking & Pentesting</p>
+                    </a>
+                </div>
+                <div class="track-card">
+                    <img src="../img/Network Security.png" alt="Network Security">
+                    <a href="./courses.html">
+                        <p>Network Security & Defense</p>
+                    </a>
+                </div>
+                <div class="track-card">
+                    <img src="../img/baner-track.png" alt="Cyber Ops">
+                    <a href="./courses.html">
+                        <p>Cyber Operations & Analysis</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="tracks-section" id="database">
+            <h2 class="section-title">Database Management</h2>
+            <div class="tracks-cards-container">
+                <div class="track-card">
+                    <img src="../img/SQL Mastery.png" alt="SQL">
+                    <a href="./courses.html">
+                        <p>SQL Mastery (MySQL & PostgreSQL)</p>
+                    </a>
+                </div>
+                <div class="track-card">
+                    <img src="../img/NoSQL Databases.png" alt="NoSQL">
+                    <a href="./courses.html">
+                        <p>NoSQL Databases (MongoDB)</p>
+                    </a>
+                </div>
+                <div class="track-card">
+                    <img src="../img/baner-track2.png" alt="DB Admin">
+                    <a href="./courses.html">
+                        <p>Database Administration (DBA)</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="tracks-section" id="os">
+            <h2 class="section-title">Operating Systems</h2>
+            <div class="tracks-cards-container">
+                <div class="track-card">
+                    <img src="../img/Linux Administration.png" alt="Linux">
+                    <a href="./courses.html">
+                        <p>Linux Administration & Bash</p>
+                    </a>
+                </div>
+                <div class="track-card">
+                    <img src="../img/Advanced OS Concepts.png" alt="OS Concepts">
+                    <a href="./courses.html">
+                        <p>Advanced OS Concepts</p>
+                    </a>
+                </div>
+                <div class="track-card">
+                    <img src="../img/baner-track3.png" alt="Windows Server">
+                    <a href="./courses.html">
+                        <p>Windows Server Management</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="tracks-section" id="ai">
+            <h2 class="section-title">Artificial Intelligence</h2>
+            <div class="tracks-cards-container">
+                <div class="track-card">
+                    <img src="../img/baner-track.png" alt="Machine Learning">
+                    <a href="./courses.html">
+                        <p>Machine Learning Fundamentals</p>
+                    </a>
+                </div>
+                <div class="track-card">
+                    <img src="../img/baner-track2.png" alt="Deep Learning">
+                    <a href="./courses.html">
+                        <p>Deep Learning & Neural Networks</p>
+                    </a>
+                </div>
+                <div class="track-card">
+                    <img src="../img/baner-track3.png" alt="NLP">
+                    <a href="./courses.html">
+                        <p>Natural Language Processing</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <footer class="footer">
+        <div class="footer-container">
+
+            <!-- Logo -->
+            <div class="footer-col">
+                <div class="logo">
+                    <img src="../img/logo.png" alt="Logo">
+                </div>
+            </div>
+
+            <!-- Links -->
+            <div class="footer-col">
+                <h5>Quick Links</h5>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="support.html">Support</a></li>
+                    <li><a href="terms.html">Terms & Conditions</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div class="footer-col">
+                <h5>Contact Us</h5>
+                <div class="contact-list">
+                    <a href="https://wa.me/201104895301" target="_blank">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <a href="tel:+201104895301">
+                        <i class="fas fa-phone"></i> Call Us
+                    </a>
+                    <a href="mailto:mohamedleqaa13@gmail.com">
+                        <i class="fas fa-envelope"></i> Email
+                    </a>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <div class="footer-col" id="contact">
+                <h5>Send Message</h5>
+                <form class="contact-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Your Message" required></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            Copyright © 2026 CODECRAFT. All rights reserved.
+        </div>
+    </footer>
+    <script src="../script/nav.js" defer></script>
+    <script src="../script/auth.js" defer></script>
+</body>
+
+</html>

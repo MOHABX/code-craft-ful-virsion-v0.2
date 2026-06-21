@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Free Resources</title>
+    <link rel="stylesheet" href="../style/resouces.css">
+    <link rel="stylesheet" href="../style/nav-img-profile.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+
+            <a class="logo" href="#">CodeCraft</a>
+
+            <ul class="list">
+                <li><a href="/html/home.html">home</a></li>
+                <li><a href="/html/track.html">tracks</a></li>
+                <li><a href="/html/courses.html">courses</a></li>
+                <li><a href="/html/roadmap.html">road maps</a></li>
+                <li><a href="/html/resources.html">resources</a></li>
+                <li><a href="/html/home.html#contact">contact us</a></li>
+            </ul>
+
+                        
+            <div class="nav-auth-container" style="display: flex; align-items: center;">
+                <!-- Guest -->
+                <div class="guest-only acount" style="display: flex; gap: 10px;">
+                    <button><a href="/html/login.html" style="color: inherit; text-decoration: none;">log in</a></button>
+                    <button><a href="/html/signup-st.html" style="color: inherit; text-decoration: none;">sign up</a></button>
+                </div>
+                <!-- Student -->
+                <div class="student-only" style="display: flex; align-items: center; gap: 15px;">
+                    <a href="/html/st-profile.html" style="display: flex; align-items: center;">
+                        <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
+                    </a>
+                    <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+                <!-- Doctor -->
+                <div class="doctor-only" style="display: flex; align-items: center; gap: 15px;">
+                    <a href="/html/dr-dashboard.html" style="display: flex; align-items: center;">
+                        <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
+                    </a>
+                    <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+                <!-- Admin -->
+                <div class="admin-only" style="display: flex; align-items: center; gap: 15px;">
+                    <a href="/html/admin-dashboard.html" style="display: flex; align-items: center;">
+                        <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
+                    </a>
+                    <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+                
+                <!-- Dark Mode Toggle -->
+                <button id="darkModeToggle" title="Toggle Dark Mode" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer; margin-left: 15px; transition: 0.3s;">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+
+
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="search-container">
+            <input type="text" placeholder="Search for a resource..." class="search-input">
+        </div>
+
+        <div class="filters">
+            <button class="filter-btn active">All</button>
+            <button class="filter-btn">Programming Books</button>
+            <button class="filter-btn">UI/UX Tools</button>
+            <button class="filter-btn">Code Libraries</button>
+            <button class="filter-btn">Developer Tools</button>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h3>Clean Code</h3>
+                <p>One of the best programming books that teaches writing clean and maintainable code.</p>
+                <span class="tag">Tag: Book</span>
+                <a href="#" class="btn-visit">Visit Resource</a>
+            </div>
+
+            <div class="card">
+                <h3>Visual Studio Code</h3>
+                <p>A powerful and lightweight code editor used by millions of developers worldwide.</p>
+                <span class="tag">Tag: Tool</span>
+                <a href="#" class="btn-visit">Visit Resource</a>
+            </div>
+
+            <div class="card">
+                <h3>React Documentation</h3>
+                <p>Official comprehensive guide and API reference for the React.js library.</p>
+                <span class="tag">Tag: Website</span>
+                <a href="#" class="btn-visit">Visit Resource</a>
+            </div>
+
+            <div class="card">
+                <h3>Figma</h3>
+                <p>A leading web-based interface design tool for UX/UI designers and teams.</p>
+                <span class="tag">Tag: Tool</span>
+                <a href="#" class="btn-visit">Visit Resource</a>
+            </div>
+
+            <div class="card">
+                <h3>GitHub</h3>
+                <p>The world's leading AI-powered developer platform to build, scale, and deliver software.</p>
+                <span class="tag">Tag: Tool</span>
+                <a href="#" class="btn-visit">Visit Resource</a>
+            </div>
+
+            <div class="card">
+                <h3>HackerRank</h3>
+                <p>A platform to practice coding skills, solve problems, and prepare for interviews.</p>
+                <span class="tag">Tag: Website</span>
+                <a href="#" class="btn-visit">Visit Resource</a>
+            </div>
+        </div>
+    </main>
+  <footer class="footer">
+        <div class="footer-container">
+
+            <!-- Logo -->
+            <div class="footer-col">
+                <div class="logo">
+                    <img src="../img/logo.png" alt="Logo">
+                </div>
+            </div>
+
+            <!-- Links -->
+            <div class="footer-col">
+                <h5>Quick Links</h5>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="support.html">Support</a></li>
+                    <li><a href="terms.html">Terms & Conditions</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div class="footer-col">
+                <h5>Contact Us</h5>
+                <div class="contact-list">
+                    <a href="https://wa.me/201104895301" target="_blank">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <a href="tel:+201104895301">
+                        <i class="fas fa-phone"></i> Call Us
+                    </a>
+                    <a href="mailto:mohamedleqaa13@gmail.com">
+                        <i class="fas fa-envelope"></i> Email
+                    </a>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <div class="footer-col" id="contact">
+                <h5>Send Message</h5>
+                <form class="contact-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Your Message" required></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            Copyright © 2026 CODECRAFT. All rights reserved.
+        </div>
+    </footer>
+    <script src="../script/nav.js" defer></script>
+    <script src="../script/auth.js" defer></script>
+</body>
+
+</html>

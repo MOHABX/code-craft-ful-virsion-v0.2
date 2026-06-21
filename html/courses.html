@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeCraft Courses</title>
+  <link rel="stylesheet" href="../style/nav-img-profile.css">
+
+  <!--  -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0; 
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #F8F9FF;
+      color: #0F0C29;
+    }
+
+    /* Search Box Styling */
+    .search-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin: 60px 0;
+    }
+
+    .search-wrapper {
+      position: relative;
+      width: 800px;
+      max-width: 90%;
+      display: flex;
+      align-items: center;
+      background: #fff;
+      border-radius: 100px;
+      padding: 8px;
+      border: 1.5px solid #9b8af0;
+      box-shadow: 0 10px 25px rgba(108, 92, 231, 0.1);
+    }
+
+    .search-wrapper input {
+      flex: 1;
+      border: none;
+      outline: none;
+      padding: 15px 30px;
+      font-size: 18px;
+      background: transparent;
+      color: #0F0C29;
+    }
+
+    .search-wrapper input::placeholder {
+      color: #a0a0c0;
+    }
+
+    .search-wrapper button {
+      background: linear-gradient(90deg, #6C5CE7, #FF00FF);
+      color: white;
+      border: none;
+      padding: 14px 45px;
+      border-radius: 100px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .search-wrapper button:hover {
+      box-shadow: 0 0 25px rgba(255, 0, 255, 0.8);
+    }
+
+    /* Sections */
+    .section {
+      max-width: 1300px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .section h2 {
+      font-size: 36px;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    /* Cards */
+    .cards-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .card {
+      background: #FFFFFF;
+      border: 1px solid rgba(108, 92, 231, 0.15);
+      padding: 25px;
+      border-radius: 15px;
+      text-align: center;
+      transition: 0.3s;
+      flex: 1 1 250px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 250px;
+    }
+
+    .card:hover {
+      border-color: #FF00FF;
+      box-shadow: 0 0 20px rgba(255, 0, 255, 0.2);
+    }
+
+    .card h3 {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+
+    .btn-view {
+      display: inline-block;
+      padding: 10px 22px;
+      font-weight: 600;
+      font-size: 16px;
+      color: #fff;
+      background: linear-gradient(90deg, #6C5CE7, #FF00FF);
+      border-radius: 8px;
+      text-decoration: none;
+      margin-top: auto;
+      cursor: pointer;
+    }
+
+    .btn-view:hover {
+      box-shadow: 0 0 25px rgba(255, 0, 255, 0.8);
+    }
+
+
+  </style>
+</head>
+
+<body>
+
+    <script src="../script/nav.js" defer></script>
+    <header>
+        <nav>
+ 
+            <a class="logo" href="#">CodeCraft</a>
+
+            <ul class="list">
+                <li><a href="/html/home.html">home</a></li>
+                <li><a href="/html/track.html">tracks</a></li>
+                <li><a href="/html/courses.html">courses</a></li>
+                <li><a href="/html/roadmap.html">road maps</a></li>
+                <li><a href="/html/resources.html">resources</a></li>
+                <li><a href="/html/home.html#contact">contact us</a></li>
+            </ul>
+
+                        
+            <div class="nav-auth-container" style="display: flex; align-items: center;">
+                <!-- Guest -->
+                <div class="guest-only acount" style="display: flex; gap: 10px;">
+                    <button><a href="/html/login.html" style="color: inherit; text-decoration: none;">log in</a></button>
+                    <button><a href="/html/signup-st.html" style="color: inherit; text-decoration: none;">sign up</a></button>
+                </div>
+                <!-- Student -->
+                <div class="student-only" style="display: flex; align-items: center; gap: 15px;">
+                    <a href="/html/st-profile.html" style="display: flex; align-items: center;">
+                        <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
+                    </a>
+                    <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+                <!-- Doctor -->
+                <div class="doctor-only" style="display: flex; align-items: center; gap: 15px;">
+                    <a href="/html/dr-dashboard.html" style="display: flex; align-items: center;">
+                        <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
+                    </a>
+                    <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+                <!-- Admin -->
+                <div class="admin-only" style="display: flex; align-items: center; gap: 15px;">
+                    <a href="/html/admin-dashboard.html" style="display: flex; align-items: center;">
+                        <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
+                    </a>
+                    <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+                
+                <!-- Dark Mode Toggle -->
+                <button id="darkModeToggle" title="Toggle Dark Mode" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer; margin-left: 15px; transition: 0.3s;">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+
+
+        </nav>
+    </header>
+
+  <div class="search-container">
+    <div class="search-wrapper"> 
+      <input type="text" id="globalSearch" placeholder="What do you want to learn?">
+      <button id="searchBtn">Search</button>
+    </div>
+  </div>
+
+  <section class="section">
+    <h2>Available Courses</h2>
+    <div class="cards-container" id="courses-container">
+      <p>Loading available courses...</p>
+    </div>
+  </section>
+
+ <footer class="footer">
+        <div class="footer-container">
+
+            <!-- Logo -->
+            <div class="footer-col">
+                <div class="logo">
+                    <img src="../img/logo.png" alt="Logo">
+                </div>
+            </div>
+
+            <!-- Links -->
+            <div class="footer-col">
+                <h5>Quick Links</h5>
+                <ul>
+                    <li><a href="./home.html">Home</a></li>
+                    <li><a href="./home.html#contact">Support</a></li>
+                    <li><a href="./terms.html">Terms & Conditions</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div class="footer-col">
+                <h5>Contact Us</h5>
+                <div class="contact-list">
+                    <a href="https://wa.me/201104895301" target="_blank">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <a href="tel:+201104895301">
+                        <i class="fas fa-phone"></i> Call Us
+                    </a>
+                    <a href="mailto:mohamedleqaa13@gmail.com">
+                        <i class="fas fa-envelope"></i> Email
+                    </a>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <div class="footer-col" id="contact">
+                <h5>Send Message</h5>
+                <form class="contact-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Your Message" required></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            Copyright © 2026 CODECRAFT. All rights reserved.
+        </div>
+    </footer>
+
+  <script>
+    // Search Functionality
+    const searchInput = document.getElementById('globalSearch');
+    const searchBtn = document.getElementById('searchBtn');
+
+    function searchCourses() {
+      const allCards = document.querySelectorAll('#courses-container .card');
+      const query = searchInput.value.toLowerCase();
+      allCards.forEach(card => {
+        const title = card.querySelector('h3').textContent.toLowerCase();
+        const instructor = card.querySelector('.instructor-name').textContent.toLowerCase();
+        if (title.includes(query) || instructor.includes(query)) {
+          card.style.display = 'flex'; // Or 'block' depending on your card styling
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    searchInput.addEventListener('keyup', searchCourses);
+    searchBtn.addEventListener('click', searchCourses);
+
+    // View Button Redirection Logic
+    // This will be handled dynamically now
+
+    // --- NEW: Fetch and Display Public Courses ---
+    document.addEventListener('DOMContentLoaded', async () => {
+        const token = localStorage.getItem('authToken');
+        const coursesContainer = document.getElementById('courses-container');
+        
+        let enrolledCourseIds = [];
+        // If user is logged in, fetch their enrolled courses first
+        if (token) {
+            try {
+                const enrolledRes = await fetch('http://localhost:5000/api/users/my-courses', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (enrolledRes.ok) {
+                    const enrolledResult = await enrolledRes.json();
+                    enrolledCourseIds = enrolledResult.data.map(course => course.id);
+                }
+            } catch (e) {
+                console.error("Could not fetch enrolled courses list.");
+            }
+        }
+
+        try {
+            const response = await fetch('http://localhost:5000/api/courses');
+            const result = await response.json();
+
+            if (response.ok && result.data.length > 0) {
+                coursesContainer.innerHTML = ''; // Clear static content
+                result.data.forEach(course => {
+                    const isEnrolled = enrolledCourseIds.includes(course.id); 
+
+                    const courseCard = document.createElement('div');
+                    courseCard.className = 'card';
+                    courseCard.innerHTML = `
+                        <h3>${course.title}</h3>
+                        <p class="instructor-name">By: ${course.instructor?.name || 'Unknown'}</p>
+                        <p>Videos: ${course.videos.length}</p>
+                        ${
+                            token 
+                            ? (isEnrolled
+                                ? `<a class="btn-view" href="lesson-player.html?courseId=${course.id}">Go to Course</a>`
+                                : `<button class="btn-view enroll-btn" data-course-id="${course.id}">Enroll Now</button>`
+                              )
+                            : `<a class="btn-view" href="login.html">Login to Enroll</a>`
+                        }
+                    `;
+                    coursesContainer.appendChild(courseCard);
+                });
+
+                // Add event listeners for the new "Enroll Now" buttons
+                document.querySelectorAll('.enroll-btn').forEach(button => {
+                    button.addEventListener('click', handleEnrollment);
+                });
+
+                // Re-run search in case there was a query before content loaded
+                searchCourses();
+
+            } else {
+                coursesContainer.innerHTML = '<p>No courses available at the moment.</p>';
+            }
+        } catch (error) {
+            console.error('Failed to fetch courses:', error);
+            coursesContainer.innerHTML = '<p>Could not load courses. Please try again later.</p>';
+        }
+    });
+
+    // --- NEW: Handle Enrollment ---
+    async function handleEnrollment(e) {
+        const button = e.target;
+        const courseId = button.dataset.courseId;
+        const token = localStorage.getItem('authToken');
+
+        button.textContent = 'Enrolling...';
+        button.disabled = true;
+
+        try {
+            const response = await fetch(`http://localhost:5000/api/courses/${courseId}/enroll`, {
+                method: 'POST',
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const result = await response.json();
+            alert(result.message);
+            if (response.ok) {
+                // Change button to "Go to Course" link
+                button.outerHTML = `<a class="btn-view" href="lesson-player.html?courseId=${courseId}">Go to Course</a>`;
+            }
+        } catch (error) {
+            alert('An error occurred during enrollment.');
+            button.textContent = 'Enroll Now';
+            button.disabled = false;
+        }
+    }
+  </script>
+
+    <script src="../script/auth.js" defer></script>
+</body>
+
+</html>

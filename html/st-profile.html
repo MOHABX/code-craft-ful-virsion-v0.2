@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile Dashboard - CodeCraft</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../style/nav-img-profile.css">
+    <link rel="stylesheet" href="../style/st-profile.css">
+</head>
+
+<style>
+    /* Responsive styles for the dashboard layout */
+    @media (max-width: 992px) {
+        .dashboard {
+            flex-direction: column;
+        }
+        .sidebar {
+            width: 100%;
+            height: auto;
+        }
+    }
+</style>
+
+<body>
+    <script src="../script/nav.js" defer></script>
+    <!-- NAVBAR -->
+    <header>
+        <nav>
+
+            <a class="logo" href="#">CodeCraft</a>
+
+            <ul class="list">
+                <li><a href="/html/home.html">home</a></li>
+                <li><a href="/html/track.html">tracks</a></li>
+                <li><a href="/html/courses.html">courses</a></li>
+                <li><a href="/html/roadmap.html">road maps</a></li>
+                <li><a href="/html/resources.html">resources</a></li>
+                <li><a href="/html/home.html#contact">contact us</a></li>
+            </ul>
+
+                        
+            <div class="nav-auth-container" style="display: flex; align-items: center;">
+                <!-- Guest -->
+                <div class="guest-only acount" style="display: flex; gap: 10px;">
+                    <button><a href="/html/login.html" style="color: inherit; text-decoration: none;">log in</a></button>
+                    <button><a href="/html/signup-st.html" style="color: inherit; text-decoration: none;">sign up</a></button>
+                </div>
+                <!-- Student -->
+                <div class="student-only" style="display: flex; align-items: center; gap: 15px;">
+                    <a href="/html/st-profile.html" style="display: flex; align-items: center;">
+                        <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
+                    </a>
+                    <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+                <!-- Doctor -->
+                <div class="doctor-only" style="display: flex; align-items: center; gap: 15px;">
+                    <a href="/html/dr-dashboard.html" style="display: flex; align-items: center;">
+                        <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
+                    </a>
+                    <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+                <!-- Admin -->
+                <div class="admin-only" style="display: flex; align-items: center; gap: 15px;">
+                    <a href="/html/admin-dashboard.html" style="display: flex; align-items: center;">
+                        <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
+                    </a>
+                    <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+                
+                <!-- Dark Mode Toggle -->
+                <button id="darkModeToggle" title="Toggle Dark Mode" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer; margin-left: 15px; transition: 0.3s;">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+
+
+        </nav>
+    </header>
+    <!-- DASHBOARD -->
+    <div class="dashboard">
+
+        <!-- SIDEBAR -->
+        <ul class="sidebar">
+            <h2>CodeCraft</h2>
+            <li><a href="./st-dashboard.html">Dashboard</a></li>
+            <li><a href="./my-courses.html">My Courses</a></li>
+            <li><a href="./my-certificates.html">Certificates</a></li>
+            <li><a href="./settings.html">Settings</a></li>
+        </ul>
+
+        <!-- MAIN -->
+        <div class="main">
+
+            <!-- PROFILE (رجع كامل زي المطلوب) -->
+            <div class="profile-wrapper">
+
+                <div class="user-header">
+                    <div class="avatar-upload">
+                        <img src="https://via.placeholder.com/90" class="user-avatar" id="userAvatar">
+                        <input type="file" id="avatarInput" hidden accept="image/*">
+                    </div>
+
+                    <div class="user-details">
+                        <h1 id="userName">Loading...</h1>
+                        <p id="userEmail">📩 Loading...</p>
+                        <p id="courseCount">📚 0 Courses</p>
+                    </div>
+
+                    <div class="profile-actions">
+                        <button id="logoutBtn" class="logout-btn">Logout</button>
+                    </div>
+
+                </div>
+
+                <h2>My Courses</h2>
+
+                <div class="courses-grid" id="courses-grid"></div>
+
+                <h2 style="margin-top:20px;">Achievements</h2>
+
+                <div class="achievements-row">
+
+                    <div class="achievement-item">🏆 Quiz Master</div>
+                    <div class="achievement-item">💻 Code Pro</div>
+                    <div class="achievement-item">⚡ Fast Learner</div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+  <footer class="footer">
+        <div class="footer-container">
+
+            <!-- Logo -->
+            <div class="footer-col">
+                <div class="logo">
+                    <img src="../img/logo.png" alt="Logo">
+                </div>
+            </div>
+
+            <!-- Links -->
+            <div class="footer-col">
+                <h5>Quick Links</h5>
+                <ul>
+                    <li><a href="./home.html">Home</a></li>
+                    <li><a href="./home.html#contact">Support</a></li>
+                    <li><a href="./terms.html">Terms & Conditions</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div class="footer-col">
+                <h5>Contact Us</h5>
+                <div class="contact-list">
+                    <a href="https://wa.me/201104895301" target="_blank">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <a href="tel:+201104895301">
+                        <i class="fas fa-phone"></i> Call Us
+                    </a>
+                    <a href="mailto:mohamedleqaa13@gmail.com">
+                        <i class="fas fa-envelope"></i> Email
+                    </a>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <div class="footer-col" id="contact">
+                <h5>Send Message</h5>
+                <form class="contact-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Your Message" required></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            Copyright © 2026 CODECRAFT. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- SCRIPT -->
+    <script>
+        const btn = document.getElementById('theme-switch');
+        const icon = document.getElementById('theme-icon');
+
+        btn.onclick = () => {
+            document.body.classList.toggle('dark-mode-active');
+
+            if (document.body.classList.contains('dark-mode-active')) {
+                icon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                icon.classList.replace('fa-sun', 'fa-moon');
+            }
+        };
+    </script>
+
+    <style>
+        .avatar-upload { position: relative; cursor: pointer; }
+        .avatar-upload::after { content: '✏️'; position: absolute; bottom: 0; right: 0; background: white; padding: 5px; border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .user-header { position: relative; }
+        .profile-actions { position: absolute; top: 10px; right: 10px; }
+        .logout-btn { background: #dc3545; color: white; border: none; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const token = localStorage.getItem('authToken');
+            if (!token) {
+                // If no token is found, redirect to the login page
+                alert("Please log in to view your profile.");
+                window.location.href = 'login.html';
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:5000/api/auth/me', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (response.ok) {
+                    const { data } = await response.json();
+                    // Populate the profile page with the fetched user data
+                    document.getElementById('userName').textContent = data.name;
+                    document.getElementById('userEmail').textContent = `📩 ${data.email}`;
+                    if (data.profilePic && data.profilePic !== 'default-avatar.png') {
+                        document.getElementById('userAvatar').src = `http://localhost:5000${data.profilePic}`;
+                    }
+
+                    // Fetch enrolled courses to populate the grid and count
+                    const coursesResponse = await fetch('http://localhost:5000/api/users/my-courses', {
+                        headers: { 'Authorization': `Bearer ${token}` }
+                    });
+
+                    if (coursesResponse.ok) {
+                        const coursesResult = await coursesResponse.json();
+                        const coursesGrid = document.getElementById('courses-grid');
+                        const courseCountEl = document.getElementById('courseCount');
+
+                        courseCountEl.textContent = `📚 ${coursesResult.data.length} Courses`;
+                        coursesGrid.innerHTML = ''; // Clear loading/static content
+
+                        if (coursesResult.data.length > 0) {
+                            coursesResult.data.slice(0, 4).forEach(course => { // Show up to 4 courses
+                                const courseCard = document.createElement('a');
+                                courseCard.href = `./lesson-player.html?courseId=${course.id}`;
+                                courseCard.className = 'course-card';
+                                // Simple color generation based on title length
+                                const colors = ['#6C5CE7', '#FF00FF', '#17a2b8', '#28a745'];
+                                const color = colors[course.title.length % colors.length];
+
+                                courseCard.innerHTML = `
+                                    <div class="course-thumb" style="background:${color};">
+                                        <h3>${course.title.substring(0, 10)}</h3>
+                                    </div>
+                                    ${course.title}
+                                `;
+                                coursesGrid.appendChild(courseCard);
+                            });
+                        } else {
+                            coursesGrid.innerHTML = '<p>No courses enrolled yet. <a href="./courses.html">Explore courses</a>.</p>';
+                        }
+                    }
+
+                } else {
+                    // If the token is invalid or expired, clear it and redirect to login
+                    localStorage.removeItem('authToken');
+                    alert("Your session has expired. Please log in again.");
+                    window.location.href = 'login.html';
+                }
+            } catch (error) {
+                console.error('Failed to fetch user profile:', error);
+                alert('Could not load your profile. Please check your connection and try logging in again.');
+            }
+        });
+
+        // Logout functionality
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            localStorage.removeItem('authToken');
+            alert("You have been logged out.");
+            window.location.href = 'login.html';
+        });
+
+        // Profile picture upload
+        document.querySelector('.avatar-upload').addEventListener('click', () => {
+            document.getElementById('avatarInput').click();
+        });
+
+        document.getElementById('avatarInput').addEventListener('change', async (event) => {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const formData = new FormData();
+            formData.append('avatar', file);
+
+            const token = localStorage.getItem('authToken');
+
+            try {
+                const response = await fetch('http://localhost:5000/api/auth/me/photo', {
+                    method: 'PUT',
+                    headers: { 'Authorization': `Bearer ${token}` },
+                    body: formData
+                });
+                const result = await response.json();
+                if (response.ok) {
+                    const newPicUrl = `http://localhost:5000${result.data.profilePic}`;
+                    document.getElementById('userAvatar').src = newPicUrl;
+                    window.dispatchEvent(new CustomEvent('profilePicUpdated', { detail: { newPicUrl } }));
+                } else {
+                    alert(result.message || 'Failed to upload photo.');
+                }
+            } catch (error) {
+                alert('Error uploading photo.');
+            }
+        });
+    </script>
+    <script src="../script/auth.js" defer></script>
+</body>
+
+</html>

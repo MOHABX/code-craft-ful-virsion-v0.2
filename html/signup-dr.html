@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codecraft | Join</title>
+    <link rel="stylesheet" href="../style/signup.css">
+    <style>
+        /* To ensure all content is visible, we'll make sure the container can grow. */
+        .box {
+            height: auto;
+            min-height: 600px; /* A minimum height to look good on large screens */
+        }
+        .form-side {
+            padding-bottom: 25px; /* Add some space at the bottom */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+        <div class="form-side">
+            <h2>Create Account</h2>
+            <p>Join our community</p>
+
+            <div class="type-select">
+                <div class="type-item">
+                    <input type="radio" name="role" id="stu" value="student">
+                    <label for="stu"><a href="./signup-st.html" style="text-decoration: none;">Student</a></label>
+                </div>
+                <div class="type-item">
+                    <input type="radio" name="role" id="doc" value="doctor" checked>
+                    <label for="doc" style="color:#ff00ff; border: solid #ff00ff2d;">Instructor</label>
+                </div>
+            </div>
+
+            <form id="sign_dr">
+                <div class="field full">
+                    <label>First Name</label>
+                    <input type="text" name="fname" required>
+                </div>
+                <div class="field full">
+                    <label>Last Name</label>
+                    <input type="text" name="lname" required>
+                </div>
+
+                <div class="field full">
+                    <label>Email</label>
+                    <input type="email" name="email" required>
+                </div>
+
+            <div class="field full">
+                <label>Phone Number</label>
+                <input type="text" name="phone" required>
+            </div>
+
+                <div class="field doc-fields">
+                    <label>Experience</label>
+                    <input type="number" name="exp" required>
+                </div>
+
+                <div class="field doc-fields">
+                    <label>Specialty</label>
+                    <input type="text" name="spec" required>
+                </div>
+
+                <div class="field full">
+                    <label>Password</label>
+                    <input type="password" name="pass" required>
+                </div>
+
+                <div class="field full">
+                    <label>Confirm</label>
+                    <input type="password" name="cpass" required>
+                </div>
+
+                <div class="agre">
+                    <input type="checkbox" id="agree" name="agree" required>
+                    <label for="agree">I agree to the <a href="./terms.html">Terms</a></label>
+                </div>
+
+                <button type="submit" class="btn">Sign Up</button>
+            </form>
+            <p class="footer-text">
+                Already have an account?
+                <a href="./login.html">log in</a>
+            </p>
+        </div>
+
+        <div class="img-side"></div>
+    </div>
+
+    <script src="../script/acount.js"></script>
+
+    <script src="../script/nav.js" defer></script>
+    <script src="../script/auth.js" defer></script>
+</body>
+
+</html>

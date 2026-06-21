@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeCraft | Student Dashboard – Lubna</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            transition: 0.3s;
+        }
+
+        body {
+            background-color: #F8F9FF;
+            color: #0F0C29;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- Navigation (عرض كامل الشاشة) --- */
+        header {
+            background: #0F0C29;
+            height: 90px;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1100;
+            display: flex;
+            align-items: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 40px;
+            align-items: center;
+        }
+
+        .logo-nav {
+            background: linear-gradient(90deg, #6C5CE7, #FF00FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .list {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .list li a { color: #fff; text-decoration: none; }
+
+        .nav-right-icons { color: #fff; font-size: 20px; cursor: pointer; }
+
+        /* --- الحاوية الوسطى (السايد بار والمحتوى) --- */
+        .main-layout {
+            display: flex;
+            flex: 1;
+            padding: 30px 40px;
+            gap: 30px;
+            width: 100%;
+        }
+
+        /* --- Sidebar (معلق Sticky) --- */
+        .sidebar {
+            width: 260px;
+            background-color: #0F0C29;
+            position: sticky;
+            top: 120px; /* مسافة تحت الهيدر */
+            height: calc(100vh - 160px);
+            display: flex;
+            flex-direction: column;
+            padding: 30px 20px;
+            z-index: 1000;
+            border-radius: 20px;
+            flex-shrink: 0;
+        }
+
+        .sidebar-logo {
+            font-size: 26px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #6C5CE7, #FF00FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .sidebar-menu { list-style: none; flex-grow: 1; }
+        .sidebar-menu li { margin-bottom: 12px; }
+        .sidebar-menu a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            display: flex;
+            gap: 15px;
+            padding: 12px 20px;
+            border-radius: 12px;
+        }
+
+        .sidebar-menu a.active, .sidebar-menu a:hover {
+            background: rgba(255,255,255,0.05);
+            color: #FF00FF;
+            border-left: 4px solid #FF00FF;
+        }
+
+        /* --- Content Area --- */
+        .content-area { flex: 1; }
+
+        .welcome-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .profile-section { display: flex; gap: 20px; align-items: center; }
+        .profile-section img { width: 70px; height: 70px; border-radius: 50%; }
+
+        .settings-card { background: #fff; border-radius: 20px; padding: 35px; }
+        .form-title { color: #6C5CE7; margin-bottom: 25px; }
+
+        .input-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; }
+        input {
+            width: 100%; padding: 12px; border-radius: 12px;
+            border: 1px solid #ddd; background: #F8F9FF; outline: none;
+        }
+
+        .btn-save {
+            width: 100%; padding: 16px; border: none; border-radius: 12px;
+            background: linear-gradient(135deg, #6C5CE7, #FF00FF);
+            color: #fff; font-weight: bold; cursor: pointer;
+        }
+
+        .btn-delete {
+            background: #dc3545;
+        }
+        .btn-delete:hover {
+            background: #c82333;
+        }
+
+        /* --- Footer (عرض كامل الشاشة) --- */
+        .footer {
+            background: #1A1642;
+            color: #FFFFFF;
+            padding: 60px 0 20px;
+            width: 100%;
+            margin-top: auto;
+        }
+
+        .footer-container {
+            max-width: 1400px; 
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 0 40px;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .footer-col { flex: 1; min-width: 200px; }
+        .footer-col:last-child { flex: 1.5; min-width: 260px; max-width: 400px; }
+
+        .footer .logo img { width: 200px; height: auto; margin-bottom: 20px; }
+
+        h5 { font-size: 20px; margin-bottom: 20px; font-weight: 700; color: #6C5CE7; }
+
+        .footer ul { list-style: none; }
+        .footer ul li { margin-bottom: 12px; }
+        .footer ul li a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 15px; }
+        .footer ul li a:hover { color: #FF00FF; padding-left: 5px; }
+
+        .contact-list a { 
+            display: flex; align-items: center; gap: 10px; font-size: 15px; 
+            text-decoration: none; color: #FFFFFF; margin-bottom: 15px;
+        }
+
+        .contact-form { display: flex; flex-direction: column; gap: 12px; } 
+        .contact-form input, .contact-form textarea { 
+            padding: 12px; border-radius: 10px; border: none; background: rgba(255,255,255,0.1); color: #fff;
+        }
+
+        .contact-form textarea { height: 80px; resize: none; }
+        .contact-form button { 
+            padding: 12px; border: none; border-radius: 10px; 
+            background: linear-gradient(135deg,#6C5CE7,#FF00FF); 
+            color: #fff; font-weight: bold; cursor: pointer;
+        }
+
+        .footer-bottom { 
+            border-top: 1px solid rgba(255,255,255,0.1); 
+            margin-top: 40px; padding-top: 20px; text-align: center; font-size: 14px; color: #888; 
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 992px) {
+            .sidebar { display: none; }
+            .main-layout { padding: 20px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <script src="../script/nav.js" defer></script>
+    <header>
+        <nav>
+            <a class="logo-nav" href="#">CodeCraft</a>
+            <ul class="list">
+                <li><a href="/html/home.html">home</a></li>
+                <li><a href="/html/track.html">tracks</a></li>
+                <li><a href="/html/courses.html">courses</a></li>
+                <li><a href="/html/roadmap.html">road maps</a></li>
+                <li><a href="/html/resources.html">resources</a></li>
+                <li><a href="/html/home.html#contact">contact us</a></li>
+            </ul>
+            <div class="nav-right-icons">
+                <i class="fas fa-moon"></i>
+            </div>
+        </nav>
+    </header>
+
+    <div class="main-layout">
+        
+        <aside class="sidebar">
+            <div class="sidebar-logo">CodeCraft</div>
+            <ul class="sidebar-menu" id="sidebar-menu">
+                <li><a href="./st-profile.html"><i class="fas fa-th-large"></i> Dashboard</a></li>
+                <li><a href="./my-courses.html"><i class="fas fa-graduation-cap"></i> My Courses</a></li>
+                <li><a href="#" class="active"><i class="fas fa-user-cog"></i> Settings</a></li>
+            </ul>
+        </aside>
+
+        <main class="content-area">
+            <section class="welcome-card">
+                <div class="profile-section">
+                    <img src="https://i.pravatar.cc/150?u=lubna" alt="Profile">
+                    <div id="welcome-message">
+                        <h2>Welcome back... ✨</h2>
+                        <p id="dashboard-role-text">Student Dashboard</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="settings-card">
+                <form id="settings-form">
+                    <h3 class="form-title">Account Settings</h3>
+                    <div class="input-group">
+                        <label>Full Name</label>
+                        <input type="text" id="userName" value="Loading...">
+                    </div>
+                    <div class="input-group">
+                        <label>Email</label>
+                        <input type="email" id="userEmail" value="Loading..." disabled>
+                    </div>
+                    <button type="submit" class="btn-save">Save Changes</button>
+                </form>
+            </section>
+
+            <section class="settings-card" style="margin-top: 30px;">
+                <form id="password-form">
+                    <h3 class="form-title">Change Password</h3>
+                    <div class="input-group">
+                        <label>Current Password</label>
+                        <input type="password" id="currentPassword" placeholder="••••••••" required>
+                    </div>
+                    <div class="input-group">
+                        <label>New Password</label>
+                        <input type="password" id="newPassword" placeholder="••••••••" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Confirm New Password</label>
+                        <input type="password" id="confirmPassword" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="btn-save">Change Password</button>
+                </form>
+            </section>
+
+            <section class="settings-card" style="margin-top: 30px; border-top: 4px solid #dc3545;">
+                <h3 class="form-title" style="color: #dc3545;">Danger Zone</h3>
+                <p style="margin-bottom: 20px;">Deleting your account is permanent and cannot be undone. All your data, including courses and progress, will be lost.</p>
+                <button id="deleteAccountBtn" class="btn-save btn-delete">Delete My Account</button>
+            </section>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <div class="logo">
+                    <img src="../img/logo.png" alt="Logo">
+                </div>
+                <p style="font-size: 14px; opacity: 0.7;">CodeCraft is your gateway to mastering development skills.</p>
+            </div>
+
+            <div class="footer-col">
+                <h5>Quick Links</h5>
+                <ul>
+                    <li><a href="../home.html">Home</a></li> 
+                    <li><a href="../support.html">Support</a></li>
+                    <li><a href="../terms.html">Terms & Conditions</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h5>Contact Us</h5>
+                <div class="contact-list">
+                    <a href="https://wa.me/201104895301" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    <a href="tel:+201104895301"><i class="fas fa-phone"></i> Call Us</a>
+                    <a href="mailto:mohamedleqaa13@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h5>Send Message</h5>
+                <form class="contact-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Your Message" required></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            Copyright © 2026 CODECRAFT. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const token = localStorage.getItem('authToken');
+            if (!token) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Fetch user data
+            try {
+                const response = await fetch('http://localhost:5000/api/auth/me', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (response.ok) {
+                    const { data } = await response.json();
+                    document.getElementById('userName').value = data.name;
+                    document.getElementById('userEmail').value = data.email;
+                    document.querySelector('#welcome-message h2').textContent = `Welcome back, ${data.name.split(' ')[0]} ✨`;
+                    
+                    if (data.profilePic && data.profilePic !== 'default-avatar.png') {
+                        document.querySelector('.profile-section img').src = `http://localhost:5000${data.profilePic}`;
+                    } else {
+                        document.querySelector('.profile-section img').src = `../img/circle-user-solid-full.svg`;
+                    }
+
+                    if (data.role === 'doctor' || data.role === 'admin') {
+                        document.getElementById('dashboard-role-text').textContent = 'Instructor Dashboard';
+                        document.querySelector('title').textContent = 'CodeCraft | Instructor Settings';
+                        document.getElementById('sidebar-menu').innerHTML = `
+                            <li><a href="./dr-dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a></li>
+                            <li><a href="./dr-profile.html"><i class="fas fa-user"></i> Profile</a></li>
+                            <li><a href="#" class="active"><i class="fas fa-user-cog"></i> Settings</a></li>
+                        `;
+                    } else {
+                        document.getElementById('dashboard-role-text').textContent = 'Student Dashboard';
+                        document.querySelector('title').textContent = 'CodeCraft | Student Settings';
+                        document.getElementById('sidebar-menu').innerHTML = `
+                            <li><a href="./st-profile.html"><i class="fas fa-th-large"></i> Dashboard</a></li>
+                            <li><a href="./my-courses.html"><i class="fas fa-graduation-cap"></i> My Courses</a></li>
+                            <li><a href="#" class="active"><i class="fas fa-user-cog"></i> Settings</a></li>
+                        `;
+                    }
+                } else {
+                    localStorage.removeItem('authToken');
+                    window.location.href = 'login.html';
+                }
+            } catch (error) {
+                console.error('Failed to fetch user settings:', error);
+            }
+
+            // Handle Settings Update (Name)
+            const settingsForm = document.getElementById('settings-form');
+            settingsForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const name = document.getElementById('userName').value;
+
+                try {
+                    const response = await fetch('http://localhost:5000/api/auth/me/details', {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify({ name })
+                    });
+                    const result = await response.json();
+                    if (response.ok) {
+                        alert('Your details have been updated successfully!');
+                        document.querySelector('#welcome-message h2').textContent = `Welcome back, ${result.data.name.split(' ')[0]} ✨`;
+                    } else {
+                        alert(result.message || 'Failed to update details.');
+                    }
+                } catch (error) {
+                    alert('A server error occurred while updating details.');
+                }
+            });
+
+            // Handle Password Change
+            const passwordForm = document.getElementById('password-form');
+            passwordForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const currentPassword = document.getElementById('currentPassword').value;
+                const newPassword = document.getElementById('newPassword').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+
+                if (newPassword !== confirmPassword) {
+                    return alert('New passwords do not match!');
+                }
+
+                try {
+                    const response = await fetch('http://localhost:5000/api/auth/me/password', {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify({ currentPassword, newPassword })
+                    });
+
+                    const result = await response.json();
+                    if (response.ok) {
+                        alert(result.message);
+                        passwordForm.reset();
+                    } else {
+                        alert(result.message || 'Failed to change password.');
+                    }
+                } catch (error) {
+                    alert('A server error occurred while changing password.');
+                }
+            });
+
+            // Handle Account Deletion
+            const deleteBtn = document.getElementById('deleteAccountBtn');
+            deleteBtn.addEventListener('click', async () => {
+                const confirmation = confirm('Are you absolutely sure you want to delete your account? This action is irreversible.');
+                
+                if (confirmation) {
+                    try {
+                        const deleteResponse = await fetch('http://localhost:5000/api/auth/me', {
+                            method: 'DELETE',
+                            headers: { 'Authorization': `Bearer ${token}` }
+                        });
+
+                        const result = await deleteResponse.json();
+                        
+                        if (deleteResponse.ok) {
+                            alert(result.message);
+                            localStorage.removeItem('authToken');
+                            window.location.href = 'home.html';
+                        } else {
+                            alert(result.message || 'Failed to delete account.');
+                        }
+
+                    } catch (error) {
+                        console.error('Error deleting account:', error);
+                        alert('A server error occurred. Could not delete account.');
+                    }
+                }
+            });
+        });
+    </script>
+
+    <script src="../script/auth.js" defer></script>
+</body>
+</html>

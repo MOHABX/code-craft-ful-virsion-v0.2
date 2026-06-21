@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instructor Profile</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+/* ========== BASE STYLES ========== */
+body { 
+    margin: 0;
+    padding: 0;
+    background-color: #F8F9FF;
+    color: #0F0C29; 
+    font-family: 'Poppins', sans-serif; 
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Dark Mode */
+body.dark-mode-active { 
+    background-color: #0a0a14; 
+    color: #ffffff; 
+}
+
+/* ========== NEW NAVBAR STYLES (MERGED) ========== */
+header {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    background: #0F0C29;
+    height: 100px;
+    border-radius: 0px 0px 20px 20px;
+}
+
+nav {
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo {
+    background: linear-gradient(90deg, #6C5CE7, #FF00FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.list {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    transition: all 1s;
+}
+
+.list li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    transition: all 1s;
+}
+
+.list li a:hover {
+    background: linear-gradient(90deg, #6C5CE7, #FF00FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: all 1s;
+    cursor: pointer;
+}
+
+.user-profile img:hover {
+    transform: rotateY(360deg);
+}
+
+/* Dark mode button inside navbar (added to match original functionality) */
+#theme-switch { 
+    background: rgba(255, 255, 255, 0.1); 
+    border: none; 
+    color: #FFD700; 
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer; 
+    font-size: 20px;
+}
+
+.dark-mode-active #theme-switch {
+    color: #6C5CE7;
+}
+
+/* ===== Profile Section ===== */
+.profile {
+    max-width: 1100px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+.profile-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 30px;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    border: 1px solid rgba(108,92,231,0.2);
+}
+
+body.dark-mode-active .profile-card {
+    background: #1e1e2a;
+    border-color: #6C5CE7;
+}
+
+.profile-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: linear-gradient(135deg, #6C5CE7, #FF00FF);
+}
+
+.badge {
+    display: inline-block;
+    background: linear-gradient(90deg, #6C5CE7, #FF00FF);
+    color: #fff;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+/* ===== Courses ===== */
+.section {
+    margin-top: 40px;
+}
+
+.section h2 {
+    margin-bottom: 15px;
+    color: #6C5CE7;
+}
+
+.courses {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.course {
+    background: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid rgba(108,92,231,0.2);
+}
+
+body.dark-mode-active .course {
+    background: #1e1e2a;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #6C5CE7, #FF00FF);
+    color: #fff;
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+/* ===== Dashboard ===== */
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.chart-box {
+    background: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid rgba(108,92,231,0.2);
+}
+
+body.dark-mode-active .chart-box {
+    background: #1e1e2a;
+}
+
+.chart-box h3 {
+    margin-bottom: 15px;
+    color: #6C5CE7;
+}
+
+/* ===== Footer ===== */
+.footer {
+    background: #1A1642;
+    color: #FFFFFF;
+    padding: 40px 0;
+    margin-top: auto;
+}
+
+.footer-container {
+    max-width: 1400px; 
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0 40px;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.footer-col {
+    flex: 1;
+    min-width: 200px;
+}
+
+.footer-col:last-child {
+    flex: 1.5;
+    min-width: 260px;
+    max-width: 400px;
+}
+
+.footer .logo img { 
+    width: 250px; 
+    height: auto;
+    margin-top: -100px;
+}
+
+h5 { 
+    font-size: 22px; 
+    margin-bottom: 20px; 
+    font-weight: 700;
+}
+
+ul { list-style: none; }
+ul li { margin-bottom: 12px; }
+
+ul li a { 
+    color: rgba(255,255,255,0.85); 
+    text-decoration: none; 
+    font-size: 15px; 
+}
+
+ul li a:hover {
+    color: #6C5CE7;
+    padding-left: 4px;
+}
+
+.contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-list a { 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    font-size: 15px; 
+    text-decoration: none; 
+    color: #FFFFFF; 
+}
+
+.contact-list a i { font-size: 18px; }
+.contact-list a:hover { color: #6C5CE7; }
+
+.contact-form { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 12px; 
+} 
+
+.contact-form input, 
+.contact-form textarea { 
+    padding: 10px; 
+    border-radius: 10px; 
+    border: none; 
+    font-size: 14px; 
+    outline: none; 
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: 2px solid #6C5CE7;
+}
+
+.contact-form textarea { 
+    height: 90px; 
+    resize: none; 
+}
+
+.contact-form button { 
+    padding: 12px; 
+    border: none; 
+    border-radius: 10px; 
+    background: linear-gradient(135deg, #6C5CE7, #FF00FF); 
+    color: #fff; 
+    font-size: 15px; 
+    font-weight: bold;
+    cursor: pointer; 
+}
+
+.contact-form button:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+.footer-bottom { 
+    border-top: 1px solid rgba(255,255,255,0.1); 
+    margin-top: 30px; 
+    padding-top: 15px; 
+    text-align: center; 
+    font-size: 14px; 
+    color: #ccc; 
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .profile-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    .footer-container {
+        flex-direction: column;
+        gap: 20px;
+        padding: 0 20px;
+    }
+    nav {
+        flex-wrap: wrap;
+        padding: 10px;
+    }
+    .list {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
+    }
+    header {
+        height: auto;
+        padding-bottom: 10px;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NEW NAVBAR (MERGED) ===== -->
+<header>
+    <nav>
+        <a class="logo" href="#">CodeCraft</a>
+
+        <ul class="list">
+                <li><a href="/html/home.html">home</a></li>
+                <li><a href="/html/track.html">tracks</a></li>
+                <li><a href="/html/courses.html">courses</a></li>
+                <li><a href="/html/roadmap.html">road maps</a></li>
+                <li><a href="/html/resources.html">resources</a></li>
+                <li><a href="/html/home.html#contact">contact us</a></li>
+            </ul>
+
+        <div class="user-profile" style="display: flex; align-items: center; gap: 15px;">
+            <button id="theme-switch" title="Toggle Dark Mode" style="background: transparent; border: none; cursor: pointer; color: #FF00FF; font-size: 20px;">
+                <i class="fas fa-moon" id="theme-icon"></i>
+            </button>
+            <div class="nav-auth-container">
+                <a href="./dr-profile.html">
+                    <img id="navUserImg" src="https://i.pravatar.cc/150" alt="Profile-img">
+                </a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- ===== PROFILE CONTENT ===== -->
+<div class="profile">
+    <div class="profile-card">
+        <div class="avatar-upload">
+            <img src="https://via.placeholder.com/150" class="profile-img" id="userAvatar">
+            <input type="file" id="avatarInput" hidden accept="image/*">
+        </div>
+        <div>
+            <h2 id="userName">Loading...</h2>
+            <p id="userEmail">Loading...</p>
+            <span class="badge">Top Instructor</span>
+        </div>
+        <div class="profile-actions">
+            <button id="logoutBtn" class="logout-btn">Logout</button>
+        </div>
+    </div>
+
+    <!-- Course Creation -->
+    <div class="section">
+        <h2>Create New Course</h2>
+        <form id="create-course-form" class="course-form">
+            <input type="text" id="courseTitle" placeholder="Course Title" required>
+            <textarea id="courseDescription" placeholder="Course Description"></textarea>
+            <button type="submit" class="btn">Create Course</button>
+        </form>
+    </div>
+
+    <!-- Courses -->
+    <div class="section">
+        <h2>My Courses</h2>
+        <div class="courses" id="courses-list">
+            <p>Loading your courses...</p>
+        </div>
+    </div>
+
+    <!-- Dashboard Charts -->
+    <div class="section">
+        <div class="dashboard">
+            <div class="chart-box">
+                <h3>Students per Course</h3>
+                <canvas id="studentsChart"></canvas>
+            </div>
+            <div class="chart-box">
+                <h3>Course Ratings</h3>
+                <canvas id="ratingChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-col">
+            <div class="logo">
+                <img src="../img/logo.png" alt="Logo">
+            </div>
+        </div>
+        <div class="footer-col">
+            <h5>Quick Links</h5>
+            <ul>
+                <li><a href="./home.html">Home</a></li> 
+                <li><a href="./home.html#contact">Support</a></li>
+                <li><a href="./terms.html">Terms & Conditions</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h5>Contact Us</h5>
+            <div class="contact-list">
+                <a href="https://wa.me/201104895301" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <a href="tel:+201104895301"><i class="fas fa-phone"></i> Call Us</a>
+                <a href="mailto:mohamedleqaa13@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h5>Send Message</h5>
+            <form class="contact-form">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        Copyright © 2026 CODECRAFT. All rights reserved.
+    </div>
+</footer>
+
+<!-- Student List Modal -->
+<div id="studentsModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2>Enrolled Students for <span id="modalCourseTitle"></span></h2>
+        <div id="modalStudentList">
+            <!-- Student list will be populated here -->
+        </div>
+    </div>
+</div>
+
+<!-- CHARTS & SCRIPTS -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="../script/nav.js" defer></script>
+<style>
+    /* Modal Styles */
+    .modal {
+        display: none; 
+        position: fixed; 
+        z-index: 1100; 
+        left: 0;
+        top: 0;
+        width: 100%; 
+        height: 100%; 
+        overflow: auto; 
+        background-color: rgba(0,0,0,0.6);
+        backdrop-filter: blur(5px);
+    }
+    .modal-content {
+        background-color: #fefefe;
+        margin: 10% auto;
+        padding: 30px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 700px;
+        border-radius: 15px;
+        position: relative;
+    }
+    body.dark-mode-active .modal-content { background-color: #1e1e2a; }
+    .close-btn {
+        color: #aaa;
+        position: absolute;
+        top: 10px;
+        right: 25px;
+        font-size: 32px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    .close-btn:hover, .close-btn:focus { color: #dc3545; }
+
+    .avatar-upload { position: relative; cursor: pointer; }
+    .avatar-upload::after { content: '✏️'; position: absolute; bottom: 0; right: 0; background: white; padding: 5px; border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+    .profile-card { position: relative; }
+    .profile-actions { position: absolute; top: 10px; right: 10px; }
+    .logout-btn { background: #dc3545; color: white; border: none; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+    .course-form { display: flex; flex-direction: column; gap: 15px; background: #fff; padding: 20px; border-radius: 15px; }
+    body.dark-mode-active .course-form { background: #1e1e2a; }
+    .course-form input, .course-form textarea { padding: 12px; border-radius: 8px; border: 1px solid #ddd; }
+    body.dark-mode-active .course-form input, body.dark-mode-active .course-form textarea { background: #0a0a14; border-color: #333; color: white; }
+    .upload-area { margin-top: 15px; }
+    .btn-upload { padding: 8px 12px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    .profile-img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; background: linear-gradient(135deg, #6C5CE7, #FF00FF); }
+
+    /* Student List in Modal */
+    .student-list { list-style: none; padding: 0; max-height: 400px; overflow-y: auto; }
+    .student-list li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 8px;
+        border-bottom: 1px solid #eee;
+    }
+    body.dark-mode-active .student-list li { border-bottom-color: #333; }
+    .student-list li:last-child { border-bottom: none; }
+    .student-list img { width: 40px; height: 40px; border-radius: 50%; margin-right: 15px; object-fit: cover; }
+    .student-list .student-details { flex-grow: 1; }
+    .student-list .student-details strong { display: block; }
+    .student-list .student-details span { font-size: 0.9em; color: #777; }
+    body.dark-mode-active .student-list .student-details span { color: #aaa; }
+    .student-list .enroll-date { font-size: 0.85em; color: #555; }
+    body.dark-mode-active .student-list .enroll-date { color: #bbb; }
+
+    /* View Students Button */
+    .btn-view-students { padding: 8px 12px; background: #17a2b8; color: white; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px; }
+</style>
+<script>
+    // Charts
+    new Chart(document.getElementById('studentsChart'), {
+        type: 'bar',
+        data: {
+            labels: ['HTML', 'JS', 'React'],
+            datasets: [{
+                data: [1200, 1900, 800],
+                backgroundColor: ['#6C5CE7', '#FF00FF', '#A29BFE']
+            }]
+        }
+    });
+
+    new Chart(document.getElementById('ratingChart'), {
+        type: 'bar',
+        data: {
+            labels: ['HTML', 'JS', 'React'],
+            datasets: [{
+                data: [4.5, 4.8, 4.6],
+                backgroundColor: ['#FF00FF', '#6C5CE7', '#A29BFE']
+            }]
+        }
+    });
+
+    // Dark Mode Toggle (works with new navbar button)
+    const themeBtn = document.getElementById('theme-switch');
+    const themeIcon = document.getElementById('theme-icon');
+
+    themeBtn.onclick = () => {
+        document.body.classList.toggle('dark-mode-active');
+        const isDark = document.body.classList.contains('dark-mode-active');
+        themeIcon.classList.replace(isDark ? 'fa-moon' : 'fa-sun', isDark ? 'fa-sun' : 'fa-moon');
+    };
+
+    // --- DYNAMIC DATA SCRIPT ---
+    document.addEventListener('DOMContentLoaded', async () => {
+        const token = localStorage.getItem('authToken');
+        if (!token) {
+            alert("Please log in to view your profile.");
+            window.location.href = 'login.html';
+            return;
+        }
+
+        try {
+            const response = await fetch('http://localhost:5000/api/auth/me', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+
+            if (response.ok) {
+                const { data } = await response.json();
+                document.getElementById('userName').textContent = data.name;
+                document.getElementById('userEmail').textContent = `✉️ ${data.email}`;
+                if (data.profilePic && data.profilePic !== 'default-avatar.png') {
+                    document.getElementById('userAvatar').src = `http://localhost:5000${data.profilePic}`;
+                }
+                
+                // Fetch and display courses
+                fetchInstructorCourses(token);
+            } else {
+                localStorage.removeItem('authToken');
+                window.location.href = 'login.html';
+            }
+        } catch (error) {
+            console.error('Failed to fetch user profile:', error);
+        }
+    });
+
+    // Logout
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+        localStorage.removeItem('authToken');
+        alert("You have been logged out.");
+        window.location.href = 'login.html';
+    });
+
+    // Avatar Upload
+    document.querySelector('.avatar-upload').addEventListener('click', () => document.getElementById('avatarInput').click());
+    document.getElementById('avatarInput').addEventListener('change', async (event) => {
+        const file = event.target.files[0];
+        if (!file) return;
+        const formData = new FormData();
+        formData.append('avatar', file);
+        const token = localStorage.getItem('authToken');
+        const response = await fetch('http://localhost:5000/api/auth/me/photo', {
+            method: 'PUT',
+            headers: { 'Authorization': `Bearer ${token}` },
+            body: formData
+        });
+        const result = await response.json();
+        if (response.ok) {
+            const newPicUrl = `http://localhost:5000${result.data.profilePic}`;
+            document.getElementById('userAvatar').src = newPicUrl;
+            window.dispatchEvent(new CustomEvent('profilePicUpdated', { detail: { newPicUrl } }));
+        } else {
+            alert('Upload failed.');
+        }
+    });
+
+    // Course Creation
+    document.getElementById('create-course-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const title = document.getElementById('courseTitle').value;
+        const description = document.getElementById('courseDescription').value;
+        const token = localStorage.getItem('authToken');
+
+        const response = await fetch('http://localhost:5000/api/courses', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ title, description })
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+            alert(`Course "${result.data.title}" created successfully!`);
+            addCourseToList(result.data); // Dynamically add the new course
+            e.target.reset();
+        } else {
+            alert(result.message || 'Failed to create course.');
+        }
+    });
+
+    function addCourseToList(course) {
+        const coursesListContainer = document.getElementById('courses-list');
+        
+        // If the "no courses yet" message is present, remove it
+        const noCoursesP = coursesListContainer.querySelector('p');
+        if (noCoursesP) {
+            noCoursesP.remove();
+        }
+
+        const courseEl = document.createElement('div');
+        courseEl.className = 'course';
+        courseEl.innerHTML = `
+            <h3>${course.title}</h3>
+            <p>${course.description || 'No description.'}</p>
+            <div class="video-list">
+                <p style="font-size: 12px; color: gray;">No videos uploaded yet.</p>
+            </div>
+            <div class="upload-area">
+                <form class="video-upload-form" data-course-id="${course.id}">
+                    <input type="file" class="video-upload-input" accept="video/*" multiple required>
+                    <button type="submit" class="btn-upload">Upload Videos</button>
+                </form>
+            </div>
+            <button class="btn-view-students" data-course-id="${course.id}">View Students</button>
+        `;
+        coursesListContainer.appendChild(courseEl);
+
+        // Re-attach event listeners to the new elements
+        courseEl.querySelector('.video-upload-form').addEventListener('submit', handleVideoUpload);
+        courseEl.querySelector('.btn-view-students').addEventListener('click', handleViewStudentsClick);
+    }
+
+    // --- NEW: Fetch and Display Instructor's Courses ---
+    async function fetchInstructorCourses(token) {
+        const coursesListContainer = document.getElementById('courses-list');
+        try {
+            const response = await fetch('http://localhost:5000/api/courses/mycourses', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const result = await response.json();
+
+            if (response.ok) {
+                coursesListContainer.innerHTML = ''; // Clear placeholder
+                if (result.data.length === 0) {
+                    coursesListContainer.innerHTML = '<p>You have not created any courses yet. Use the form above to create your first one!</p>';
+                    return;
+                }
+                result.data.forEach(course => {
+                    const courseEl = document.createElement('div');
+                    courseEl.className = 'course';
+                    courseEl.innerHTML = `
+                        <h3>${course.title}</h3>
+                        <p>${course.description || 'No description.'}</p>
+                        
+                            ${course.videos && course.videos.length > 0 
+                                ? course.videos.map(v => `<div class="video-item" style="display:flex; justify-content:space-between; align-items:center; margin: 5px 0; padding: 5px; background: #f9f9f9; border-radius: 5px;">
+                                    <span>🎥 ${v.title || 'Video ' + v.id}</span>
+                                    <button class="btn-delete-video" data-course-id="${course.id}" data-video-id="${v.id}" style="background:#dc3545; color:white; border:none; padding:5px 10px; border-radius:4px; cursor:pointer;"><i class="fas fa-trash"></i> Delete</button>
+                                  </div>`).join('')
+                                : '<p style="font-size: 12px; color: gray;">No videos uploaded yet.</p>'}
+                        </div>
+
+                        <div class="upload-area">
+                            <form class="video-upload-form" data-course-id="${course.id}">
+                                <input type="file" class="video-upload-input" accept="video/*" multiple required>
+                                <button type="submit" class="btn-upload">Upload Videos</button>
+                            </form>
+                        </div>
+                        <button class="btn-view-students" data-course-id="${course.id}">View Students</button>
+                    `;
+                    coursesListContainer.appendChild(courseEl);
+                });
+
+                // Add event listeners
+                document.querySelectorAll('.video-upload-form').forEach(form => {
+                    form.addEventListener('submit', handleVideoUpload);
+                });
+
+                document.querySelectorAll('.btn-view-students').forEach(button => {
+                    button.addEventListener('click', handleViewStudentsClick);
+                });
+                
+                document.querySelectorAll('.btn-delete-video').forEach(button => {
+                    button.addEventListener('click', handleDeleteVideo);
+                });
+            }
+        } catch (error) {
+            coursesListContainer.innerHTML = '<p>Error loading your courses. Please refresh the page.</p>';
+        }
+    }
+
+    // --- NEW: Handle Video Upload (Bulk) ---
+    async function handleVideoUpload(e) {
+        e.preventDefault();
+        const form = e.target;
+        const submitButton = form.querySelector('button');
+        const courseId = form.dataset.courseId;
+        const videoFiles = form.querySelector('.video-upload-input').files;
+        
+        if (videoFiles.length === 0) return alert('Please select video files.');
+        if (videoFiles.length > 15) return alert('You can only upload up to 15 videos at once.');
+
+        const formData = new FormData();
+        const titles = [];
+        Array.from(videoFiles).forEach(file => {
+            formData.append('videos', file);
+            titles.push(file.name.replace(/\.[^.]+$/, ''));
+        });
+        formData.append('titles', JSON.stringify(titles));
+
+        const token = localStorage.getItem('authToken');
+        submitButton.textContent = 'Uploading...';
+        submitButton.disabled = true;
+
+        try {
+            const response = await fetch(`http://localhost:5000/api/videos/upload/${courseId}`, {
+                method: 'POST',
+                headers: { 'Authorization': `Bearer ${token}` },
+                body: formData
+            });
+            const result = await response.json();
+            alert(result.message);
+            if(response.ok) fetchInstructorCourses(token); // Refresh
+        } catch (error) {
+            alert('An error occurred during upload.');
+        } finally {
+            submitButton.textContent = 'Upload Videos';
+            submitButton.disabled = false;
+            form.reset();
+        }
+    }
+
+    // --- NEW: Handle Video Deletion ---
+    async function handleDeleteVideo(e) {
+        const button = e.currentTarget;
+        const courseId = button.dataset.courseId;
+        const videoId = button.dataset.videoId;
+        
+        if(!confirm('Are you sure you want to delete this video?')) return;
+        
+        const token = localStorage.getItem('authToken');
+        button.disabled = true;
+        button.textContent = 'Deleting...';
+        
+        try {
+            const response = await fetch(`http://localhost:5000/api/courses/${courseId}/videos/${videoId}`, {
+                method: 'DELETE',
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const result = await response.json();
+            if(response.ok) {
+                alert('Video deleted successfully.');
+                fetchInstructorCourses(token);
+            } else {
+                alert(result.message || 'Failed to delete video.');
+                button.disabled = false;
+                button.innerHTML = '<i class="fas fa-trash"></i> Delete';
+            }
+        } catch (error) {
+            alert('An error occurred while deleting.');
+            button.disabled = false;
+            button.innerHTML = '<i class="fas fa-trash"></i> Delete';
+        }
+    }
+
+    // --- NEW: Modal and Student List Logic ---
+    const modal = document.getElementById('studentsModal');
+    const closeBtn = modal.querySelector('.close-btn');
+    closeBtn.onclick = () => { modal.style.display = 'none'; };
+    window.onclick = (event) => {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    };
+
+    async function handleViewStudentsClick(e) {
+        const courseId = e.target.dataset.courseId;
+        const courseTitle = e.target.closest('.course').querySelector('h3').textContent;
+        
+        const modalTitle = document.getElementById('modalCourseTitle');
+        const studentListDiv = document.getElementById('modalStudentList');
+
+        modalTitle.textContent = courseTitle;
+        studentListDiv.innerHTML = '<p>Loading students...</p>';
+        modal.style.display = 'block';
+
+        const token = localStorage.getItem('authToken');
+        try {
+            const response = await fetch(`http://localhost:5000/api/courses/${courseId}/students`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const result = await response.json();
+
+            if (response.ok) {
+                studentListDiv.innerHTML = '';
+                if (result.data.length === 0) {
+                    studentListDiv.innerHTML = '<p>No students are enrolled in this course yet.</p>';
+                    return;
+                }
+                
+                const studentListUL = document.createElement('ul');
+                studentListUL.className = 'student-list';
+                result.data.forEach(student => {
+                    const li = document.createElement('li');
+                    const enrollmentDate = new Date(student.Enrollment.createdAt).toLocaleDateString();
+                    const profilePic = student.profilePic && student.profilePic !== 'default-avatar.png' ? `http://localhost:5000${student.profilePic}` : 'https://via.placeholder.com/40';
+                    li.innerHTML = `
+                        <img src="${profilePic}" alt="avatar">
+                        <div class="student-details">
+                            <strong>${student.name}</strong>
+                            <span>${student.email}</span>
+                        </div>
+                        <span class="enroll-date">Enrolled: ${enrollmentDate}</span>
+                    `;
+                    studentListUL.appendChild(li);
+                });
+                studentListDiv.appendChild(studentListUL);
+
+            } else {
+                studentListDiv.innerHTML = `<p>Error: ${result.message}</p>`;
+            }
+        } catch (error) {
+            studentListDiv.innerHTML = '<p>Failed to load student data.</p>';
+        }
+    }
+</script>
+
+    <script src="../script/auth.js" defer></script>
+</body>
+</html>

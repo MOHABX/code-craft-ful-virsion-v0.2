@@ -1,0 +1,333 @@
+
+ 
+ *{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+
+background:#F4F2FB;
+color:#0F0C29;
+/*padding:60px 20px;*/
+
+}
+/* ======================= Navbar ======================= */
+.navbar{
+width:100%;
+background:#0F0C29;
+margin-bottom: 50px;
+}
+
+.nav-container{
+max-width:1300px;
+margin:auto;
+padding:22px 70px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+font-size:28px;
+font-weight:800;
+background:linear-gradient(90deg,#6C5CE7,#FF00FF);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+text-decoration:none;
+}
+
+.nav-capsule{
+display:flex;
+align-items:center;
+gap:38px;
+padding:14px 40px;
+border:2px solid #6C5CE7;
+border-radius:50px;
+white-space:nowrap;
+}
+
+.nav-capsule a{
+color:#FFFFFF;
+text-decoration:none;
+font-weight:600;
+font-size:18px;
+transition:0.3s;
+}
+
+.nav-capsule a:hover{
+color:#FF00FF;
+}
+
+.nav-buttons{
+display:flex;
+align-items:center;
+gap:22px;
+}
+
+.login-btn{
+padding:10px 26px;
+border:none;
+border-radius:10px;
+font-weight:600;
+font-size:16px;
+color:#fff;
+cursor:pointer;
+background:linear-gradient(90deg,#6C5CE7,#FF00FF);
+}
+
+.signup-btn{
+padding:10px 28px;
+border-radius:10px;
+font-weight:600;
+font-size:16px;
+color:#0F0C29;
+background:#E0D4FF;
+border:none;
+cursor:pointer;
+box-shadow:0 4px 14px rgba(108,92,231,0.35);
+transition:0.3s;
+}
+
+.signup-btn:hover{
+background:#d4c4ff;
+}
+
+.faq{
+
+max-width:900px;
+margin:auto;
+text-align:center;
+
+}
+
+.faq h1{
+
+font-size:40px;
+margin-bottom:10px;
+color:#6C5CE7;
+
+}
+
+.faq-desc{
+
+color:#666;
+margin-bottom:30px;
+
+}
+
+/* Search Box */
+
+.search-box{
+
+width:100%;
+max-width:500px;
+padding:14px 20px;
+border-radius:30px;
+border:2px solid #6C5CE7;
+outline:none;
+margin-bottom:40px;
+transition:0.3s;
+
+}
+
+.search-box:hover{
+
+border-color:#FF00FF;
+box-shadow:0 4px 10px rgba(255,0,255,0.15);
+
+}
+
+/* FAQ Container */
+
+.faq-container{
+
+display:flex;
+flex-direction:column;
+gap:20px;
+
+}
+
+/* FAQ Cards */
+
+.faq-card{
+
+background:#FFFFFF;
+border-radius:12px;
+border-top:5px solid #FF00FF;
+overflow:hidden;
+transition:0.3s;
+height: 100px;
+
+}
+
+.faq-card:hover{
+
+border-top:5px solid #6C5CE7;
+box-shadow:0 8px 20px rgba(108,92,231,0.15);
+
+}
+
+/* Question */
+
+.faq-question{
+
+width:100%;
+background:none;
+border:none;
+padding:18px 20px;
+font-size:16px;
+font-weight:600;
+display:flex;
+justify-content:space-between;
+align-items:center;
+cursor:pointer;
+color:#0F0C29;
+
+}
+
+/* Answer */
+
+.faq-answer{
+
+max-height:0;
+overflow:hidden;
+padding:0 20px;
+color:#555;
+transition:max-height 0.3s ease;
+
+}
+
+/* Active */
+
+.faq-card.active .faq-answer{
+
+max-height:150px;
+padding-bottom:20px;
+
+}
+
+
+.footer{
+background:#1A1642;
+color:#FFFFFF;
+padding:80px 0 40px;
+margin-top: 50px;
+}
+
+.footer-container{
+max-width:1300px;
+margin:auto;
+display:flex;
+justify-content:space-between;
+padding:0 40px;
+flex-wrap:wrap;
+}
+
+.footer-col{
+margin-bottom:40px;
+min-width:200px;
+}
+
+.brand-col{
+flex:1.5;
+}
+
+.brand-col h3{
+font-size:30px;
+line-height:1.4;
+font-weight:600;
+max-width:450px;
+}
+
+.logo img{
+height:130px;
+margin-bottom:25px;
+}
+
+.footer h5{
+font-size:24px;
+margin-bottom:25px;
+font-weight:800;
+text-transform:uppercase;
+}
+
+.footer ul{
+list-style:none;
+}
+
+.footer ul li{
+margin-bottom:15px;
+}
+
+.footer ul li a{
+color:rgba(255,255,255,0.8);
+text-decoration:none;
+font-size:20px;
+transition:0.3s;
+}
+
+.footer ul li a:hover{
+color:#FF00FF;
+text-shadow:0 0 10px rgba(255,0,255,0.5);
+}
+
+.contact-list{
+display:flex;
+flex-direction:column;
+gap:18px;
+}
+
+.contact-list a{
+display:flex;
+align-items:center;
+gap:12px;
+font-size:20px;
+text-decoration:none;
+color:#FFFFFF;
+transition:0.3s;
+}
+
+.contact-list a i{
+font-size:24px;
+width:28px;
+}
+
+.fa-whatsapp{color:#25D366;}
+.fa-github{color:#6C5CE7;}
+.fa-envelope{color:#FF00FF;}
+
+.contact-list a:hover{
+color:#FF00FF;
+transform:translateX(6px);
+text-shadow:0 0 12px rgba(255,0,255,0.6);
+}
+
+.footer-bottom{
+border-top:1px solid rgba(108,92,231,0.2);
+margin-top:40px;
+padding-top:20px;
+text-align:center;
+font-size:16px;
+color:#ccc;
+}
+
+@media(max-width:992px){
+
+.footer-container{
+flex-direction:column;
+text-align:center;
+}
+
+.contact-list{
+align-items:center;
+}
+
+}
+
+
+
+
+

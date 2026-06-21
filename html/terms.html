@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+      <title>Terms & Conditions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">    
+  <!-- Google Font -->
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+   
+   <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      color: #333;
+      line-height: 1.8;
+
+       font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+background-color:#F8F9FF;
+      }
+
+        /*style nav*/
+        header {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            background: #0F0C29;
+            height: 100px;
+            border-radius: 0px 0px 20px 20px;
+        }
+
+        nav {
+            grid-column: 1 / -1;
+            grid-row: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            background: linear-gradient(90deg, #6C5CE7, #FF00FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .list {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            transition: all 1s;
+        }
+
+        .list li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 1s;
+        }
+        .list li a:hover {
+            background: linear-gradient(90deg, #6C5CE7, #FF00FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .user-profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #fff;
+            transition: all 1s;
+        }
+        .user-profile img:hover{
+            transform: rotatey(360deg);
+        }
+        /*style page*/
+  
+    .container {
+      max-width: 900px;
+      margin: 50px auto;
+      background: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      position: relative;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-weight: 600;
+      color: #0F0C29;
+    }
+      /* h3{
+        color: #6C5CE7;
+       }*/
+    h2 {
+      margin-top: 30px;
+      /*color: #34495e;*/
+      border-left: 4px solid #E0D4FF;
+      padding-left: 10px;
+      transition: 0.3s;
+    }
+
+    h2:hover {
+      color: #FF00FF;
+    }
+
+    p {
+      margin: 10px 0;
+    }
+
+    ul {
+      padding-left: 20px;
+
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .intro {
+      background: #ecf5ff;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    /* Table of Contents */
+    .toc {
+      background: #f0f4f8;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+    }
+
+    .toc h3 {
+      margin-top: 0;
+    }
+
+    .toc a {
+      text-decoration: none;
+      color: #1E40AF;
+    }
+
+    .toc a:hover {
+      text-decoration: underline;
+    }
+
+    /* Scroll to top button */
+    .top-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #1f1f20;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .top-btn:hover {
+      background: #1E40AF;
+    }
+
+    /*style footer*/
+body{
+    /* 🔥 الحل بتاع الفوتر */
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+/* ===== Footer ===== */
+
+.footer{
+    background:#1A1642;
+    color:#FFFFFF;
+    padding:40px 0;
+
+    margin-top:40px; 
+}
+
+.footer-container{
+    max-width:1400px; 
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    padding:0 40px;
+    flex-wrap:wrap;
+    gap:30px;
+}
+
+/* الأعمدة */
+.footer-col{
+    flex:1;
+    min-width:200px;
+}
+
+.footer-col:last-child{
+    flex:1.5;
+    min-width:260px;
+    max-width:400px;
+}
+
+/* اللوجو */
+.footer .logo img{ 
+    width:250px; 
+    height:auto;
+  
+    margin-top: -100px;
+}
+
+/* العناوين */
+h5{ 
+    font-size:22px; 
+    margin-bottom:20px; 
+    font-weight:700;
+}
+
+/* الروابط */
+ul{ list-style:none; }
+ul li{ margin-bottom:12px; }
+
+ul li a{ 
+    color:rgba(255,255,255,0.85); 
+    text-decoration:none; 
+    font-size:15px; 
+}
+
+ul li a:hover{
+    color:#6C5CE7;
+    padding-left:4px;
+}
+
+/* Contact */
+.contact-list{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.contact-list a{ 
+    display:flex; 
+    align-items:center; 
+    gap:10px; 
+    font-size:15px; 
+    text-decoration:none; 
+    color:#FFFFFF; 
+}
+
+.contact-list a i{ font-size:18px; }
+
+.contact-list a:hover{
+    color:#6C5CE7;
+}
+
+/* الفورم */
+.contact-form{ 
+    display:flex; 
+    flex-direction:column; 
+    gap:12px; 
+} 
+
+.contact-form input, 
+.contact-form textarea{ 
+    padding:10px; 
+    border-radius:10px; 
+    border:none; 
+    font-size:14px; 
+    outline:none; 
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus{
+    outline:2px solid #6C5CE7;
+}
+
+.contact-form textarea{ 
+    height:90px; 
+    resize:none; 
+}
+
+.contact-form button{ 
+    padding:12px; 
+    border:none; 
+    border-radius:10px; 
+    background:linear-gradient(135deg,#6C5CE7,#FF00FF); 
+    color:#fff; 
+    font-size:15px; 
+    font-weight:bold;
+    cursor:pointer; 
+}
+
+.contact-form button:hover{
+    transform:scale(1.05);
+    opacity:0.9;
+}
+
+/* footer bottom */
+.footer-bottom{ 
+    border-top:1px solid rgba(255,255,255,0.1); 
+    margin-top:30px; 
+    padding-top:15px; 
+    text-align:center; 
+    font-size:14px; 
+    color:#ccc; 
+}
+
+/* 📱 موبايل */
+@media (max-width:768px){
+    .footer-container{
+        flex-direction:column;
+        gap:20px;
+        padding:0 20px;
+    }
+}
+    </style>
+</head>
+<body>
+
+    <!--nav-->
+    <header>
+        <nav>
+
+            <a class="logo" href="#">CodeCraft</a>
+
+            <ul class="list">
+                <li><a href="/html/home.html">home</a></li>
+                <li><a href="/html/track.html">tracks</a></li>
+                <li><a href="/html/courses.html">courses</a></li>
+                <li><a href="/html/roadmap.html">road maps</a></li>
+                <li><a href="/html/resources.html">resources</a></li>
+                <li><a href="/html/home.html#contact">contact us</a></li>
+            </ul>
+
+                                    
+            <div class="nav-auth-container" style="display: flex; align-items: center;">
+                <!-- Guest -->
+                <div class="guest-only acount" style="display: flex; gap: 10px;">
+                    <button><a href="/html/login.html" style="color: inherit; text-decoration: none;">log in</a></button>
+                    <button><a href="/html/signup-st.html" style="color: inherit; text-decoration: none;">sign up</a></button>
+                </div>
+                <!-- Student -->
+                <div class="student-only" style="display: flex; align-items: center; gap: 15px;">
+                    <a href="/html/st-profile.html" style="display: flex; align-items: center;">
+                        <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
+                    </a>
+                    <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+                <!-- Doctor -->
+                <div class="doctor-only" style="display: flex; align-items: center; gap: 15px;">
+                    <a href="/html/dr-dashboard.html" style="display: flex; align-items: center;">
+                        <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
+                    </a>
+                    <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+                <!-- Admin -->
+                <div class="admin-only" style="display: flex; align-items: center; gap: 15px;">
+                    <a href="/html/admin-dashboard.html" style="display: flex; align-items: center;">
+                        <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
+                    </a>
+                    <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+                
+                <!-- Dark Mode Toggle -->
+                <button id="darkModeToggle" title="Toggle Dark Mode" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer; margin-left: 15px; transition: 0.3s;">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+
+
+        </nav>
+    </header>
+
+
+  <div class="container">
+    <h1>Terms & Conditions</h1>
+
+    <div class="intro">
+      <p>
+        Welcome to our programming courses platform. By using this website, you agree to comply with and be bound by the following terms and conditions.
+        Please read them carefully before using the website or enrolling in any course.
+      </p>
+    </div>
+
+    <!-- Table of Contents -->
+    <div class="toc">
+      <h3 >Contents</h3>
+      <ul>
+        <li><a href="#eligibility">Eligibility</a></li>
+        <li><a href="#accounts">Accounts</a></li>
+        <li><a href="#content">Content</a></li>
+        <li><a href="#payments">Payments & Refunds</a></li>
+        <li><a href="#use">Acceptable Use</a></li>
+        <li><a href="#disclaimer">Disclaimer</a></li>
+        <li><a href="#changes">Changes to Terms</a></li>
+        <li><a href="#law">Governing Law</a></li>
+      </ul>
+    </div>
+
+    <h2 id="eligibility">1. Eligibility</h2>
+    <ul>
+      <li>You must be at least 13 years old to use this website.</li>
+      <li>You agree to use the website in a lawful manner.</li>
+    </ul>
+
+    <h2 id="accounts">2. Accounts</h2>
+    <ul>
+      <li>You are responsible for maintaining the confidentiality of your account information.</li>
+      <li>You must not share your account with others.</li>
+      <li>All information provided during registration must be accurate.</li>
+    </ul>
+
+    <h2 id="content">3. Content</h2>
+    <p>
+      All courses, materials, and code provided on this platform are owned by us and are protected by intellectual property laws.
+    </p>
+    <ul>
+      <li>You may not copy, distribute, or resell any content without permission.</li>
+      <li>Content is for personal use only.</li>
+    </ul>
+
+    <h2 id="payments">4. Payments & Refunds</h2>
+    <ul>
+      <li>Payments are processed through the available methods on the website.</li>
+      <li>Refunds are only available in case of technical issues.</li>
+    </ul>
+
+    <h2 id="use">5. Acceptable Use</h2>
+    <ul>
+      <li>You must not share course content with others.</li>
+      <li>You must not use the platform for illegal activities.</li>
+    </ul>
+
+    <h2 id="disclaimer">6. Disclaimer</h2>
+    <p>
+      The content provided is for educational purposes only. We are not responsible for any outcomes resulting from the use of this information.
+    </p>
+
+    <h2 id="changes">7. Changes to Terms</h2>
+    <p>
+      We reserve the right to update or modify these terms at any time. Users will be notified of any changes through the website.
+    </p>
+
+    <h2 id="law">8. Governing Law</h2>
+    <p>
+      These terms are governed by the laws of Egypt. Any disputes will be handled by the appropriate courts.
+    </p>
+
+  </div>
+
+  <!-- Scroll to top button -->
+  <button onclick="scrollToTop()" class="top-btn">↑</button>
+  <script>
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+
+  <!--footer-->
+  
+<footer class="footer">
+    <div class="footer-container">
+
+        <!-- Logo -->
+        <div class="footer-col">
+            <div class="logo">
+                <img src="../img/logo.png" alt="Logo">
+            </div>
+        </div>
+
+        <!-- Links -->
+        <div class="footer-col">
+            <h5>Quick Links</h5>
+            <ul>
+                <li><a href="home.html">Home</a></li> 
+                <li><a href="support.html">Support</a></li>
+                <li><a href="terms.html">Terms & Conditions</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-col">
+            <h5>Contact Us</h5>
+            <div class="contact-list">
+                <a href="https://wa.me/201104895301" target="_blank">
+  <i class="fab fa-whatsapp"></i> WhatsApp
+</a>
+              <a href="tel:+201104895301">
+  <i class="fas fa-phone"></i> Call Us
+</a>
+             <a href="mailto:mohamedleqaa13@gmail.com">
+  <i class="fas fa-envelope"></i> Email
+</a>
+            </div>
+        </div>
+
+        <!-- Form -->
+        <div class="footer-col">
+            <h5>Send Message</h5>
+            <form class="contact-form">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        Copyright © 2026 CODECRAFT. All rights reserved.
+    </div>
+</footer>
+
+
+<!--script nav-->
+<script>
+    const themeBtn = document.getElementById('theme-switch');
+    const themeIcon = document.getElementById('theme-icon');
+
+    themeBtn.onclick = () => {
+        document.body.classList.toggle('dark-mode-active');
+        const isDark = document.body.classList.contains('dark-mode-active');
+        
+        if (isDark) {
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        } else {
+            themeIcon.classList.replace('fa-sun', 'fa-moon');
+        }
+    };
+</script>
+
+    <script src="../script/nav.js" defer></script>
+    <script src="../script/auth.js" defer></script>
+</body>
+</html>

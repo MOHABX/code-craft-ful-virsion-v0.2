@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Verification - Craft Code</title>
+    <link rel="stylesheet" href="../style/login.css">
+    <link rel="stylesheet" href="../style/otp-verification.css">
+</head>
+<body>
+
+    <div class="login-card">
+        <!-- Form Section -->
+        <div class="form-section">
+            <div class="header">
+                <h1>Verify Your Email</h1>
+                <p>We have sent a 9-digit verification code to your email. Please enter it below.</p>
+            </div>
+
+            <form id="otp-form">
+                <div class="otp-container">
+                    <input type="text" class="otp-box" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+                    <input type="text" class="otp-box" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+                    <input type="text" class="otp-box" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+                    <input type="text" class="otp-box" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+                    <input type="text" class="otp-box" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+                    <input type="text" class="otp-box" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+                    <input type="text" class="otp-box" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+                    <input type="text" class="otp-box" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+                    <input type="text" class="otp-box" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+                </div>
+
+                <div class="timer-resend">
+                    <span id="timer">00:40</span>
+                    <button type="button" id="resend-btn" class="resend-btn" disabled>Resend Code</button>
+                </div>
+
+                <button type="submit" class="login-btn">Verify Now</button>
+            </form>
+        </div>
+
+        <!-- Image Section -->
+        <div class="image-section"></div>
+    </div>
+
+    <script src="../script/otp-verification.js"></script>
+    <script src="../script/nav.js" defer></script>
+    <script src="../script/auth.js" defer></script>
+</body>
+</html>

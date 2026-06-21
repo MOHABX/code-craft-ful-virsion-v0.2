@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Codecraft | Login</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F8F9FF;
+}
+
+.login-card {
+    display: flex;
+    width: 900px;
+    max-width: 95%;
+    height: 550px;
+    background-color: #ffffff;
+    border-radius: 30px;
+    box-shadow: 0 20px 25px rgba(0,0,0,0.08);
+    overflow: hidden;
+}
+
+/* ===== Form Section ===== */
+.form-section {
+    width: 50%;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.header {
+    margin-bottom: 35px;
+}
+
+.header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #0F0C29;
+    margin-bottom: 8px;
+}
+
+.header p {
+    color: #555555;
+    font-size: 15px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #0F0C29;
+}
+
+form input[type="email"],
+form input[type="password"] {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #6C5CE7;
+    border-radius: 10px;
+    outline: none;
+    font-size: 14px;
+    background-color: #FFFFFF;
+    transition: 0.3s;
+}
+
+form input:focus {
+    border-color: #FF00FF;
+}
+
+/* ===== Button ===== */
+.login-btn {
+    background: linear-gradient(to right, #6C5CE7, #FF00FF);
+    color: #FFFFFF;
+    border: none;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    box-shadow: 0 0 12px rgba(255, 0, 255, 0.3);
+}
+
+.login-btn:hover {
+    opacity: 0.9;
+}
+
+/* ===== Footer ===== */
+.footer-text {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 14px;
+    color: #555555;
+}
+
+.footer-text a {
+    color: #6C5CE7;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.footer-text a:hover {
+    text-decoration: underline;
+}
+
+/* ===== Image Section (رجعنا الصورة زي ما هي) ===== */
+.image-section {
+    width: 50%;
+    background: url('../img/acount.png') no-repeat center center;
+    background-size: cover;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 850px) {
+    .image-section {
+        display: none;
+    }
+    .form-section {
+        width: 100%;
+        padding: 40px 30px;
+    }
+    .login-card {
+        height: auto;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<main class="login-card">
+
+    <section class="form-section">
+        <div class="header">
+            <h1>Welcome Back</h1>
+            <p>Please enter your details to sign in.</p>
+        </div>
+
+        <form id="log">
+            <div class="input-group">
+                <label>Email Address</label>
+                <input type="email" name="email" placeholder="name@company.com" required>
+            </div>
+
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="••••••••" required>
+                <div style="text-align: right; margin-top: 8px;">
+                    <a href="forgot-password.html" style="font-size: 13px; color: #6C5CE7; text-decoration: none;">Forgot Password?</a>
+                </div>
+            </div>
+
+
+            <button type="submit" class="login-btn">Log In</button>
+
+        </form>
+
+        <p class="footer-text">
+            Don't have an account?
+            <a href="./signup-st.html">Sign up for free</a>
+        </p>
+    </section>
+
+    <section class="image-section"></section>
+
+    <script src="../script/acount.js"></script>
+</main>
+
+    <script src="../script/nav.js" defer></script>
+    <script src="../script/auth.js" defer></script>
+</body>
+</html>

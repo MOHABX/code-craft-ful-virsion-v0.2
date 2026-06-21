@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Roadmap</title>
+    <style>
+        
+        body{
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: #f8f7ff; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .banner{
+            width: 100%;
+            height: 200px;
+            background-image: linear-gradient(90deg, #6C5CE7, #FF00FF);
+            background-position: center;
+            background-repeat: repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff; 
+            font-size: 1.5rem;
+            border-radius: 0px 0px 50px 50px;
+            box-shadow: 0px 4px 15px rgba(108, 92, 231, 0.4);
+        }
+        
+        .banner h1{
+            margin: 5px 0 0 0;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            box-shadow: 0px 0px 15px 2px rgba(255, 255, 255, 0.2);
+            border-radius: 15px ;
+            padding: 5px 20px;
+            text-align: center;
+        }
+        .banner p{
+            margin: 10px 0 0 0;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0px 0px 15px 2px rgba(255, 255, 255, 0.1);
+            border-radius: 15px ;
+            padding: 5px 15px;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+        .banner a{
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            bottom: 0px;
+            width: 50px;
+            height: 50px;
+        }
+        .banner a img{
+            border-radius: 50%;
+            transition: 0.5s;
+            background: white; 
+            padding: 5px;
+        }
+        .banner a img:hover{
+            box-shadow: 0 0 15px #fff;
+            transform: scale(1.1);
+        }
+        .roadmap{
+            min-height: 100%;
+            width: 80%;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            position: absolute;
+            top: 200px;
+            left: 8%;
+            right: 0;
+            bottom: 200px;
+        }
+        .roadmap::before{
+            content: '';
+            position: absolute;
+            top: 35px;
+            left: 50%;
+            width: 4px;
+            height: 100vh;
+            background-color: #6C5CE7;
+            opacity: 0.3;
+        }
+        .card{
+            width: 80%;
+            max-width: 420px;
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0px 10px 20px rgba(108, 92, 231, 0.1);
+            margin: 10px 0;
+            transition: 0.5s;
+            border-left: 5px solid #FF00FF; 
+            z-index: 1;
+        }
+        .card h2 {
+            color: #6C5CE7; 
+            margin-top: 0;
+            font-size: 1.3rem;
+        }
+        .card p {
+            color: #555;
+            line-height: 1.5;
+            margin-bottom: 0;
+        }
+        .rod-left:hover,.rod-right:hover{
+            box-shadow: 0px 15px 30px rgba(255, 0, 255, 0.2);
+            border-left-color: #6C5CE7;
+            transition: 0.5s;
+        }
+        .rod-left{
+            transform: translateX(50%);
+        }
+        .rod-right{
+            transform: translateX(-50%);
+        }
+        
+        @media (max-width: 768px) {
+            .roadmap::before {
+                left: 20px;
+            }
+            .card {
+                transform: translateX(0);
+                align-self: flex-end;
+                width: 85%;
+            }
+            .rod-left, .rod-right {
+                border-right: none;
+                border-left: 5px solid #FF00FF;
+            }
+            .rod-left:hover, .rod-right:hover {
+                border-left-color: #6C5CE7;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <section class="banner">
+            <a href="./roadmap.html"> <img src="../img/arrow-left-solid-full.svg" alt="back"></a>
+            <h1>Mobile Roadmap</h1>
+            <p>Your complete guide to building mobile apps on Codecraft!</p>
+        </section>
+
+        <section class="roadmap">
+            <div class="card rod-left">
+                <h2>Step 1: Programming Basics</h2>
+                <p>Start by mastering the fundamentals. Learn core concepts like OOP and Data Structures using languages like Java, Kotlin, or Swift.</p>
+            </div>
+            
+            <div class="card rod-right">
+                <h2>Step 2: Native Android</h2>
+                <p>Focus on the Android ecosystem. Learn Android Studio, XML/Jetpack Compose, and how to build high-performance native apps.</p>
+            </div>
+            
+            <div class="card rod-left">
+                <h2>Step 3: Native iOS</h2>
+                <p>Dive into Apple's ecosystem. Master Xcode and SwiftUI to develop seamless, native applications for iPhones and iPads.</p>
+            </div>
+            
+            <div class="card rod-right">
+                <h2>Step 4: Cross-Platform</h2>
+                <p>Write code once, run it everywhere. Master frameworks like Flutter (Dart) or React Native (JS) to build for both iOS and Android simultaneously.</p>
+            </div>
+            
+            <div class="card rod-left">
+                <h2>Step 5: Backend & APIs</h2>
+                <p>Connect your app to the cloud. Learn how to integrate RESTful APIs, JSON, and BaaS platforms like Firebase or Supabase for real-time databases.</p>
+            </div>
+            
+            <div class="card rod-right">
+                <h2>Step 6: App Deployment</h2>
+                <p>The final step. Learn how to prepare, sign, and publish your mobile applications to the Google Play Store and Apple App Store.</p>
+            </div>
+        </section>
+    </main>
+    <script src="../script/nav.js" defer></script>
+    <script src="../script/auth.js" defer></script>
+</body>
+</html>
