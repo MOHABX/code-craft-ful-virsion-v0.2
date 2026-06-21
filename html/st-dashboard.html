@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="../style/nav-img-profile.css">
     <!-- Dashboard specific styles -->
     <link rel="stylesheet" href="../style/st-dashbord.css">
-  </head>
+      <link rel="stylesheet" href="../style/nav-login-signup.css">
+</head>
   <body>
     <header>
       <nav>
@@ -64,18 +65,24 @@
     <div class="dash-wrapper">
       <aside class="dash-sidebar">
         <nav class="sidebar-nav">
-          <a href="#" id="btn-overview" class="sidebar-link active">
+          <a href="st-dashboard.html" class="sidebar-link active">
             <i class="fas fa-th-large"></i> Dashboard
           </a>
-          <a href="#" id="btn-courses" class="sidebar-link">
+          <a href="st-profile.html" class="sidebar-link">
+            <i class="fas fa-user"></i> Profile
+          </a>
+          <a href="my-courses.html" class="sidebar-link">
             <i class="fas fa-book"></i> My Courses
           </a>
-          <a href="#" id="btn-settings" class="sidebar-link">
+          <a href="my-certificates.html" class="sidebar-link">
+            <i class="fas fa-certificate"></i> Certificates
+          </a>
+          <a href="settings.html" class="sidebar-link">
             <i class="fas fa-cog"></i> Settings
           </a>
         </nav>
         <div class="sidebar-bottom">
-          <a href="#" id="btn-logout-st" class="sidebar-link">
+          <a href="#" id="btn-logout-st" class="sidebar-link logout-btn">
             <i class="fas fa-sign-out-alt"></i> Log out
           </a>
         </div>
@@ -173,24 +180,6 @@
                 </label>
               </div>
             </div>
-          </div>
-        </div>
-
-        <!-- COURSES PANEL -->
-        <div id="panel-courses" class="dash-panel hidden">
-          <h1>My Courses</h1>
-          <div class="placeholder-card">
-            <i class="fas fa-book-open"></i>
-            <p>Courses list coming soon!</p>
-          </div>
-        </div>
-
-        <!-- SETTINGS PANEL -->
-        <div id="panel-settings" class="dash-panel hidden">
-          <h1>Account Settings</h1>
-          <div class="placeholder-card">
-            <i class="fas fa-cogs"></i>
-            <p>Settings feature coming soon!</p>
           </div>
         </div>
       </main>

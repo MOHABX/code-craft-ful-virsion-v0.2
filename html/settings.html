@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style/st-dashbord.css">
 
     <style>
         * {
@@ -236,18 +237,33 @@
         </nav>
     </header>
 
-    <div class="main-layout">
-        
-        <aside class="sidebar">
-            <div class="sidebar-logo">CodeCraft</div>
-            <ul class="sidebar-menu" id="sidebar-menu">
-                <li><a href="./st-profile.html"><i class="fas fa-th-large"></i> Dashboard</a></li>
-                <li><a href="./my-courses.html"><i class="fas fa-graduation-cap"></i> My Courses</a></li>
-                <li><a href="#" class="active"><i class="fas fa-user-cog"></i> Settings</a></li>
-            </ul>
-        </aside>
+    <div class="dash-wrapper">
+      <aside class="dash-sidebar">
+        <nav class="sidebar-nav" id="sidebar-menu">
+          <a href="st-dashboard.html" class="sidebar-link">
+            <i class="fas fa-th-large"></i> Dashboard
+          </a>
+          <a href="st-profile.html" class="sidebar-link">
+            <i class="fas fa-user"></i> Profile
+          </a>
+          <a href="my-courses.html" class="sidebar-link">
+            <i class="fas fa-book"></i> My Courses
+          </a>
+          <a href="my-certificates.html" class="sidebar-link">
+            <i class="fas fa-certificate"></i> Certificates
+          </a>
+          <a href="settings.html" class="sidebar-link active">
+            <i class="fas fa-cog"></i> Settings
+          </a>
+        </nav>
+        <div class="sidebar-bottom">
+          <a href="#" id="btn-logout-st" class="sidebar-link logout-btn">
+            <i class="fas fa-sign-out-alt"></i> Log out
+          </a>
+        </div>
+      </aside>
 
-        <main class="content-area">
+        <main class="dash-content">
             <section class="welcome-card">
                 <div class="profile-section">
                     <img src="https://i.pravatar.cc/150?u=lubna" alt="Profile">
@@ -372,17 +388,19 @@
                         document.getElementById('dashboard-role-text').textContent = 'Instructor Dashboard';
                         document.querySelector('title').textContent = 'CodeCraft | Instructor Settings';
                         document.getElementById('sidebar-menu').innerHTML = `
-                            <li><a href="./dr-dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a></li>
-                            <li><a href="./dr-profile.html"><i class="fas fa-user"></i> Profile</a></li>
-                            <li><a href="#" class="active"><i class="fas fa-user-cog"></i> Settings</a></li>
+                            <a href="./dr-dashboard.html" class="sidebar-link"><i class="fas fa-th-large"></i> Dashboard</a>
+                            <a href="./dr-profile.html" class="sidebar-link"><i class="fas fa-user"></i> Profile</a>
+                            <a href="#" class="sidebar-link active"><i class="fas fa-cog"></i> Settings</a>
                         `;
                     } else {
                         document.getElementById('dashboard-role-text').textContent = 'Student Dashboard';
                         document.querySelector('title').textContent = 'CodeCraft | Student Settings';
                         document.getElementById('sidebar-menu').innerHTML = `
-                            <li><a href="./st-profile.html"><i class="fas fa-th-large"></i> Dashboard</a></li>
-                            <li><a href="./my-courses.html"><i class="fas fa-graduation-cap"></i> My Courses</a></li>
-                            <li><a href="#" class="active"><i class="fas fa-user-cog"></i> Settings</a></li>
+                            <a href="st-dashboard.html" class="sidebar-link"><i class="fas fa-th-large"></i> Dashboard</a>
+                            <a href="st-profile.html" class="sidebar-link"><i class="fas fa-user"></i> Profile</a>
+                            <a href="my-courses.html" class="sidebar-link"><i class="fas fa-book"></i> My Courses</a>
+                            <a href="my-certificates.html" class="sidebar-link"><i class="fas fa-certificate"></i> Certificates</a>
+                            <a href="settings.html" class="sidebar-link active"><i class="fas fa-cog"></i> Settings</a>
                         `;
                     }
                 } else {

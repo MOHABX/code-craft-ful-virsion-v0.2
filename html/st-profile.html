@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../style/nav-img-profile.css">
     <link rel="stylesheet" href="../style/st-profile.css">
+    <link rel="stylesheet" href="../style/st-dashbord.css">
+    <link rel="stylesheet" href="../style/nav-login-signup.css">
 </head>
 
 <style>
@@ -79,19 +81,34 @@
         </nav>
     </header>
     <!-- DASHBOARD -->
-    <div class="dashboard">
-
-        <!-- SIDEBAR -->
-        <ul class="sidebar">
-            <h2>CodeCraft</h2>
-            <li><a href="./st-dashboard.html">Dashboard</a></li>
-            <li><a href="./my-courses.html">My Courses</a></li>
-            <li><a href="./my-certificates.html">Certificates</a></li>
-            <li><a href="./settings.html">Settings</a></li>
-        </ul>
+    <div class="dash-wrapper">
+      <aside class="dash-sidebar">
+        <nav class="sidebar-nav">
+          <a href="st-dashboard.html" class="sidebar-link">
+            <i class="fas fa-th-large"></i> Dashboard
+          </a>
+          <a href="st-profile.html" class="sidebar-link active">
+            <i class="fas fa-user"></i> Profile
+          </a>
+          <a href="my-courses.html" class="sidebar-link">
+            <i class="fas fa-book"></i> My Courses
+          </a>
+          <a href="my-certificates.html" class="sidebar-link">
+            <i class="fas fa-certificate"></i> Certificates
+          </a>
+          <a href="settings.html" class="sidebar-link">
+            <i class="fas fa-cog"></i> Settings
+          </a>
+        </nav>
+        <div class="sidebar-bottom">
+          <a href="#" id="btn-logout-st" class="sidebar-link logout-btn">
+            <i class="fas fa-sign-out-alt"></i> Log out
+          </a>
+        </div>
+      </aside>
 
         <!-- MAIN -->
-        <div class="main">
+        <main class="dash-content">
 
             <!-- PROFILE (رجع كامل زي المطلوب) -->
             <div class="profile-wrapper">
@@ -130,7 +147,7 @@
 
             </div>
 
-        </div>
+        </main>
     </div>
 
     <!-- FOOTER -->

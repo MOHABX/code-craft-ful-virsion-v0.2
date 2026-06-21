@@ -28,38 +28,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error('Error fetching dashboard data:', error);
     }
 
-    // 2. Tab Navigation
-    const btnOverview = document.getElementById('btn-overview');
-    const btnCourses = document.getElementById('btn-courses');
-    const btnSettings = document.getElementById('btn-settings');
-    const panelOverview = document.getElementById('panel-overview');
-    const panelCourses = document.getElementById('panel-courses');
-    const panelSettings = document.getElementById('panel-settings');
-    const navItems = [btnOverview, btnCourses, btnSettings];
-
-    function showPanel(panelToShow, activeBtn) {
-        if (!panelToShow || !activeBtn) return;
-        
-        // Hide all panels
-        [panelOverview, panelCourses, panelSettings].forEach(p => {
-            if (p) p.classList.add('hidden');
-        });
-        
-        // Remove active class from all buttons
-        navItems.forEach(btn => {
-            if (btn) btn.classList.remove('active');
-        });
-
-        // Show target panel
-        panelToShow.classList.remove('hidden');
-        
-        // Highlight active button
-        activeBtn.classList.add('active');
-    }
-
-    if (btnOverview) btnOverview.addEventListener('click', (e) => { e.preventDefault(); showPanel(panelOverview, btnOverview); });
-    if (btnCourses) btnCourses.addEventListener('click', (e) => { e.preventDefault(); showPanel(panelCourses, btnCourses); });
-    if (btnSettings) btnSettings.addEventListener('click', (e) => { e.preventDefault(); showPanel(panelSettings, btnSettings); });
+    // Tab Navigation logic removed. The sidebar now uses real page links.
 
     // 3. Logout
     const btnLogout = document.getElementById('btn-logout-st');
