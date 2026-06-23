@@ -382,6 +382,91 @@ exports.updatePassword = async (req, res) => {
     }
 };
 
-// دوال استعادة كلمة المرور تم تركها فارغة مؤقتاً لتوفير المساحة
-exports.forgotPassword = async (req, res) => { /* منطق إرسال إيميل الاستعادة يكتب هنا */ };
-exports.resetPassword = async (req, res) => { /* منطق التحقق من رمز الاستعادة وتحديث الرمز يكتب هنا */ };
+// ─── 11. دالة استعادة كلمة المرور (Forgot Password) ───
+exports.forgotPassword = async (req, res) => {
+    const { email } = req.body;
+    if (!email) return res.status(400).json({ message: 'Email is required' });
+
+    try {
+        const user = await User.findOne({ where: { email } });
+        if (!user) {
+            return res.status(404).json({ message: 'There is no user with that email' });
+        }
+
+        // الحصول على رمز استعادة كلمة المرور (غير المشفر)
+        const resetToken = user.getResetPasswordToken();
+
+        // حفظ التعديلات في قاعدة البيانات
+        await user.save({ validate: false });
+
+        // إنشاء رابط الاستعادة
+        // عادة نرسل المستخدم إلى صفحة في الواجهة الأمامية (Frontend) تحتوي على الرمز
+        // مثال: http://localhost:5000/reset-password.html?token=resetToken
+        // لكننا سنفترض هنا أن مسار الواجهة الأمامية هو نفسه أو بناءً على المتغيرات البيئية
+        const clientUrl = process.env.CLIENT_URL || 'http://127.0.0.1:5500/html';
+        const resetUrl = `${clientUrl}/reset-password.html?token=${resetToken}`;
+
+        const message = `
+            <h1>You have requested a password reset</h1>
+            <p>Please go to this link to reset your password:</p>
+            <a href="${resetUrl}" clicktracking=off>${resetUrl}</a>
+            <p>This link is valid for 10 minutes.</p>
+        `;
+
+        try {
+            await sendEmail({
+                email: user.email,
+                subject: 'Craft Code - Password Reset Request',
+                message
+            });
+
+            res.status(200).json({ success: true, message: 'Email sent' });
+        } catch (error) {
+            console.error(error);
+            user.passwordResetToken = null;
+            user.passwordResetExpire = null;
+            await user.save({ validate: false });
+
+            return res.status(500).json({ message: 'Email could not be sent' });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+// ─── 12. دالة إعادة تعيين كلمة المرور (Reset Password) ───
+exports.resetPassword = async (req, res) => {
+    try {
+        // تشفير الرمز المرسل في الرابط للبحث عنه في قاعدة البيانات
+        const resetPasswordToken = crypto.createHash('sha256').update(req.params.token).digest('hex');
+
+        const user = await User.unscoped().findOne({
+            where: {
+                passwordResetToken: resetPasswordToken,
+                passwordResetExpire: { [Op.gt]: new Date() }
+            }
+        });
+
+        if (!user) {
+            return res.status(400).json({ message: 'Invalid or expired token' });
+        }
+
+        const { password } = req.body;
+        if (!password || password.length < 6) {
+            return res.status(400).json({ message: 'Password must be at least 6 characters' });
+        }
+
+        // تعيين كلمة المرور الجديدة ومسح الرموز
+        user.password = password;
+        user.passwordResetToken = null;
+        user.passwordResetExpire = null;
+        
+        await user.save(); // الـ Hook سيقوم بالتشفير
+
+        res.status(200).json({ success: true, message: 'Password reset successfully. You can now login.' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
