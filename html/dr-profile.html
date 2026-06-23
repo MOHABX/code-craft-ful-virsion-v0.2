@@ -17,6 +17,9 @@ body {
     color: #0F0C29; 
     font-family: 'Poppins', sans-serif; 
     transition: background-color 0.3s, color 0.3s;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Dark Mode */
@@ -359,6 +362,7 @@ ul li a:hover {
 }
 </style>
     <link rel="stylesheet" href="../style/nav-login-signup.css">
+    <link rel="stylesheet" href="../style/st-dashbord.css">
 </head>
 <body>
 
@@ -390,8 +394,29 @@ ul li a:hover {
 </header>
 
 <!-- ===== PROFILE CONTENT ===== -->
-<div class="profile">
-    <div class="profile-card">
+<div class="dash-wrapper">
+    <aside class="dash-sidebar">
+      <nav class="sidebar-nav" id="sidebar-menu">
+        <a href="dr-dashboard.html" class="sidebar-link">
+          <i class="fas fa-th-large"></i> Dashboard
+        </a>
+        <a href="dr-profile.html" class="sidebar-link active">
+          <i class="fas fa-user"></i> Profile
+        </a>
+      </nav>
+      <div class="sidebar-bottom">
+        <a href="dr-dashboard.html#settings" id="btn-settings" class="sidebar-link">
+          <i class="fas fa-cog"></i> Settings
+        </a>
+        <a href="#" class="sidebar-link logout-btn">
+          <i class="fas fa-sign-out-alt"></i> Log out
+        </a>
+      </div>
+    </aside>
+
+    <main class="dash-content">
+        <div class="profile">
+            <div class="profile-card">
         <div class="avatar-upload">
             <img src="https://via.placeholder.com/150" class="profile-img" id="userAvatar">
             <input type="file" id="avatarInput" hidden accept="image/*">
@@ -437,6 +462,8 @@ ul li a:hover {
             </div>
         </div>
     </div>
+</div>
+    </main>
 </div>
 
 <!-- ===== FOOTER ===== -->

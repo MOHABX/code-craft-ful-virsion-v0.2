@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CodeCraft</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeCraft</title>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-body{
-    font-family:'Poppins', 'Segoe UI', sans-serif;
-    background:#ffffff;
-    min-height:100vh;
-}
-header {
+        body {
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+            background: #ffffff;
+            min-height: 100vh;
+        }
+
+        header {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             grid-template-rows: repeat(3, 1fr);
@@ -60,267 +62,341 @@ header {
             font-size: 18px;
             transition: all 1s;
         }
+
         .list li a:hover {
             background: linear-gradient(90deg, #6C5CE7, #FF00FF);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+
         .user-profile img {
             width: 40px;
             height: 40px;
             border-radius: 50%;
             transition: all 1s;
         }
-        .user-profile img:hover{
+
+        .user-profile img:hover {
             transform: rotatey(360deg);
         }
 
-/* ===== Section Courses ===== */
-.section{
-    display:flex;
-    justify-content:center;
-    align-items:flex-start;
-    min-height:100vh;
-    padding:40px 20px;
-    background:#ffffff;
-}
+        .dash-wrapper {
+            display: flex;
+            flex: 1;
+        }
 
-.card{
-    background: linear-gradient(135deg, #F5F3FF, #EDE9FE, #DDD6FE); /* ���� */
-    padding:40px;
-    border-radius:22px;
-    width:100%;
-    min-height:100%;
-    box-shadow:0 50px 60px rgba(139,92,246,0.4);
-    color:#1A1642;
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-start;
-}
+        /* Sidebar */
+        .dash-sidebar {
+            width: 260px;
+            background: #ffffff;
+            border-right: 1px solid #e5e7eb;
+            display: flex;
+            flex-direction: column;
+            padding: 20px 15px;
+            height: calc(100vh - 100px);
+            /* Adjust to header height */
+            position: sticky;
+            top: 100px;
+        }
 
-.header{
-    display:flex;
-    justify-content:flex-start;
-    align-items:center;
-    margin-bottom:15px;
-}
+        .sidebar-nav {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
 
-.sub-title{
-    font-size:20px;
-    margin-bottom:18px;
-}
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 20px;
+            color: #8e8e93;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
 
-.course{
-    margin-bottom:18px;
-}
+        .sidebar-link i {
+            width: 20px;
+            text-align: center;
+            font-size: 18px;
+        }
 
-.course-row{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:8px;
-}
+        .sidebar-link:hover {
+            background: #f4f4ff;
+            color: #6c5ce7;
+        }
 
-.course-row div{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
+        .sidebar-link.active {
+            background: #f4f4ff;
+            color: #6c5ce7;
+        }
 
-.progress-bar{
-    height:14px;
-    background:rgba(255,255,255,.2);
-    border-radius:20px;
-    overflow:hidden;
-}
+        .sidebar-bottom {
+            border-top: 1px solid #e5e7eb;
+            padding-top: 15px;
+            margin-top: 15px;
+        }
 
-.progress{
-    height:100%;
-    border-radius:20px;
-}
 
-.js{
-    width:66%;
-    background:linear-gradient(90deg,#A78BFA,#FF00FF);
-    box-shadow:0 0 15px #FF00FF;
-}
+        /* ===== Section Courses ===== */
+        .section {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 40px 20px;
+            background: #ffffff;
+        }
 
-.py{
-    width:65%;
-    background:linear-gradient(90deg,#A78BFA,#FF00FF);
-    box-shadow:0 0 15px #A78BFA;
-}
+        .card {
+            background: linear-gradient(135deg, #F5F3FF, #EDE9FE, #DDD6FE);
+            /* ���� */
+            padding: 40px;
+            border-radius: 22px;
+            width: 100%;
+            min-height: 100%;
+            box-shadow: 0 50px 60px rgba(139, 92, 246, 0.4);
+            color: #1A1642;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
 
-/* ===== Button Neon ===== */
-.view{
-    text-decoration:none;
-    color:#fff;
-    font-weight:600;
-    padding:6px 14px;
-    border-radius:8px;
-    font-size:14px;
-    transition:0.3s;
-    background:linear-gradient(90deg,#6C5CE7,#FF00FF);
-    border:none;
-    box-shadow:0 0 10px rgba(255,0,255,0.4);
-}
+        .header {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin-bottom: 15px;
+        }
 
-.view:hover{
-    transform:scale(1.05);
-    box-shadow:0 0 20px rgba(255,0,255,0.8);
-}
-/* ===== Footer ===== */
-.footer{
-    background:#1A1642;
-    color:#FFFFFF;
-    padding:40px 0;
+        .sub-title {
+            font-size: 20px;
+            margin-bottom: 18px;
+        }
 
-    margin-top:auto; /* ?? ����� ��� */
-}
+        .course {
+            margin-bottom: 18px;
+        }
 
-.footer-container{
-    max-width:1400px; 
-    margin:auto;
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    padding:0 40px;
-    flex-wrap:wrap;
-    gap:30px;
-}
+        .course-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
 
-/* ������� */
-.footer-col{
-    flex:1;
-    min-width:200px;
-}
+        .course-row div {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-.footer-col:last-child{
-    flex:1.5;
-    min-width:260px;
-    max-width:400px;
-}
+        .progress-bar {
+            height: 14px;
+            background: rgba(255, 255, 255, .2);
+            border-radius: 20px;
+            overflow: hidden;
+        }
 
-/* ������ */
-.footer .logo img{ 
-    width:250px; 
-    height:auto;
-  
-    margin-top: -100px;
-}
+        .progress {
+            height: 100%;
+            border-radius: 20px;
+        }
 
-/* �������� */
-h5{ 
-    font-size:22px; 
-    margin-bottom:20px; 
-    font-weight:700;
-}
+        .js {
+            width: 66%;
+            background: linear-gradient(90deg, #A78BFA, #FF00FF);
+            box-shadow: 0 0 15px #FF00FF;
+        }
 
-/* ������� */
-ul{ list-style:none; }
-ul li{ margin-bottom:12px; }
+        .py {
+            width: 65%;
+            background: linear-gradient(90deg, #A78BFA, #FF00FF);
+            box-shadow: 0 0 15px #A78BFA;
+        }
 
-ul li a{ 
-    color:rgba(255,255,255,0.85); 
-    text-decoration:none; 
-    font-size:15px; 
-}
+        /* ===== Button Neon ===== */
+        .view {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: 0.3s;
+            background: linear-gradient(90deg, #6C5CE7, #FF00FF);
+            border: none;
+            box-shadow: 0 0 10px rgba(255, 0, 255, 0.4);
+        }
 
-ul li a:hover{
-    color:#6C5CE7;
-    padding-left:4px;
-}
+        .view:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.8);
+        }
 
-/* Contact */
-.contact-list{
-    display:flex;
-    flex-direction:column;
-    gap:15px;
-}
+        /* ===== Footer ===== */
+        .footer {
+            background: #1A1642;
+            color: #FFFFFF;
+            padding: 40px 0;
 
-.contact-list a{ 
-    display:flex; 
-    align-items:center; 
-    gap:10px; 
-    font-size:15px; 
-    text-decoration:none; 
-    color:#FFFFFF; 
-}
+            margin-top: auto;
+            /* ?? ����� ��� */
+        }
 
-.contact-list a i{ font-size:18px; }
+        .footer-container {
+            max-width: 1400px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 0 40px;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
 
-.contact-list a:hover{
-    color:#6C5CE7;
-}
+        /* ������� */
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
 
-/* ������ */
-.contact-form{ 
-    display:flex; 
-    flex-direction:column; 
-    gap:12px; 
-} 
+        .footer-col:last-child {
+            flex: 1.5;
+            min-width: 260px;
+            max-width: 400px;
+        }
 
-.contact-form input, 
-.contact-form textarea{ 
-    padding:10px; 
-    border-radius:10px; 
-    border:none; 
-    font-size:14px; 
-    outline:none; 
-}
+        /* ������ */
+        .footer .logo img {
+            width: 250px;
+            height: auto;
 
-.contact-form input:focus,
-.contact-form textarea:focus{
-    outline:2px solid #6C5CE7;
-}
+            margin-top: -100px;
+        }
 
-.contact-form textarea{ 
-    height:90px; 
-    resize:none; 
-}
+        /* �������� */
+        h5 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
 
-.contact-form button{ 
-    padding:12px; 
-    border:none; 
-    border-radius:10px; 
-    background:linear-gradient(135deg,#6C5CE7,#FF00FF); 
-    color:#fff; 
-    font-size:15px; 
-    font-weight:bold;
-    cursor:pointer; 
-}
+        /* ������� */
+        ul {
+            list-style: none;
+        }
 
-.contact-form button:hover{
-    transform:scale(1.05);
-    opacity:0.9;
-}
+        ul li {
+            margin-bottom: 12px;
+        }
 
-/* footer bottom */
-.footer-bottom{ 
-    border-top:1px solid rgba(255,255,255,0.1); 
-    margin-top:30px; 
-    padding-top:15px; 
-    text-align:center; 
-    font-size:14px; 
-    color:#ccc; 
-}
+        ul li a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-size: 15px;
+        }
 
-/* ?? ������ */
-@media (max-width:768px){
-    .footer-container{
-        flex-direction:column;
-        gap:20px;
-        padding:0 20px;
-    }
-}
-</style>
+        ul li a:hover {
+            color: #6C5CE7;
+            padding-left: 4px;
+        }
+
+        /* Contact */
+        .contact-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-list a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 15px;
+            text-decoration: none;
+            color: #FFFFFF;
+        }
+
+        .contact-list a i {
+            font-size: 18px;
+        }
+
+        .contact-list a:hover {
+            color: #6C5CE7;
+        }
+
+        /* ������ */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: 2px solid #6C5CE7;
+        }
+
+        .contact-form textarea {
+            height: 90px;
+            resize: none;
+        }
+
+        .contact-form button {
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #6C5CE7, #FF00FF);
+            color: #fff;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .contact-form button:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+
+        /* footer bottom */
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 30px;
+            padding-top: 15px;
+            text-align: center;
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        /* ?? ������ */
+        @media (max-width:768px) {
+            .footer-container {
+                flex-direction: column;
+                gap: 20px;
+                padding: 0 20px;
+            }
+        }
+    </style>
 </head>
 
 <body>
-<script src="../script/nav.js" defer></script>
-<header>
+    <script src="../script/nav.js" defer></script>
+    <header>
         <nav>
- 
+
             <a class="logo" href="#">CodeCraft</a>
 
             <ul class="list">
@@ -332,172 +408,181 @@ ul li a:hover{
                 <li><a href="/html/home.html#contact">contact us</a></li>
             </ul>
 
-            
+
             <div class="nav-auth-container" style="display: flex; align-items: center;">
                 <!-- Guest -->
                 <div class="guest-only acount" style="display: flex; gap: 10px;">
-                    <button><a href="/html/login.html" style="color: inherit; text-decoration: none;">log in</a></button>
-                    <button><a href="/html/signup-st.html" style="color: inherit; text-decoration: none;">sign up</a></button>
+                    <button><a href="/html/login.html" style="color: inherit; text-decoration: none;">log
+                            in</a></button>
+                    <button><a href="/html/signup-st.html" style="color: inherit; text-decoration: none;">sign
+                            up</a></button>
                 </div>
                 <!-- Student -->
                 <div class="student-only" style="display: flex; align-items: center; gap: 15px;">
                     <a href="/html/st-profile.html" style="display: flex; align-items: center;">
-                        <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
+                        <img src="/img/circle-user-solid-full.svg" alt="Profile"
+                            style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
                     </a>
-                    <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
+                    <button class="logout-btn"
+                        style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i
+                            class="fas fa-sign-out-alt"></i></button>
                 </div>
                 <!-- Doctor -->
                 <div class="doctor-only" style="display: flex; align-items: center; gap: 15px;">
                     <a href="/html/dr-dashboard.html" style="display: flex; align-items: center;">
-                        <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
+                        <img src="/img/circle-user-solid-full.svg" alt="Profile"
+                            style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
                     </a>
-                    <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
+                    <button class="logout-btn"
+                        style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i
+                            class="fas fa-sign-out-alt"></i></button>
                 </div>
                 <!-- Admin -->
                 <div class="admin-only" style="display: flex; align-items: center; gap: 15px;">
                     <a href="/html/admin-dashboard.html" style="display: flex; align-items: center;">
-                        <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
+                        <img src="/img/circle-user-solid-full.svg" alt="Profile"
+                            style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
                     </a>
-                    <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
+                    <button class="logout-btn"
+                        style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i
+                            class="fas fa-sign-out-alt"></i></button>
                 </div>
-                
+
                 <!-- Dark Mode Toggle -->
-                <button id="darkModeToggle" title="Toggle Dark Mode" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer; margin-left: 15px; transition: 0.3s;">
-                    <i class="fas fa-moon"></i>
-                </button>
+
             </div>
 
 
         </nav>
     </header>
 
-<!-- ===== Section Courses ===== -->
-<div class="dash-wrapper">
-    <!-- <aside class="dash-sidebar">
-      <nav class="sidebar-nav" id="sidebar-menu">
-        <a href="st-dashboard.html" class="sidebar-link">
-          <i class="fas fa-th-large"></i> Dashboard
-        </a>
-        <a href="st-profile.html" class="sidebar-link">
-          <i class="fas fa-user"></i> Profile
-        </a>
-        <a href="my-courses.html" class="sidebar-link active">
-          <i class="fas fa-book"></i> My Courses
-        </a>
-        <a href="my-certificates.html" class="sidebar-link">
-          <i class="fas fa-certificate"></i> Certificates
-        </a>
-        <a href="settings.html" class="sidebar-link">
-          <i class="fas fa-cog"></i> Settings
-        </a>
-      </nav>
-      <div class="sidebar-bottom">
-        <a href="#" id="btn-logout-st" class="sidebar-link logout-btn">
-          <i class="fas fa-sign-out-alt"></i> Log out
-        </a>
-      </div>
-    </aside> -->
-
-    <main class="dash-content">
-        <div class="section">
-    <div class="card">
-        <div class="header">
-            <h2>My Courses</h2>
-        </div>
-
-        <div class="line"></div>
-
-        <div id="courses-container">
-            <div class="sub-title">Currently Enrolled Courses</div>
-            <p>Loading your enrolled courses...</p>
-        </div>
-    </div>
-</div>
-    </main>
-</div>
-<footer class="footer">
-    <div class="footer-container">
-
-        <!-- Logo -->
-        <div class="footer-col">
-            <div class="logo">
-                <img src="../img/logo.png" alt="Logo">
+    <!-- ===== Section Courses ===== -->
+    <div class="dash-wrapper">
+        <aside class="dash-sidebar">
+            <nav class="sidebar-nav" id="sidebar-menu">
+                <a href="st-dashboard.html" class="sidebar-link">
+                    <i class="fas fa-th-large"></i> Dashboard
+                </a>
+                <a href="st-profile.html" class="sidebar-link">
+                    <i class="fas fa-user"></i> Profile
+                </a>
+                <a href="my-courses.html" class="sidebar-link active">
+                    <i class="fas fa-book"></i> My Courses
+                </a>
+                <a href="my-certificates.html" class="sidebar-link">
+                    <i class="fas fa-certificate"></i> Certificates
+                </a>
+                <a href="settings.html" class="sidebar-link">
+                    <i class="fas fa-cog"></i> Settings
+                </a>
+            </nav>
+            <div class="sidebar-bottom">
+                <a href="#" id="btn-logout-st" class="sidebar-link logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Log out
+                </a>
             </div>
-        </div>
+        </aside>
 
-        <!-- Links -->
-        <div class="footer-col">
-            <h5>Quick Links</h5>
-            <ul>
-                <li><a href="../home.html">Home</a></li> 
-                <li><a href="../support.html">Support</a></li>
-                <li><a href="../terms.html">Terms & Conditions</a></li>
-            </ul>
-        </div>
+        <main class="dash-content">
+            <div class="section">
+                <div class="card">
+                    <div class="header">
+                        <h2>My Courses</h2>
+                    </div>
 
-        <!-- Contact -->
-        <div class="footer-col">
-            <h5>Contact Us</h5>
-            <div class="contact-list">
-                <a href="https://wa.me/201104895301" target="_blank">
-  <i class="fab fa-whatsapp"></i> WhatsApp
-</a>
-              <a href="tel:+201104895301">
-  <i class="fas fa-phone"></i> Call Us
-</a>
-             <a href="mailto:mohamedleqaa13@gmail.com">
-  <i class="fas fa-envelope"></i> Email
-</a>
+                    <div class="line"></div>
+
+                    <div id="courses-container">
+                        <div class="sub-title">Currently Enrolled Courses</div>
+                        <p>Loading your enrolled courses...</p>
+                    </div>
+                </div>
             </div>
+        </main>
+    </div>
+    <footer class="footer">
+        <div class="footer-container">
+
+            <!-- Logo -->
+            <div class="footer-col">
+                <div class="logo">
+                    <img src="../img/logo.png" alt="Logo">
+                </div>
+            </div>
+
+            <!-- Links -->
+            <div class="footer-col">
+                <h5>Quick Links</h5>
+                <ul>
+                    <li><a href="../home.html">Home</a></li>
+                    <li><a href="../support.html">Support</a></li>
+                    <li><a href="../terms.html">Terms & Conditions</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div class="footer-col">
+                <h5>Contact Us</h5>
+                <div class="contact-list">
+                    <a href="https://wa.me/201104895301" target="_blank">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <a href="tel:+201104895301">
+                        <i class="fas fa-phone"></i> Call Us
+                    </a>
+                    <a href="mailto:mohamedleqaa13@gmail.com">
+                        <i class="fas fa-envelope"></i> Email
+                    </a>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <div class="footer-col">
+                <h5>Send Message</h5>
+                <form class="contact-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Your Message" required></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+
         </div>
 
-        <!-- Form -->
-        <div class="footer-col">
-            <h5>Send Message</h5>
-            <form class="contact-form">
-                <input type="text" placeholder="Your Name" required>
-                <input type="email" placeholder="Your Email" required>
-                <textarea placeholder="Your Message" required></textarea>
-                <button type="submit">Send Message</button>
-            </form>
+        <div class="footer-bottom">
+            Copyright &copy; 2026 CODECRAFT. All rights reserved.
         </div>
-
-    </div>
-
-    <div class="footer-bottom">
-        Copyright &copy; 2026 CODECRAFT. All rights reserved.
-    </div>
-</footer>
+    </footer>
 
 
-<script>
-    document.addEventListener('DOMContentLoaded', async () => {
-        const token = localStorage.getItem('authToken');
-        if (!token) {
-            window.location.href = 'login.html';
-            return;
-        }
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const token = localStorage.getItem('authToken');
+            if (!token) {
+                window.location.href = 'login.html';
+                return;
+            }
 
-        const coursesContainer = document.getElementById('courses-container');
+            const coursesContainer = document.getElementById('courses-container');
 
-        try {
-            const response = await fetch('http://localhost:5000/api/users/my-courses', {
-                headers: { 'Authorization': `Bearer ${token}` }
-            });
+            try {
+                const response = await fetch('http://localhost:5000/api/users/my-courses', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
 
-            const result = await response.json();
+                const result = await response.json();
 
-            if (response.ok) {
-                coursesContainer.innerHTML = '<div class="sub-title">Currently Enrolled Courses</div>'; // Reset and add title
-                if (result.data.length === 0) {
-                    coursesContainer.innerHTML += '<p>You are not enrolled in any courses yet. <a href="courses.html" style="color: #6C5CE7; font-weight: bold;">Explore courses</a>.</p>';
-                    return;
-                }
+                if (response.ok) {
+                    coursesContainer.innerHTML = '<div class="sub-title">Currently Enrolled Courses</div>'; // Reset and add title
+                    if (result.data.length === 0) {
+                        coursesContainer.innerHTML += '<p>You are not enrolled in any courses yet. <a href="courses.html" style="color: #6C5CE7; font-weight: bold;">Explore courses</a>.</p>';
+                        return;
+                    }
 
-                result.data.forEach(course => {
-                    const courseElement = document.createElement('div');
-                    courseElement.className = 'course';
-                    courseElement.innerHTML = `
+                    result.data.forEach(course => {
+                        const courseElement = document.createElement('div');
+                        courseElement.className = 'course';
+                        courseElement.innerHTML = `
                         <div class="course-row">
                             <span style="font-weight: 600;">${course.title}</span>
                             <div>
@@ -509,17 +594,18 @@ ul li a:hover{
                             <div class="progress js" style="width: ${course.progress}%;"></div>
                         </div>
                     `;
-                    coursesContainer.appendChild(courseElement);
-                });
-            } else {
-                coursesContainer.innerHTML = `<p>Error: ${result.message}</p>`;
+                        coursesContainer.appendChild(courseElement);
+                    });
+                } else {
+                    coursesContainer.innerHTML = `<p>Error: ${result.message}</p>`;
+                }
+            } catch (error) {
+                coursesContainer.innerHTML = '<p>Failed to load your courses. Please try again later.</p>';
             }
-        } catch (error) {
-            coursesContainer.innerHTML = '<p>Failed to load your courses. Please try again later.</p>';
-        }
-    });
-</script>
+        });
+    </script>
 
     <script src="../script/auth.js" defer></script>
 </body>
+
 </html>

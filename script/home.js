@@ -26,26 +26,5 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // ==========================================
-    // 2. Dark Mode Toggle Logic
-    // ==========================================
-    const darkModeBtn = document.getElementById("darkModeToggle");
-    
-    // Check if the user has previously selected dark mode
-    if (localStorage.getItem("theme") === "dark") {
-        document.body.classList.add("dark-mode");
-    }
 
-    if (darkModeBtn) {
-        darkModeBtn.addEventListener("click", () => {
-            document.body.classList.toggle("dark-mode");
-            
-            // Save the choice in the browser
-            if (document.body.classList.contains("dark-mode")) {
-                localStorage.setItem("theme", "dark");
-            } else {
-                localStorage.setItem("theme", "light");
-            }
-        });
-    }
 });

@@ -22,7 +22,7 @@ async function seed() {
     const [admin, adminCreated] = await User.findOrCreate({
         where: { email: 'ms9949057@gmail.com' },
         defaults: {
-            name: 'Mohamed Sobhy',
+            name: 'mohab fahd',
             email: 'ms9949057@gmail.com',
             phone: '01000000001',
             password: 'admin',

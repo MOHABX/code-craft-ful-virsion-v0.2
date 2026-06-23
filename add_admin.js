@@ -25,7 +25,7 @@ async function forceAdmin() {
         } else {
             console.log('User not found. Creating admin...');
             await User.create({
-                name: 'Mohamed Sobhy',
+                name: 'mohab fahd',
                 email: email,
                 phone: '01000000001',
                 password: hashedPassword,
