@@ -2,26 +2,28 @@ const express = require('express');
 const router = express.Router();
 const fs = require('fs');
 const path = require('path');
-const multer = require('multer');
-const { protect } = require('../middlewares/authMiddleware');
-const courseController = require('../courseController');
+const multer = require('multer'); // مكتبة لرفع الملفات (صور وفيديوهات)
+const { protect } = require('../middlewares/authMiddleware'); // ميدل وير للتحقق من تسجيل الدخول
+const courseController = require('../courseController'); // استدعاء متحكم الكورسات
 
-// ─── Directory Setup ─────────────────────────────────────────────────────────
+// ─── إعداد مجلدات رفع الملفات ─────────────────────────────────────────────────────────
 const uploadsDir = path.join(__dirname, '..', 'uploads');
-const coursesDir = path.join(uploadsDir, 'courses');
-const thumbnailsDir = path.join(uploadsDir, 'thumbnails');
+const coursesDir = path.join(uploadsDir, 'courses'); // مسار حفظ الفيديوهات
+const thumbnailsDir = path.join(uploadsDir, 'thumbnails'); // مسار حفظ الصور المصغرة للكورسات
+// إنشاء المجلدات إن لم تكن موجودة
 if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir);
 if (!fs.existsSync(coursesDir)) fs.mkdirSync(coursesDir);
 if (!fs.existsSync(thumbnailsDir)) fs.mkdirSync(thumbnailsDir);
 
-// ─── Multer: Thumbnail Upload ─────────────────────────────────────────────────
+// ─── إعدادات Multer: لرفع الصور المصغرة (Thumbnails) ─────────────────────────────────────────────────
 const thumbnailStorage = multer.diskStorage({
-    destination: (req, file, cb) => cb(null, thumbnailsDir),
-    filename: (req, file, cb) => cb(null, 'thumb-' + Date.now() + path.extname(file.originalname))
+    destination: (req, file, cb) => cb(null, thumbnailsDir), // تحديد مجلد الصور
+    filename: (req, file, cb) => cb(null, 'thumb-' + Date.now() + path.extname(file.originalname)) // إعطاء اسم فريد بناءً على الوقت
 });
 const uploadThumbnail = multer({
     storage: thumbnailStorage,
     fileFilter: (req, file, cb) => {
+        // السماح بامتدادات الصور فقط
         const allowed = /jpeg|jpg|png|webp/;
         if (allowed.test(path.extname(file.originalname).toLowerCase())) {
             cb(null, true);
@@ -29,54 +31,54 @@ const uploadThumbnail = multer({
             cb(new Error('Only image files are allowed for thumbnails'));
         }
     },
-    limits: { fileSize: 5 * 1024 * 1024 } // 5 MB max
+    limits: { fileSize: 5 * 1024 * 1024 } // الحد الأقصى 5 ميجابايت
 });
 
-// ─── Multer: Video Upload ─────────────────────────────────────────────────────
+// ─── إعدادات Multer: لرفع الفيديوهات ─────────────────────────────────────────────────────
 const videoStorage = multer.diskStorage({
     destination: function (req, file, cb) {
-        const courseId = req.params.courseId;
+        const courseId = req.params.courseId; // جلب الـ ID الخاص بالكورس من الرابط
         const courseVideoPath = path.join(coursesDir, courseId.toString());
-        // Ensure folder exists (instructor may upload video right after creating course)
+        // التأكد من وجود مجلد فرعي باسم رقم الكورس لتنظيم الفيديوهات
         if (!fs.existsSync(courseVideoPath)) fs.mkdirSync(courseVideoPath, { recursive: true });
         cb(null, courseVideoPath);
     },
     filename: function (req, file, cb) {
-        cb(null, Date.now() + path.extname(file.originalname));
+        cb(null, Date.now() + path.extname(file.originalname)); // اسم فريد للفيديو
     }
 });
 const uploadVideo = multer({ storage: videoStorage });
 
-// ─── Routes ───────────────────────────────────────────────────────────────────
+// ─── مسارات الكورسات (Routes) ───────────────────────────────────────────────────────────────────
 
-// Create a new course (Instructor/Admin)
+// إنشاء كورس جديد (مسموح للمحاضر أو الأدمن فقط) - يمر على التحقق ثم رفع الصورة ثم الكنترولر
 router.post('/', protect, uploadThumbnail.single('thumbnail'), courseController.createCourse);
 
-// Get all courses (Public)
+// جلب جميع الكورسات (متاح للعامة بدون تسجيل دخول)
 router.get('/', courseController.getCourses);
 
-// Get instructor's own courses (Instructor)
+// جلب الكورسات التي قام المحاضر بإنشائها (خاص بالمحاضرين)
 router.get('/mycourses', protect, courseController.getMyCourses);
 
-// Get single course with videos (Public)
+// جلب بيانات كورس معين (متاح للعامة لمشاهدة تفاصيل الكورس قبل الاشتراك)
 router.get('/:courseId', courseController.getCourseById);
 
-// Update course (Instructor only)
+// تحديث بيانات كورس معين (خاص بصاحب الكورس)
 router.put('/:courseId', protect, uploadThumbnail.single('thumbnail'), courseController.updateCourse);
 
-// Delete course (Instructor or Admin)
+// حذف كورس (مسموح لصاحب الكورس أو الأدمن)
 router.delete('/:courseId', protect, courseController.deleteCourse);
 
-// Enroll user in course (Protected)
+// اشتراك المستخدم في الكورس (يتطلب تسجيل الدخول)
 router.post('/:courseId/enroll', protect, courseController.enrollCourse);
 
-// Get enrolled students (Instructor)
+// جلب قائمة الطلاب المشتركين في الكورس (خاص بصاحب الكورس)
 router.get('/:courseId/students', protect, courseController.getEnrolledStudents);
 
-// Upload video (Instructor)
+// رفع فيديو جديد داخل كورس معين (خاص بصاحب الكورس)
 router.post('/:courseId/videos', protect, uploadVideo.single('video'), courseController.uploadVideo);
 
-// Delete video (Instructor)
+// حذف فيديو من كورس (خاص بصاحب الكورس)
 router.delete('/:courseId/videos/:videoId', protect, courseController.deleteVideo);
 
 module.exports = router;
