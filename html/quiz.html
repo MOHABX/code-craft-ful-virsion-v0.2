@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Course Quiz & Certificate</title>
-    <!-- You can include your header file here later -->
+    <!-- يمكنك تضمين ملف الترويسة هنا لاحقاً -->
     <link rel="stylesheet" href="../style/quiz.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
     <div class="page-wrapper">
         
-        <!-- 1. Quiz Section -->
+        <!-- 1. قسم الاختبار -->
         <div id="quiz-section" class="glass-card active-section">
             <div class="quiz-header">
                 <h2>Course Completion Quiz</h2>
@@ -21,12 +21,12 @@
             
             <h3 id="question-text">Loading question...</h3>
             <div id="options-container" class="options-grid">
-                <!-- Options will be rendered here by JavaScript -->
+                <!-- سيتم عرض الخيارات هنا بواسطة الجافاسكريبت -->
             </div>
             <button id="next-btn" class="neon-btn hidden">Next Question</button>
         </div>
 
-        <!-- 2. Certificate Form Section -->
+        <!-- 2. قسم نموذج الشهادة -->
         <div id="form-section" class="glass-card hidden">
             <h2 class="success-title">🎉 Congratulations! You passed the test.</h2>
             <p class="score-text">Your score: <span id="final-score"></span></p>
@@ -51,7 +51,7 @@
             </form>
         </div>
 
-        <!-- Fail Section -->
+        <!-- قسم الرسوب -->
         <div id="fail-section" class="glass-card hidden">
             <h2 class="fail-title">😔 Unfortunately, you did not pass the test.</h2>
             <p class="score-text">Your score: <span id="fail-score"></span></p>
@@ -59,7 +59,7 @@
             <button id="retry-btn" class="neon-btn w-100 mt-20" style="background: linear-gradient(135deg, #dc3545, #ff6b81);">Retry Test</button>
         </div>
 
-        <!-- 3. Certificate View Section -->
+        <!-- 3. قسم عرض الشهادة -->
         <div id="certificate-section" class="hidden">
             <div class="certificate-wrapper" id="certificate-wrapper">
                 <div class="cert-border">
@@ -76,7 +76,7 @@
         </div>
     </div>
     <script>
-        // This script is based on the original quiz.js functionality
+        // هذا السكريبت مبني على وظائف quiz.js الأصلية
         document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const courseId = urlParams.get('courseId');
@@ -106,6 +106,7 @@
                 try {
                     const token = localStorage.getItem('authToken');
                     questionText.textContent = "AI is generating 30 questions... please wait.";
+                    // هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
                     const response = await fetch(`http://localhost:5000/api/quiz/generate?track=${encodeURIComponent(courseName)}&courseId=${courseId}`, {
                         headers: { 'Authorization': `Bearer ${token}` }
                     });
@@ -139,7 +140,7 @@
                     const button = document.createElement('button');
                     button.textContent = option;
                     button.className = 'option-btn';
-                    // Gemini generates "correct": 0, 1, 2, 3 usually, or gives text. Handling both:
+                    // Gemini عادة ينتج 'correct': 0, 1, 2, 3 أو يعطي نصاً. نتعامل مع الحالتين:
                     let isCorrect = (question.correct === idx || question.correct === option || parseInt(question.correct) === idx);
                     button.onclick = () => selectOption(button, isCorrect);
                     optionsContainer.appendChild(button);
@@ -150,7 +151,7 @@
             function selectOption(button, isCorrect) {
                 Array.from(optionsContainer.children).forEach(btn => {
                     btn.disabled = true;
-                    // Optional: show correct/incorrect visually
+                    // اختياري: عرض صح/خطأ بصرياً
                 });
 
                 if (isCorrect) {
@@ -184,6 +185,7 @@
                 
                 try {
                     questionText.textContent = "Submitting your score...";
+                    // يا ويل اللي ما يذاكر! هذي الدالة حقت الاختبارات، نشوف من ينجح ومن يجيب العيد
                     const response = await fetch(`http://localhost:5000/api/quiz/submit`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
@@ -199,6 +201,7 @@
                     if (data.passed) {
                         formSection.classList.remove('hidden');
                         
+                        // هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
                         const profileResponse = await fetch(`http://localhost:5000/api/auth/me`, {
                             headers: { 'Authorization': `Bearer ${token}` }
                         });
@@ -213,8 +216,9 @@
                             const rating = document.getElementById('course-rating').value;
                             const comment = document.getElementById('course-comment').value;
 
-                            // Submit review
+                            // إرسال المراجعة
                             try {
+                                // هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
                                 await fetch(`http://localhost:5000/api/reviews/${courseId}`, {
                                     method: 'POST',
                                     headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
@@ -224,7 +228,7 @@
                                 console.error("Error submitting review", err);
                             }
 
-                            // Show certificate
+                            // إظهار الشهادة
                             formSection.classList.add('hidden');
                             certificateSection.classList.remove('hidden');
                         });

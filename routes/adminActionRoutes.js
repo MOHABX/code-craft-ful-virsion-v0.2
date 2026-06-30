@@ -2,11 +2,14 @@ const express = require('express');
 const router = express.Router();
 const { blockDevice, unblockDevice, forceLogout } = require('../adminActionController');
 
-// These routes are accessed directly via email links, so they use GET instead of POST/PUT
-// Authentication is handled via the JWT token in the URL parameter
+// هذه المسارات يتم الوصول إليها مباشرة عبر روابط البريد الإلكتروني، لذا تستخدم GET بدلاً من POST/PUT
+// تتم المصادقة عبر رمز JWT في معامل الرابط
 
+// يا خوي هذي تفتح درب للمراسيل في السيرفر، نستقبل الطلب ونقضي اللزوم
 router.get('/block/:token', blockDevice);
+// يا خوي هذي تفتح درب للمراسيل في السيرفر، نستقبل الطلب ونقضي اللزوم
 router.get('/unblock/:token', unblockDevice);
+// يا خوي هذي تفتح درب للمراسيل في السيرفر، نستقبل الطلب ونقضي اللزوم
 router.get('/logout/:token', forceLogout);
 
 module.exports = router;

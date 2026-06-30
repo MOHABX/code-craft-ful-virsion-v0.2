@@ -1,5 +1,6 @@
 const nodemailer = require('nodemailer');
 
+// هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
 exports.submitContactMessage = async (req, res) => {
     const { name, email, message } = req.body;
 

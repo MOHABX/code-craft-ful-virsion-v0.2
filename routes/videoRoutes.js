@@ -21,7 +21,7 @@ const videoStorage = multer.diskStorage({
 
 const videoUpload = multer({
     storage: videoStorage,
-    limits: { fileSize: 500 * 1024 * 1024 }, // 500 MB per video
+    limits: { fileSize: 500 * 1024 * 1024 }, // 500 ميجابايت كحد أقصى لكل فيديو
     fileFilter: (req, file, cb) => {
         const allowed = ['video/mp4', 'video/webm', 'video/ogg', 'video/mkv', 'video/avi', 'video/quicktime'];
         if (allowed.includes(file.mimetype)) {
@@ -32,13 +32,16 @@ const videoUpload = multer({
     }
 });
 
-// Bulk upload multiple videos to a course (Doctor only)
+// الرفع الجماعي لعدة فيديوهات لدورة (للمدرب فقط)
+// هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
 router.post('/upload/:courseId', protect, videoUpload.array('videos', 20), videoController.uploadVideos);
 
-// Mark a video as complete for the logged-in user
+// تحديد الفيديو كمكتمل للمستخدم
+// هني المربط حق الفيديوهات، نشغل المقطع ونضبط الشاشة للربع
 router.post('/:videoId/complete', protect, videoController.markVideoComplete);
 
-// Delete a video (instructor only)
+// حذف فيديو (للمدرب فقط)
+// هني المربط حق الفيديوهات، نشغل المقطع ونضبط الشاشة للربع
 router.delete('/:videoId', protect, videoController.deleteVideo);
 
 module.exports = router;

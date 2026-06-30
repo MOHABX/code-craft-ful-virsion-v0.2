@@ -3,10 +3,12 @@ const router = express.Router();
 const { protect } = require('../middlewares/authMiddleware');
 const certificateController = require('../certificateController');
 
-// Issue a new certificate for the logged-in user
+// إصدار شهادة جديدة للمستخدم المسجل دخوله
+// هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
 router.post('/', protect, certificateController.issueCertificate);
 
-// Get all certificates for the logged-in user
+// جلب جميع شهادات المستخدم المسجل دخوله
+// هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
 router.get('/me', protect, certificateController.getMyCertificates);
 
 module.exports = router;

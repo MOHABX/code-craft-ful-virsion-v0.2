@@ -7,7 +7,7 @@ const routesDir = path.join(__dirname, 'backend', 'routes');
 
 const models = ['User', 'Course', 'Video', 'Enrollment', 'QuizResult', 'Review', 'Certificate', 'UserProgress', 'UserVideoProgress', 'BlockedDevice', 'RefreshToken', 'AdminEmail'];
 
-// Update Controllers
+// تحديث المتحكمات
 fs.readdirSync(controllersDir).forEach(file => {
     let filePath = path.join(controllersDir, file);
     let content = fs.readFileSync(filePath, 'utf-8');
@@ -22,7 +22,7 @@ fs.readdirSync(controllersDir).forEach(file => {
     fs.writeFileSync(filePath, content);
 });
 
-// Update Models
+// تحديث النماذج
 fs.readdirSync(modelsDir).forEach(file => {
     let filePath = path.join(modelsDir, file);
     let content = fs.readFileSync(filePath, 'utf-8');
@@ -30,18 +30,18 @@ fs.readdirSync(modelsDir).forEach(file => {
     content = content.replace(/require\(['"]\.\.\/db['"]\)/g, "require('./db')");
     content = content.replace(/require\(['"]\.\/db['"]\)/g, "require('./db')");
     
-    // Associations might still be doing `require('./Video')`, they should now do `require('./Video')` since they are in the same folder.
-    // So `require('./[Model]')` is fine for models requiring each other.
+    // الروابط قد تظل تستخدم ('./Video')، وهذا صحيح الآن لأنها في نفس المجلد.
+    // إذاً (`./[Model]`) صحيحة للنماذج التي تستدعي بعضها البعض.
     
     fs.writeFileSync(filePath, content);
 });
 
-// Update Routes
+// تحديث المسارات
 fs.readdirSync(routesDir).forEach(file => {
     let filePath = path.join(routesDir, file);
     let content = fs.readFileSync(filePath, 'utf-8');
     
-    // Auth route uses protect middleware. If it was `../middlewares/authMiddleware`, now it's `../middleware/authMiddleware`
+    // مسار المصادقة يستخدم الحماية. تم التعديل إلى المجلد الجديد.
     content = content.replace(/require\(['"]\.\.\/middlewares\//g, "require('../middleware/");
     
     fs.writeFileSync(filePath, content);

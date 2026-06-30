@@ -1,4 +1,4 @@
-// Elements
+// العناصر
 const btnLogin = document.getElementById('btn-login');
 const btnDrSignup = document.getElementById('btn-dr-signup');
 const btnStSignup = document.getElementById('btn-st-signup');
@@ -9,19 +9,19 @@ const logForm = document.getElementById('log');
 const drForm = document.getElementById('sign_dr');
 const stForm = document.getElementById('sign_st');
 
-// Function to toggle the sidebar state (login or signup)
+// دالة لتبديل حالة الشريط الجانبي (دخول أو تسجيل)
 function setMode(mode) {
     if (mode === 'signup') {
-        // Hide login button and show signup options
+        // إخفاء زر الدخول وإظهار خيارات التسجيل
         btnLogin.classList.add('hidden');
         btnDrSignup.classList.remove('hidden');
         btnStSignup.classList.remove('hidden');
         backBtn.classList.remove('hidden');
         
-        // Show instructor form as default
+        // إظهار نموذج المدرب كافتراضي
         switchForm(drForm, btnDrSignup);
     } else {
-        // Return to login state
+        // العودة لحالة تسجيل الدخول
         btnLogin.classList.remove('hidden');
         btnDrSignup.classList.add('hidden');
         btnStSignup.classList.add('hidden');
@@ -31,18 +31,18 @@ function setMode(mode) {
     }
 }
 
-// Function to switch between forms
+// دالة للتبديل بين النماذج
 function switchForm(targetForm, targetBtn) {
-    // Hide all
+    // إخفاء الكل
     [logForm, drForm, stForm].forEach(f => f.style.display = 'none');
     [btnLogin, btnDrSignup, btnStSignup].forEach(b => b.classList.remove('active'));
     
-    // Show the selected one
+    // إظهار المختار
     targetForm.style.display = 'block';
     targetBtn.classList.add('active');
 }
 
-// Events
+// الأحداث
 if (goToSignupLink) {
     goToSignupLink.addEventListener('click', (e) => {
         e.preventDefault();
@@ -61,7 +61,7 @@ if (btnStSignup) btnStSignup.addEventListener('click', () => switchForm(stForm, 
 if (btnLogin) btnLogin.addEventListener('click', () => switchForm(logForm, btnLogin));
 
 // ========================================================
-//  API Integration for Registration
+//  ربط الـ API للتسجيل
 // ========================================================
 
 /**
@@ -75,15 +75,15 @@ async function handleRegistration(e, role) {
     const submitButton = form.querySelector('button[type="submit"]');
     const originalButtonText = submitButton.innerText;
 
-    // Disable button and show loading state
+    // تعطيل الزر وإظهار حالة التحميل
     submitButton.disabled = true;
     submitButton.innerText = 'Submitting...';
 
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
-    data.role = role; // Add the role to the data object
+    data.role = role; // إضافة الصلاحية (الدور) لكائن البيانات
     
-    // Prepare data to match the backend
+    // تجهيز البيانات لتطابق السيرفر
     data.name = `${data.fname} ${data.lname}`;
     data.password = data.pass;
 
@@ -93,6 +93,7 @@ async function handleRegistration(e, role) {
     }
 
     try {
+        // يا ولد هذا الدرب للزوار الجدد، يسجلون علومهم عندنا عشان نصير ربع
         const response = await fetch('http://localhost:5000/api/auth/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -102,10 +103,10 @@ async function handleRegistration(e, role) {
         const result = await response.json();
 
         if (!response.ok) {
-            // If there's an error (e.g., email exists), show it
+            // في حال وجود خطأ (مثل: البريد مسجل مسبقاً)، قم بعرضه
             alert(result.message || 'An error occurred during registration.');
         } else {
-            // On success, redirect to the OTP page
+            // عند النجاح، وجّه المستخدم لصفحة رمز التحقق OTP
             alert(result.message);
             localStorage.setItem('registrationEmail', data.email);
             window.location.href = `otp-verification.html`;
@@ -114,17 +115,17 @@ async function handleRegistration(e, role) {
         console.error('Registration failed:', error);
         alert('Failed to connect to the server. Please check your internet connection.');
     } finally {
-        // Re-enable the button
+        // إعادة تفعيل الزر
         submitButton.disabled = false;
         submitButton.innerText = originalButtonText;
     }
 }
 
-// Attach the event listeners to the signup forms
+// ربط مستمعي الأحداث بنماذج التسجيل
 if (drForm) drForm.addEventListener('submit', (e) => handleRegistration(e, 'doctor'));
 if (stForm) stForm.addEventListener('submit', (e) => handleRegistration(e, 'student'));
 
-// Login form listener
+// مستمع نموذج تسجيل الدخول
 if (logForm) {
     logForm.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -133,6 +134,7 @@ if (logForm) {
         const data = Object.fromEntries(formData.entries());
 
         try {
+            // يا رفيقي هني بوابة الدخول، نشيك على هوية الرجال وندخله إذا علمه غانم
             const response = await fetch('/api/auth/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -146,11 +148,11 @@ if (logForm) {
             } else {
                 alert(result.message);
 
-                // Save to localStorage
+                // حفظ في الذاكرة المحلية (localStorage)
                 localStorage.setItem('authToken', result.token);
                 localStorage.setItem('role', result.role);
 
-                // Redirect the user based on account type
+                // توجيه المستخدم بناءً على نوع الحساب
                 if (result.role === 'admin') {
                     window.location.href = 'admin-dashboard.html';
                 } else if (result.role === 'doctor') {

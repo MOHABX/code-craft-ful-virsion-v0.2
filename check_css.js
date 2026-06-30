@@ -16,9 +16,9 @@ files.forEach(file => {
         if (hrefMatch) {
             let href = hrefMatch[1];
             if (href.startsWith('http') || href.startsWith('https')) return;
-            href = href.split('?')[0]; // remove query params
+            href = href.split('?')[0]; // إزالة معلمات الاستعلام
             
-            // resolve relative to htmlDir
+            // تحليل المسار نسبة إلى مجلد الـ HTML
             const cssPath = path.resolve(htmlDir, href);
             
             if (!fs.existsSync(cssPath)) {

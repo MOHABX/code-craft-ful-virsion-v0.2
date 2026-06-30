@@ -23,7 +23,7 @@ const QuizResult = sequelize.define('QuizResult', {
         type: DataTypes.INTEGER,
         allowNull: true,
     },
-    // userId added via association in User.js
+    // تمت إضافة معرف المستخدم عبر الروابط في User.js
 }, {
     timestamps: true
 });

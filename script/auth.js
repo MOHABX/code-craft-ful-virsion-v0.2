@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    // 1. Select all role-specific UI elements
+    // 1. تحديد كافة عناصر الواجهة الخاصة بكل صلاحية
     const guestElements = document.querySelectorAll('.guest-only');
     const studentElements = document.querySelectorAll('.student-only');
     const doctorElements = document.querySelectorAll('.doctor-only');
     const adminElements = document.querySelectorAll('.admin-only');
 
-    // 2. Default State: Initially hide all role-specific UI elements
+    // 2. الحالة الافتراضية: إخفاء جميع عناصر الصلاحيات مبدئياً
     const hideAllRoles = () => {
         guestElements.forEach(el => el.style.display = 'none');
         studentElements.forEach(el => el.style.display = 'none');
@@ -13,33 +13,34 @@ document.addEventListener('DOMContentLoaded', async () => {
         adminElements.forEach(el => el.style.display = 'none');
     };
 
-    // Helper to show specific elements
+    // دالة مساعدة لإظهار عناصر محددة
     const showRoleElements = (elements) => {
-        elements.forEach(el => el.style.display = 'flex'); // using flex to match your UI layout
+        elements.forEach(el => el.style.display = 'flex'); // استخدام flex لمطابقة تخطيط الواجهة
     };
 
     hideAllRoles();
 
-    // 3. State Checking
+    // 3. فحص الحالة
     const authToken = localStorage.getItem('authToken');
     const role = localStorage.getItem('role');
 
     if (!authToken || !role) {
-        // No token exists: Display ONLY the .guest-only elements
+        // لا يوجد رمز: عرض عناصر الزوار فقط
         showRoleElements(guestElements);
         bindLogoutButtons();
         return;
     }
 
-    // Since token exists, show the role UI optimistically before validation (optional, for speed)
-    // Or we wait for validation. We'll show optimistically for better UX, then validate.
+    // بما أن الرمز موجود، أظهر واجهة المستخدم بشكل تفاؤلي قبل التحقق (للسرعة)
+    // أو ننتظر التحقق. سنعرضها لتجربة مستخدم أفضل ثم نتحقق.
     if (role === 'student') showRoleElements(studentElements);
     else if (role === 'doctor') showRoleElements(doctorElements);
     else if (role === 'admin') showRoleElements(adminElements);
     else showRoleElements(guestElements);
 
-    // 4. Token Validation (Security)
+    // 4. التحقق من الرمز (للأمان)
     try {
+        // هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
         const response = await fetch('/api/auth/me', {
             method: 'GET',
             headers: {
@@ -48,16 +49,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
 
         if (!response.ok) {
-            // 401 Unauthorized / expired token
+            // 401 غير مصرح / رمز منتهي الصلاحية
             clearSession();
             hideAllRoles();
             showRoleElements(guestElements);
         } else {
-            // 5. Dynamic UI Rendering: Confirmed Valid
+            // 5. تقديم الواجهة ديناميكياً: تم التأكيد
             const result = await response.json();
             const actualRole = result.data.role || role;
             
-            // If the role from the server doesn't match localStorage, fix it
+            // إذا كانت الصلاحية من السيرفر لا تطابق الذاكرة المحلية، أصلحها
             if (actualRole !== role) {
                 localStorage.setItem('role', actualRole);
                 hideAllRoles();
@@ -69,30 +70,31 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     } catch (error) {
         console.error('Session validation error:', error);
-        // On network failure, we fallback to guest state for security
+        // عند فشل الشبكة، نعود لحالة الزائر للأمان
         clearSession();
         hideAllRoles();
         showRoleElements(guestElements);
     }
 
-    // 6. Logout Functionality
+    // 6. وظيفة تسجيل الخروج
     bindLogoutButtons();
 });
 
 function bindLogoutButtons() {
     const logoutBtns = document.querySelectorAll('.logout-btn');
     logoutBtns.forEach(btn => {
-        // Prevent adding multiple listeners if called twice
+        // منع إضافة عدة مستمعين إذا تم استدعاؤها مرتين
         btn.replaceWith(btn.cloneNode(true));
     });
     
-    // Select again after cloning
+    // التحديد مجدداً بعد الاستنساخ
     document.querySelectorAll('.logout-btn').forEach(btn => {
         btn.addEventListener('click', async (e) => {
             e.preventDefault();
             
-            // Optional: call the logout API if it exists to clear server-side cookies
+            // اختياري: استدعاء API تسجيل الخروج إن وجد لمسح ملفات تعريف الارتباط من السيرفر
             try {
+                // هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
                 await fetch('/api/auth/logout', { method: 'POST' });
             } catch (err) {
                 console.error(err);

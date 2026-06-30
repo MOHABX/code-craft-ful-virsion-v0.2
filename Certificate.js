@@ -25,9 +25,9 @@ const Certificate = sequelize.define('Certificate', {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
     },
-    // userId and courseId are added via associations
+    // تتم إضافة معرف المستخدم ومعرف الدورة عبر الروابط (associations)
 }, {
-    timestamps: true // Adds createdAt and updatedAt
+    timestamps: true // يضيف تاريخ الإنشاء وتاريخ التحديث
 });
 
 module.exports = Certificate;

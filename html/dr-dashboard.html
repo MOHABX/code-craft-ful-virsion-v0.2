@@ -147,7 +147,7 @@
             flex-direction: column;
         }
 
-        /* ===== Footer ===== */
+        /* ===== التذييل (Footer) ===== */
         .footer {
             background: #1A1642;
             color: #FFFFFF;
@@ -215,7 +215,7 @@
             padding-left: 4px;
         }
 
-        /* Contact */
+        /* تواصل معنا */
         .contact-list {
             /* display: flex; */
             flex-direction: column;
@@ -281,7 +281,7 @@
             opacity: 0.9;
         }
 
-        /* footer bottom */
+        /* أسفل التذييل */
         .footer-bottom {
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             margin-top: 30px;
@@ -319,14 +319,14 @@
             </ul>
 
             <div class="nav-auth-container" style="display: flex; align-items: center;">
-                <!-- Guest -->
+                <!-- زائر -->
                 <div class="guest-only acount" style="display: flex; gap: 10px;">
                     <button><a href="/html/login.html" style="color: inherit; text-decoration: none;">log
                             in</a></button>
                     <button><a href="/html/signup-st.html" style="color: inherit; text-decoration: none;">sign
                             up</a></button>
                 </div>
-                <!-- Student -->
+                <!-- طالب -->
                 <div class="student-only" style="display: flex; align-items: center; gap: 15px;">
                     <a href="/html/st-profile.html" style="display: flex; align-items: center;">
                         <img src="/img/circle-user-solid-full.svg" alt="Profile"
@@ -336,7 +336,7 @@
                         style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i
                             class="fas fa-sign-out-alt"></i></button>
                 </div>
-                <!-- Doctor -->
+                <!-- مدرب -->
                 <div class="doctor-only" style="display: flex; align-items: center; gap: 15px;">
                     <a href="/html/dr-dashboard.html" style="display: flex; align-items: center;">
                         <img src="/img/circle-user-solid-full.svg" alt="Profile"
@@ -346,7 +346,7 @@
                         style="border:none; color:inherit; font-size: 20px; cursor:pointer;"><i
                             class="fas fa-sign-out-alt"></i></button>
                 </div>
-                <!-- Admin -->
+                <!-- مسؤول -->
                 <div class="admin-only" style="display: flex; align-items: center; gap: 15px;">
                     <!-- <a href="/html/admin-dashboard.html" style="display: flex; align-items: center;">
                         <img src="/img/circle-user-solid-full.svg" alt="Profile"
@@ -357,7 +357,7 @@
                             class="fas fa-sign-out-alt"></i></button>
                 </div>
 
-                <!-- Dark Mode Toggle -->
+                <!-- تبديل الوضع الليلي -->
                 
             </div>
 
@@ -399,21 +399,21 @@
                 function switchTab(tabId) {
                     if (!panels[tabId]) return;
                     
-                    // Hide all panels
+                    // إخفاء جميع اللوحات
                     Object.values(panels).forEach(p => { if(p) p.classList.add('hidden') });
-                    // Show target panel
+                    // إظهار اللوحة المستهدفة
                     panels[tabId].classList.remove('hidden');
 
-                    // Update active state of buttons
+                    // تحديث الحالة النشطة للأزرار
                     Object.values(btns).forEach(b => { if(b) b.classList.remove('active') });
                     if (btns[tabId]) btns[tabId].classList.add('active');
                 }
 
-                // Attach click events
+                // إرفاق أحداث النقر
                 Object.keys(btns).forEach(key => {
                     if (btns[key]) {
                         btns[key].addEventListener('click', (e) => {
-                            // Only prevent default if it's a hash link, though we already defined them as hash
+                            // منع السلوك الافتراضي فقط إذا كان رابط هش (hash)
                             e.preventDefault();
                             history.pushState(null, null, '#' + key);
                             switchTab(key);
@@ -421,13 +421,13 @@
                     }
                 });
 
-                // Check URL hash on load
+                // التحقق من الرابط الهاش عند التحميل
                 if (window.location.hash) {
                     const hash = window.location.hash.replace('#', '');
                     switchTab(hash);
                 }
 
-                // Settings functionality
+                // وظائف الإعدادات
                 const updateDetailsForm = document.getElementById('updateDetailsForm');
                 const updatePasswordForm = document.getElementById('updatePasswordForm');
                 const deleteAccountBtn = document.getElementById('deleteAccountBtn');
@@ -440,6 +440,7 @@
                         const email = document.getElementById('settingsEmail').value;
                         
                         try {
+                            // هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
                             const response = await fetch('http://localhost:5000/api/auth/updatedetails', {
                                 method: 'PUT',
                                 headers: {
@@ -470,6 +471,7 @@
                         const newPassword = document.getElementById('newPassword').value;
                         
                         try {
+                            // هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
                             const response = await fetch('http://localhost:5000/api/auth/updatepassword', {
                                 method: 'PUT',
                                 headers: {
@@ -498,7 +500,8 @@
                         if(confirm('Are you ABSOLUTELY sure you want to delete your account? This action cannot be undone.')) {
                             const token = localStorage.getItem('authToken');
                             try {
-                                // Find user ID from the profile fetch earlier or assume the API deletes the currently authenticated user
+                                // إيجاد معرف المستخدم من الملف الشخصي أو افتراض أن الـ API يحذف المستخدم الحالي
+                                // هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
                                 const response = await fetch('http://localhost:5000/api/auth/delete', {
                                     method: 'DELETE',
                                     headers: { 'Authorization': `Bearer ${token}` }
@@ -541,7 +544,7 @@
                     </div>
                 </div>
 
-                <!-- Create Course Modal -->
+                <!-- نافذة إنشاء دورة -->
                 <div id="createCourseModal"
                     class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center">
                     <div class="bg-white p-8 rounded-xl w-[500px] max-w-[90%] relative">
@@ -592,7 +595,7 @@
                     </div>
                 </div>
 
-                <!-- Bulk Video Upload Section -->
+                <!-- قسم الرفع الجماعي للفيديوهات -->
                 <div class="card p-8 mb-10" id="upload-section">
                     <div class="flex justify-between items-center mb-6">
                         <div>
@@ -602,7 +605,7 @@
                         </div>
                         <select id="courseSelect" class="border p-2 rounded-lg outline-none focus:border-[#6C5CE7]">
                             <option value="">Select Course...</option>
-                            <!-- Options will be populated by JS -->
+                            <!-- سيتم تعبئة الخيارات بواسطة الجافاسكريبت -->
                         </select>
                     </div>
 
@@ -615,7 +618,7 @@
                     </div>
 
                     <div id="file-list" class="mt-6 space-y-3">
-                        <!-- Uploaded files will appear here -->
+                        <!-- الملفات المرفوعة ستظهر هنا -->
                     </div>
 
                     <div class="mt-6 flex justify-end">
@@ -696,6 +699,7 @@
                             return;
                         }
                         try {
+                            // هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
                             const response = await fetch('http://localhost:5000/api/courses/mycourses', {
                                 headers: { 'Authorization': `Bearer ${token}` }
                             });
@@ -716,6 +720,7 @@
                             }
 
                             // Also fetch profile info for dashboard
+                            // هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
                             const meResponse = await fetch('http://localhost:5000/api/auth/me', {
                                 headers: { 'Authorization': `Bearer ${token}` }
                             });
@@ -732,7 +737,7 @@
                     }
                     loadInstructorCourses();
 
-                    // Handle Course Creation
+                    // Handle إنشاء دورة
                     const createCourseForm = document.getElementById('createCourseForm');
                     createCourseForm.addEventListener('submit', async (e) => {
                         e.preventDefault();
@@ -742,6 +747,7 @@
                         btn.disabled = true;
 
                         try {
+                            // هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
                             const res = await fetch('http://localhost:5000/api/courses', {
                                 method: 'POST',
                                 headers: {
@@ -790,6 +796,7 @@
                         uploadBtn.disabled = true;
 
                         try {
+                            // هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
                             const response = await fetch(`http://localhost:5000/api/videos/upload/${courseSelect.value}`, {
                                 method: 'POST',
                                 headers: { 'Authorization': `Bearer ${token}` },
@@ -912,13 +919,13 @@
                     </div>
                 </div>
             </div>
-    </div> <!-- End of panel-overview -->
+    </div> <!-- نهاية لوحة النظرة العامة -->
 
-    <!-- Settings Panel -->
+    <!-- لوحة الإعدادات -->
     <div id="panel-settings" class="hidden">
         <h1 class="text-3xl font-bold text-[#0F0C29] mb-10">Account Settings</h1>
 
-        <!-- Update Email / Details -->
+        <!-- تحديث البريد الإلكتروني / التفاصيل -->
         <div class="card p-8 mb-8">
             <h2 class="text-2xl font-bold mb-6 text-[#0F0C29]">Update Information</h2>
             <form id="updateDetailsForm" class="space-y-4">
@@ -937,7 +944,7 @@
             </form>
         </div>
 
-        <!-- Update Password -->
+        <!-- تحديث كلمة المرور -->
         <div class="card p-8 mb-8">
             <h2 class="text-2xl font-bold mb-6 text-[#0F0C29]">Change Password</h2>
             <form id="updatePasswordForm" class="space-y-4">
@@ -957,7 +964,7 @@
             </form>
         </div>
 
-        <!-- Delete Account -->
+        <!-- حذف الحساب -->
         <div class="card p-8 border-red-200 bg-red-50">
             <h2 class="text-2xl font-bold mb-4 text-red-600">Danger Zone</h2>
             <p class="text-gray-700 mb-4">Once you delete your account, there is no going back. Please be certain.</p>
@@ -970,14 +977,14 @@
     <footer class="footer">
         <div class="footer-container">
 
-            <!-- Logo -->
+            <!-- الشعار -->
             <div class="footer-col">
                 <div class="logo">
                     <img src="../img/logo.png" alt="Logo">
                 </div>
             </div>
 
-            <!-- Links -->
+            <!-- الروابط -->
             <div class="footer-col">
                 <h5>Quick Links</h5>
                 <ul>
@@ -987,7 +994,7 @@
                 </ul>
             </div>
 
-            <!-- Contact -->
+            <!-- تواصل معنا -->
             <div class="footer-col">
                 <h5>Contact Us</h5>
                 <div class="contact-list">
@@ -1003,7 +1010,7 @@
                 </div>
             </div>
 
-            <!-- Form -->
+            <!-- النموذج -->
             <div class="footer-col">
                 <h5>Send Message</h5>
                 <form class="contact-form">

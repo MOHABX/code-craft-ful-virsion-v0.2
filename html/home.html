@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../style/nav-login-signup.css">
 
     <style>
-        /* Override navbar styles from external sheet for a cleaner look */
+        /* تجاوز أنماط شريط التنقل لتبدو أنظف */
         .list {
             border: none !important;
             gap: 30px !important;
@@ -40,26 +40,26 @@
 
             
             <div class="nav-auth-container" style="display: flex; align-items: center;">
-                <!-- Guest -->
+                <!-- زائر -->
                 <div class="guest-only acount" style="display: flex; gap: 10px;">
                     <button><a href="/html/login.html" style="color: inherit; text-decoration: none;">log in</a></button>
                     <button><a href="/html/signup-st.html" style="color: inherit; text-decoration: none;">sign up</a></button>
                 </div>
-                <!-- Student -->
+                <!-- طالب -->
                 <div class="student-only" style="display: flex; align-items: center; gap: 15px;">
                     <a href="/html/st-profile.html" style="display: flex; align-items: center;">
                         <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
                     </a>
                     <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
                 </div>
-                <!-- Doctor -->
+                <!-- مدرب -->
                 <div class="doctor-only" style="display: flex; align-items: center; gap: 15px;">
                     <a href="/html/dr-dashboard.html" style="display: flex; align-items: center;">
                         <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
                     </a>
                     <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
                 </div>
-                <!-- Admin -->
+                <!-- مسؤول -->
                 <div class="admin-only" style="display: flex; align-items: center; gap: 15px;">
                     <a href="/html/admin-dashboard.html" style="display: flex; align-items: center;">
                         <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
@@ -67,7 +67,7 @@
                     <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
                 </div>
                 
-                <!-- Dark Mode Toggle -->
+                <!-- تبديل الوضع الليلي -->
                 
             </div>
 
@@ -80,6 +80,7 @@
     <section class="hero" id="home">
         <div class="hero-content">
             <h1>Craft Your <span>Future</span> with Code.</h1>
+            <!-- هذا الجزء مربوط بالجافاسكريبت (في ملف home.js) لالتقاط ما يكتبه المستخدم في مربع البحث والتصرف بناءً عليه -->
             <form class="search-box" id="searchbox">
                 <input type="search" id="searchInput" placeholder="What do you want to learn?">
                 <button type="submit">Search</button>
@@ -140,7 +141,7 @@
                 </div>
             </div>
         </section>
-        <!-- <button id="explore_track"><a href="./signup-st.html">Explore Tracks =></a></button> -->
+        <!-- <button id="explore_track"><a href="./signup-st.html">استكشف المسارات =></a></button> -->
     </section>
     <!-- ==================================================================== -->
     <!-- مهرأيل     -->
@@ -178,7 +179,7 @@
     <!-- ================================================================= -->
     <!-- ايمان ومريم - قسم التقييمات الموحد -->
     <section class="reviews-section" id="reviews">
-        <!-- Student Reviews -->
+        <!-- مراجعات الطلاب -->
         <div>
             <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 40px; color: var(--text-dark);">Student
                 Reviews</h2>
@@ -220,7 +221,7 @@
             </div>
         </div>
 
-        <!-- Instructor Reviews -->
+        <!-- مراجعات المدربين -->
         <div style="margin-top: 80px;">
             <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 40px; color: var(--text-dark);">Instructor
                 Reviews</h2>
@@ -302,7 +303,7 @@
 
     </section>
 
-    <!-- MISSION -->
+    <!-- مهمتنا -->
 
     <section class="mission">
 
@@ -315,7 +316,7 @@
 
     </section>
 
-    <!-- TEAM -->
+    <!-- الفريق -->
 
     <section class="team">
 
@@ -353,14 +354,14 @@
     <footer class="footer">
         <div class="footer-container">
 
-            <!-- Logo -->
+            <!-- الشعار -->
             <div class="footer-col">
                 <div class="logo">
                     <img src="../img/logo.png" alt="Logo">
                 </div>
             </div>
 
-            <!-- Links -->
+            <!-- الروابط -->
             <div class="footer-col">
                 <h5>Quick Links</h5>
                 <ul>
@@ -370,7 +371,7 @@
                 </ul>
             </div>
 
-            <!-- Contact -->
+            <!-- تواصل معنا -->
             <div class="footer-col">
                 <h5>Contact Us</h5>
                 <div class="contact-list">
@@ -386,9 +387,10 @@
                 </div>
             </div>
 
-            <!-- Form -->
+            <!-- النموذج -->
             <div class="footer-col" id="contact">
                 <h5>Send Message</h5>
+                <!-- هذا الجزء مربوط بالجافاسكريبت بالأسفل لمنع تحديث الصفحة عند إرسال الفورم وإظهار رسالة شكر -->
                 <form class="contact-form" id="footerContactForm">
                     <input type="text" placeholder="Your Name" required>
                     <input type="email" placeholder="Your Email" required>
@@ -404,17 +406,25 @@
         </div>
     </footer>
 
-    <!-- استدعاء ملف الجافاسكريبت الموحد -->
+    <!-- استدعاء ملفات الجافاسكريبت: هذا الجزء مسؤول عن ربط الأكواد الوظيفية والتفاعلية بصفحة الـ HTML -->
+    
+    <!-- 1. ملف home.js: يحتوي على العمليات الخاصة بصفحة الرئيسية مثل البحث أو الحركات (Animations) -->
     <script src="../script/home.js"></script>
+    
+    <!-- 2. ملف شريط التنقل.js: مسؤول عن وظائف شريط التنقل (Navbar) وتغيير شكلها عند التمرير أو في الشاشات الصغيرة -->
     <script src="../script/nav.js" defer></script>
+    
+    <!-- 3. كود برمجي (جافاسكريبت) لمنع إعادة تحميل الصفحة عند تقديم فورم التواصل في الفوتر -->
     <script>
-        // Prevent footer contact form from reloading the page
+        // منع إعادة تحميل الصفحة عند إرسال نموذج التواصل
         document.getElementById('footerContactForm').addEventListener('submit', function (e) {
             e.preventDefault();
             alert('Thank you for your message!');
             this.reset();
         });
     </script>
+    
+    <!-- 4. ملف auth.js: يتحكم في إظهار أو إخفاء أزرار تسجيل الدخول بناءً على حالة المستخدم (طالب، محاضر، أو زائر) -->
     <script src="../script/auth.js" defer></script>
 </body>
 

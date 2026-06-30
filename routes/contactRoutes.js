@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const contactController = require('../contactController');
 
-// Submit a contact message (from footer form)
+// إرسال رسالة تواصل (من نموذج التذييل)
+// هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
 router.post('/', contactController.submitContactMessage);
 
 module.exports = router;

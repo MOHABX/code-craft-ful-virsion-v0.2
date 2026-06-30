@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <title>Submit Assignment</title>
   <style>
-        /* --- style nav --- */
+        /* --- style شريط التنقل --- */
         header {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -106,7 +106,7 @@
       gap:30px;
       align-items:flex-start;
     }
-    /* Sidebar */
+    /* الشريط الجانبي */
     .sidebar{
       width:300px;
       background:white;
@@ -146,7 +146,7 @@
       line-height:1.8;
       font-size:14px;
     }
-    /* Main Section */
+    /* القسم الرئيسي */
     .main{
       flex:1;
     }
@@ -211,7 +211,7 @@
       }
     }
 
-    /*style footer*/
+    /*style التذييل*/
 body{
     /* 🔥 الحل بتاع الفوتر */
     min-height:100vh;
@@ -219,7 +219,7 @@ body{
     flex-direction:column;
 }
 
-/* ===== Footer ===== */
+/* ===== التذييل (Footer) ===== */
 .footer{
     background:#1A1642;
     color:#FFFFFF;
@@ -281,7 +281,7 @@ ul li a:hover{
     padding-left:4px;
 }
 
-/* Contact */
+/* تواصل معنا */
 .contact-list{
     display:flex;
     flex-direction:column;
@@ -345,7 +345,7 @@ ul li a:hover{
     opacity:0.9;
 }
 
-/* footer bottom */
+/* أسفل التذييل */
 .footer-bottom{ 
     border-top:1px solid rgba(255,255,255,0.1); 
     margin-top:30px; 
@@ -367,7 +367,7 @@ ul li a:hover{
     <link rel="stylesheet" href="../style/nav-login-signup.css">
 </head>
 <body>
-<!--nav-->
+<!--شريط التنقل-->
     <header>
         <nav>
 
@@ -384,26 +384,26 @@ ul li a:hover{
 
                          
             <div class="nav-auth-container" style="display: flex; align-items: center;">
-                <!-- Guest -->
+                <!-- زائر -->
                 <div class="guest-only acount" style="display: flex; gap: 10px;">
                     <button><a href="/html/login.html" style="color: inherit; text-decoration: none;">log in</a></button>
                     <button><a href="/html/signup-st.html" style="color: inherit; text-decoration: none;">sign up</a></button>
                 </div>
-                <!-- Student -->
+                <!-- طالب -->
                 <div class="student-only" style="display: flex; align-items: center; gap: 15px;">
                     <a href="/html/st-profile.html" style="display: flex; align-items: center;">
                         <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
                     </a>
                     <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
                 </div>
-                <!-- Doctor -->
+                <!-- مدرب -->
                 <div class="doctor-only" style="display: flex; align-items: center; gap: 15px;">
                     <a href="/html/dr-dashboard.html" style="display: flex; align-items: center;">
                         <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
                     </a>
                     <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
                 </div>
-                <!-- Admin -->
+                <!-- مسؤول -->
                 <div class="admin-only" style="display: flex; align-items: center; gap: 15px;">
                     <a href="/html/admin-dashboard.html" style="display: flex; align-items: center;">
                         <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
@@ -411,7 +411,7 @@ ul li a:hover{
                     <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
                 </div>
                 
-                <!-- Dark Mode Toggle -->
+                <!-- تبديل الوضع الليلي -->
                 
             </div>
 
@@ -446,19 +446,19 @@ ul li a:hover{
     </div>
   </div>
 
-  <!--footer-->
+  <!--التذييل-->
 
 <footer class="footer">
     <div class="footer-container">
 
-        <!-- Logo -->
+        <!-- الشعار -->
         <div class="footer-col">
             <div class="logo">
                 <img src="../img/logo.png" alt="Logo">
             </div>
         </div>
 
-        <!-- Links -->
+        <!-- الروابط -->
         <div class="footer-col">
             <h5>Quick Links</h5>
             <ul>
@@ -468,7 +468,7 @@ ul li a:hover{
             </ul>
         </div>
 
-        <!-- Contact -->
+        <!-- تواصل معنا -->
         <div class="footer-col">
             <h5>Contact Us</h5>
             <div class="contact-list">
@@ -484,7 +484,7 @@ ul li a:hover{
             </div>
         </div>
 
-        <!-- Form -->
+        <!-- النموذج -->
         <div class="footer-col">
             <h5>Send Message</h5>
             <form class="contact-form">
@@ -500,7 +500,7 @@ ul li a:hover{
     </div>
 </footer>
 
-<!--script nav-->
+<!--سكريبت شريط التنقل-->
 <script>
     const themeBtn = document.getElementById('theme-switch');
     const themeIcon = document.getElementById('theme-icon');
@@ -516,7 +516,7 @@ ul li a:hover{
         }
     };
 </script>
-<!-- script submit-->
+<!-- سكريبت الإرسال-->
   <script>
     const fileInput = document.getElementById("file");
     const fileText = document.getElementById("fileText");

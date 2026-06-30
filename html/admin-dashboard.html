@@ -39,7 +39,7 @@
             }
         }
 
-        /* Modal Styles */
+        /* أنماط النافذة المنبثقة (Modal) */
         .modal {
             display: none;
             position: fixed;
@@ -90,7 +90,7 @@
     </aside>
 
     <main class="main-content">
-        <!-- Overview Tab -->
+        <!-- علامة التبويب نظرة عامة -->
         <div id="overview-tab" class="tab-content">
             <h1>Dashboard Overview</h1>
             <div class="stat-cards">
@@ -109,7 +109,7 @@
             </div>
         </div>
 
-        <!-- Users Tab -->
+        <!-- علامة التبويب المستخدمين -->
         <div id="users-tab" class="tab-content" style="display: none;">
             <h1>User Management</h1>
             <table>
@@ -120,7 +120,7 @@
             </table>
         </div>
 
-        <!-- Courses Tab -->
+        <!-- علامة التبويب الدورات -->
         <div id="courses-tab" class="tab-content" style="display: none;">
             <h1>Course Management</h1>
             <table>
@@ -132,7 +132,7 @@
         </div>
     </main>
 
-    <!-- User Edit Modal -->
+    <!-- نافذة تعديل المستخدم -->
     <div id="editUserModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeEditModal()">&times;</span>
@@ -168,7 +168,8 @@
     </div>
 
     <script>
-        // Check auth immediately
+        // التحقق من المصادقة فوراً
+        // يا رفيقي هني بوابة الدخول، نشيك على هوية الرجال وندخله إذا علمه غانم
         fetch('/api/auth/me', { credentials: 'include' }).then(res => {
             if (!res.ok) window.location.href = '/html/login.html';
         });
@@ -181,6 +182,7 @@
 
         async function fetchWithAuth(url, options = {}) {
             options.credentials = 'include';
+            // يا رفيقي هني بوابة الدخول، نشيك على هوية الرجال وندخله إذا علمه غانم
             const response = await fetch(url, options);
             if (response.status === 401 || response.status === 403) {
                 window.location.href = '/html/login.html';
@@ -205,7 +207,7 @@
             if (result.success) {
                 result.data.forEach(user => {
                     const tr = document.createElement('tr');
-                    tr.dataset.user = JSON.stringify(user); // Store user data on the row
+                    tr.dataset.user = JSON.stringify(user); // حفظ بيانات المستخدم في الصف
                     tr.innerHTML = `
                         <td>${user.id}</td><td>${user.name}</td><td>${user.email}</td><td>${user.role}</td><td>${user.isVerified ? 'Yes' : 'No'}</td>
                         <td>
@@ -223,7 +225,7 @@
             if (result.success) {
                 result.data.forEach(course => {
                     const tr = document.createElement('tr');
-                    tr.dataset.courseId = course.id; // Store course id on the row
+                    tr.dataset.courseId = course.id; // حفظ معرف الدورة في الصف
                     tr.innerHTML = `
                         <td>${course.id}</td><td>${course.title}</td><td>${course.instructor.name}</td><td>${new Date(course.createdAt).toLocaleDateString()}</td>
                         <td><button class="btn-delete">Delete</button></td>`;
@@ -232,7 +234,7 @@
             }
         }
 
-        // Using Event Delegation for table actions
+        // استخدام التفويض للأحداث (Event Delegation) لإجراءات الجدول
         document.getElementById('users-table-body').addEventListener('click', async (e) => {
             if (e.target.classList.contains('btn-delete')) {
                 const userId = JSON.parse(e.target.closest('tr').dataset.user).id;
@@ -250,13 +252,14 @@
 
         async function impersonateUser(user) {
             try {
+                // هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
                 const response = await fetch(`/api/admin/users/${user.id}/impersonate`, {
                     credentials: 'include'
                 });
                 const result = await response.json();
                 if (result.success) {
-                    // To return to admin, we will need to re-login or use a "return" endpoint
-                    // For now we will alert that return to admin requires logging out.
+                    // للعودة كمسؤول، سنحتاج لتسجيل الدخول مجدداً أو استخدام مسار 'العودة'
+                    // حالياً سننبه أن العودة كمسؤول تتطلب تسجيل الخروج.
                     alert(`Successfully logged in as ${user.name}. To return to admin, you must log out and log in again.`);
                     if (result.role === 'student') window.location.href = '/html/st-dashboard.html';
                     else if (result.role === 'doctor') window.location.href = '/html/dr-dashboard.html';
@@ -276,23 +279,25 @@
             }
         });
 
-        async function deleteUser(userId) { // Now accepts userId
+        async function deleteUser(userId) { // الآن يقبل معرف المستخدم
             if (!confirm(`Are you sure you want to delete user ${userId}?`)) return;
+            // هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
             const response = await fetch(`/api/admin/users/${userId}`, { method: 'DELETE', credentials: 'include' });
             const result = await response.json();
             alert(result.message);
             if (response.ok) loadUsers();
         }
 
-        async function deleteCourse(courseId) { // Now accepts courseId
+        async function deleteCourse(courseId) { // الآن يقبل معرف الدورة
             if (!confirm(`Are you sure you want to delete course ${courseId}?`)) return;
+            // هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
             const response = await fetch(`/api/admin/courses/${courseId}`, { method: 'DELETE', credentials: 'include' });
             const result = await response.json();
             alert(result.message);
             if (response.ok) loadCourses();
         }
 
-        // --- User Edit Modal Logic ---
+        // --- منطق نافذة تعديل المستخدم ---
         const editModal = document.getElementById('editUserModal');
 
         function openEditUserModal(user) {
@@ -318,6 +323,7 @@
                 isVerified: document.getElementById('editUserVerified').value === 'true'
             };
 
+            // هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
             const response = await fetch(`/api/admin/users/${userId}`, {
                 method: 'PUT',
                 credentials: 'include',
@@ -332,11 +338,11 @@
 
             if (response.ok) {
                 closeEditModal();
-                loadUsers(); // Refresh the user list
+                loadUsers(); // تحديث قائمة المستخدمين
             }
         });
 
-        // Close modal if clicked outside
+        // إغلاق النافذة عند النقر خارجها
         window.addEventListener('click', (event) => { if (event.target == editModal) { closeEditModal(); } });
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -346,6 +352,7 @@
 
             document.getElementById('logout-btn').addEventListener('click', async () => {
                 try {
+                    // يا رفيقي هني بوابة الدخول، نشيك على هوية الرجال وندخله إذا علمه غانم
                     await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' });
                 } catch(e) {}
                 window.location.href = '/html/login.html';

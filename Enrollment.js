@@ -15,9 +15,9 @@ const Enrollment = sequelize.define('Enrollment', {
         type: DataTypes.ENUM('in-progress', 'completed', 'failed'),
         defaultValue: 'in-progress',
     }
-    // userId and courseId are added automatically by Sequelize associations
+    // تتم إضافة المعرفات تلقائيا بواسطة روابط Sequelize
 }, {
-    timestamps: true // To track when a user enrolled
+    timestamps: true // لتتبع متى قام المستخدم بالتسجيل
 });
 
 module.exports = Enrollment;

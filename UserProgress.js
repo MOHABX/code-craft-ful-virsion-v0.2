@@ -7,9 +7,9 @@ const UserProgress = sequelize.define('UserProgress', {
         primaryKey: true,
         autoIncrement: true,
     },
-    // userId and videoId are added automatically by Sequelize associations
+    // تمت إضافة معرف المستخدم ومعرف الفيديو تلقائياً عبر روابط Sequelize
 }, {
-    timestamps: true // Adds createdAt (as completion time) and updatedAt
+    timestamps: true // يضيف تاريخ الإنشاء (كوقت الإكمال) وتاريخ التحديث
 });
 
 module.exports = UserProgress;

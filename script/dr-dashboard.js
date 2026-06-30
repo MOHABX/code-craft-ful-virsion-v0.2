@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    // Check auth immediately
+    // التحقق من المصادقة فوراً
     let userRes;
     try {
+        // يا رفيقي هني بوابة الدخول، نشيك على هوية الرجال وندخله إذا علمه غانم
         userRes = await fetch('/api/auth/me', { credentials: 'include' });
         if (!userRes.ok) {
             window.location.href = '/html/login.html';
@@ -12,8 +13,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         return;
     }
 
-    // 1. Fetch Dashboard Data
+    // 1. جلب بيانات لوحة التحكم
     try {
+        // هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
         const response = await fetch('/api/users/dashboard', {
             credentials: 'include'
         });
@@ -28,7 +30,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error('Error fetching dashboard data:', error);
     }
 
-    // 2. Tab Navigation
+    // 2. التنقل بين التبويبات
     const btnOverview = document.getElementById('btn-overview');
     const btnStudents = document.getElementById('btn-students');
     const btnSettings = document.getElementById('btn-settings');
@@ -40,20 +42,20 @@ document.addEventListener('DOMContentLoaded', async () => {
     function showPanel(panelToShow, activeBtn) {
         if (!panelToShow || !activeBtn) return;
         
-        // Hide all panels
+        // إخفاء جميع اللوحات
         [panelOverview, panelStudents, panelSettings].forEach(p => {
             if (p) p.classList.add('hidden');
         });
         
-        // Remove active class from all buttons
+        // إزالة الفئة النشطة من جميع الأزرار
         navItems.forEach(btn => {
             if (btn) btn.classList.remove('active', 'bg-[#F4F4FF]', 'text-[#6C5CE7]');
         });
 
-        // Show target panel
+        // إظهار اللوحة المستهدفة
         panelToShow.classList.remove('hidden');
         
-        // Highlight active button
+        // إبراز الزر النشط
         activeBtn.classList.add('active', 'bg-[#F4F4FF]', 'text-[#6C5CE7]');
     }
 
@@ -61,19 +63,20 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (btnStudents) btnStudents.addEventListener('click', (e) => { e.preventDefault(); showPanel(panelStudents, btnStudents); });
     if (btnSettings) btnSettings.addEventListener('click', (e) => { e.preventDefault(); showPanel(panelSettings, btnSettings); });
 
-    // 3. Logout
+    // 3. تسجيل الخروج
     const btnLogout = document.getElementById('logoutBtn');
     if (btnLogout) {
         btnLogout.addEventListener('click', async (e) => {
             e.preventDefault();
             try {
+                // هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
                 await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' });
             } catch(e) {}
             window.location.href = '/html/home.html';
         });
     }
 
-    // Fetch user details for profile chip
+    // جلب تفاصيل المستخدم للملف الشخصي
     try {
         const userData = await userRes.json();
         if (userRes.ok) {
@@ -81,7 +84,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (userData.data.profilePic && userData.data.profilePic !== 'default-avatar.png') {
                 document.getElementById('dashInstructorPic').src = userData.data.profilePic;
             }
-            // Populate settings fields
+            // تعبئة حقول الإعدادات
             const settingsName = document.getElementById('settingsName');
             const settingsEmail = document.getElementById('settingsEmail');
             if (settingsName) settingsName.value = userData.data.name;
@@ -91,7 +94,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error(err);
     }
 
-    // 4. Update Details
+    // 4. تحديث التفاصيل
     const updateDetailsForm = document.getElementById('updateDetailsForm');
     if (updateDetailsForm) {
         updateDetailsForm.addEventListener('submit', async (e) => {
@@ -105,6 +108,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             btn.disabled = true;
 
             try {
+                // هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
                 const res = await fetch('/api/auth/me/details', {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
@@ -127,7 +131,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
-    // 5. Update Password
+    // 5. تحديث كلمة المرور
     const updatePasswordForm = document.getElementById('updatePasswordForm');
     if (updatePasswordForm) {
         updatePasswordForm.addEventListener('submit', async (e) => {
@@ -141,6 +145,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             btn.disabled = true;
 
             try {
+                // هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
                 const res = await fetch('/api/auth/me/password', {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
@@ -163,12 +168,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
-    // 6. Delete Account
+    // 6. حذف الحساب
     const deleteAccountBtn = document.getElementById('deleteAccountBtn');
     if (deleteAccountBtn) {
         deleteAccountBtn.addEventListener('click', async () => {
             if (confirm('Are you absolutely sure you want to delete your account? This cannot be undone.')) {
                 try {
+                    // هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
                     const res = await fetch('/api/auth/me', {
                         method: 'DELETE',
                         credentials: 'include'

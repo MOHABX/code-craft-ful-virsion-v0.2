@@ -9,14 +9,14 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
-// --- Avatar Upload Middleware ---
+// --- وسيط رفع الصورة الشخصية ---
 const avatarDir = path.join(__dirname, '..', 'uploads', 'avatars');
 if (!fs.existsSync(avatarDir)) fs.mkdirSync(avatarDir, { recursive: true });
 
 const avatarStorage = multer.diskStorage({
     destination: (req, file, cb) => cb(null, avatarDir),
     filename: (req, file, cb) => {
-        // req.user.id is safe here because protect runs before this middleware
+        // معرف المستخدم (req.user.id) آمن هنا لأن وسيط الحماية يعمل قبل هذا الوسيط
         const uniqueSuffix = req.user.id + '-' + Date.now() + path.extname(file.originalname);
         cb(null, uniqueSuffix);
     }
@@ -32,39 +32,47 @@ const uploadAvatar = multer({
             cb(new Error('Only image files are allowed'));
         }
     },
-    limits: { fileSize: 2 * 1024 * 1024 } // 2 MB max
+    limits: { fileSize: 2 * 1024 * 1024 } // الحد الأقصى 2 ميجابايت
 });
 
-// @route  POST /api/auth/register
-// @desc   Register a new user and send OTP
+// @مسار  POST /api/auth/register
+// @وصف   تسجيل مستخدم جديد وإرسال رمز التحقق (OTP)
+// يا ولد هذا الدرب للزوار الجدد، يسجلون علومهم عندنا عشان نصير ربع
 router.post('/register', registerUser);
 
-// @route  POST /api/auth/verify
-// @desc   Verify user's OTP
+// @مسار  POST /api/auth/verify
+// @وصف   التحقق من رمز OTP للمستخدم
+// هذي حقت التحقق يا خوي، نبعت له كود ونشوف هو صاحب الحلال ولا نصاب
 router.post('/verify', verifyOTP);
 
-// @route  POST /api/auth/resend-otp
-// @desc   Resend OTP to unverified user
+// @مسار  POST /api/auth/resend-otp
+// @وصف   إعادة إرسال رمز OTP لمستخدم غير مفعل
+// يا رفيقي هني بوابة الدخول، نشيك على هوية الرجال وندخله إذا علمه غانم
 router.post('/resend-otp', resendOTP);
 
-// @route  POST /api/auth/login
-// @desc   Login a user
+// @مسار  POST /api/auth/login
+// @وصف   تسجيل الدخول
+// يا رفيقي هني بوابة الدخول، نشيك على هوية الرجال وندخله إذا علمه غانم
 router.post('/login', loginUser);
 
-// @route  POST /api/auth/logout
-// @desc   Logout a user and invalidate refresh token
+// @مسار  POST /api/auth/logout
+// @وصف   تسجيل الخروج وإبطال رمز التحديث
+// هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
 router.post('/logout', logoutUser);
 
-// @route  POST /api/auth/refresh
-// @desc   Get new access token from refresh token
+// @مسار  POST /api/auth/refresh
+// @وصف   الحصول على رمز وصول جديد باستخدام رمز التحديث
+// هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
 router.post('/refresh', refreshToken);
 
-// @route  GET /api/auth/me
-// @desc   Get logged in user data
+// @مسار  GET /api/auth/me
+// @وصف   جلب بيانات المستخدم المسجل دخوله
+// هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
 router.get('/me', protect, getMe);
 
-// @route  PUT /api/auth/me/photo
-// @desc   Upload user profile picture (protect runs first, then multer — req.user.id is safe)
+// @مسار  PUT /api/auth/me/photo
+// @وصف   رفع صورة الملف الشخصي (يعمل الحماية أولاً، ثم multer — معرف المستخدم آمن)
+// هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
 router.put('/me/photo', protect, uploadAvatar.single('avatar'), async (req, res) => {
     try {
         if (!req.file) {
@@ -80,24 +88,29 @@ router.put('/me/photo', protect, uploadAvatar.single('avatar'), async (req, res)
     }
 });
 
-// @route  DELETE /api/auth/me
-// @desc   Delete logged in user account
+// @مسار  DELETE /api/auth/me
+// @وصف   حذف حساب المستخدم المسجل دخوله
+// هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
 router.delete('/me', protect, deleteMe);
 
-// @route  PUT /api/auth/me/details
-// @desc   Update user details (name)
+// @مسار  PUT /api/auth/me/details
+// @وصف   تحديث تفاصيل المستخدم (الاسم)
+// هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
 router.put('/me/details', protect, updateDetails);
 
-// @route  PUT /api/auth/me/password
-// @desc   Update user password
+// @مسار  PUT /api/auth/me/password
+// @وصف   تحديث كلمة المرور
+// هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
 router.put('/me/password', protect, updatePassword);
 
-// @route  POST /api/auth/forgotpassword
-// @desc   Forgot password
+// @مسار  POST /api/auth/forgotpassword
+// @وصف   نسيت كلمة المرور
+// هذي حقت التحقق يا خوي، نبعت له كود ونشوف هو صاحب الحلال ولا نصاب
 router.post('/forgotpassword', forgotPassword);
 
-// @route  PUT /api/auth/resetpassword/:token
-// @desc   Reset password
+// @مسار  PUT /api/auth/resetpassword/:token
+// @وصف   إعادة تعيين كلمة المرور
+// الرجال ضيع مفتاحه! هني نضبط له كلمة سر جديدة عشان يرجع لداره
 router.put('/resetpassword/:token', resetPassword);
 
 module.exports = router;

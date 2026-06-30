@@ -6,7 +6,7 @@ const routesDir = path.join(rootDir, 'routes');
 
 const models = ['User', 'Course', 'Video', 'Enrollment', 'QuizResult', 'Review', 'Certificate', 'UserProgress', 'UserVideoProgress', 'BlockedDevice', 'RefreshToken', 'AdminEmail'];
 
-// Fix files in Root (Controllers & Models & server.js)
+// إصلاح الملفات في الجذر (المتحكمات والنماذج وسيرفر)
 fs.readdirSync(rootDir).forEach(file => {
     if (!file.endsWith('.js')) return;
     let filePath = path.join(rootDir, file);
@@ -17,8 +17,8 @@ fs.readdirSync(rootDir).forEach(file => {
     
     models.forEach(model => {
         content = content.replace(new RegExp(`require\\(['"]\\.\\./models/${model}['"]\\)`, 'g'), `require('../${model}')`);
-        // Wait, if the controller is in root, it should require('./Model') not '../Model'
-        // Let's just fix all of them correctly based on current location
+        // إذا كان الكنترولر في الجذر، يجب أن يستدعي ('./Model') وليس ('../Model')
+        // دعنا نصلحها جميعاً بشكل صحيح بناءً على موقعها الحالي
         content = content.replace(new RegExp(`require\\(['"]\\.\\./models/${model}['"]\\)`, 'g'), `require('./${model}')`);
         content = content.replace(new RegExp(`require\\(['"]\\./models/${model}['"]\\)`, 'g'), `require('./${model}')`);
     });
@@ -31,7 +31,7 @@ fs.readdirSync(rootDir).forEach(file => {
     }
 });
 
-// Fix Routes
+// إصلاح المسارات
 if (fs.existsSync(routesDir)) {
     fs.readdirSync(routesDir).forEach(file => {
         let filePath = path.join(routesDir, file);
@@ -40,7 +40,7 @@ if (fs.existsSync(routesDir)) {
         
         content = content.replace(/require\(['"]\.\.\/middleware\//g, "require('../middlewares/");
         
-        // If routes were requiring controllers like require('../controllers/X'), now they are require('../X')
+        // إذا كانت المسارات تستدعي الكنترولرز مثل require('../controllers/X')، ستصبح require('../X')
         content = content.replace(/require\(['"]\.\.\/controllers\//g, "require('../");
         
         if (content !== original) {

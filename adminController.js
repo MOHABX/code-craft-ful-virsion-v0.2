@@ -5,9 +5,10 @@ const Review = require('./Review');
 const QuizResult = require('./QuizResult');
 const { Op, fn, col } = require('sequelize');
 
-// @desc    Get platform statistics
-// @route   GET /api/admin/stats
-// @access  Private/Admin
+// @وصف    جلب إحصائيات المنصة
+// @مسار   GET /api/admin/stats
+// @صلاحية  خاص/مسؤول
+// هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
 exports.getStats = async (req, res) => {
     try {
         const totalUsers = await User.count();
@@ -40,9 +41,10 @@ exports.getStats = async (req, res) => {
     }
 };
 
-// @desc    Get all users (with pagination and search)
-// @route   GET /api/admin/users?page=1&limit=20&search=keyword
-// @access  Private/Admin
+// @وصف    جلب جميع المستخدمين (مع الترقيم والبحث)
+// @مسار   GET /api/admin/users?page=1&limit=20&search=keyword
+// @صلاحية  خاص/مسؤول
+// هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
 exports.getUsers = async (req, res) => {
     try {
         const { page = 1, limit = 20, search } = req.query;
@@ -77,9 +79,10 @@ exports.getUsers = async (req, res) => {
     }
 };
 
-// @desc    Update a user by Admin
-// @route   PUT /api/admin/users/:id
-// @access  Private/Admin
+// @وصف    تحديث مستخدم بواسطة المسؤول
+// @مسار   PUT /api/admin/users/:id
+// @صلاحية  خاص/مسؤول
+// هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
 exports.updateUser = async (req, res) => {
     try {
         const user = await User.findByPk(req.params.id);
@@ -109,9 +112,10 @@ exports.updateUser = async (req, res) => {
     }
 };
 
-// @desc    Delete a user
-// @route   DELETE /api/admin/users/:id
-// @access  Private/Admin
+// @وصف    حذف مستخدم
+// @مسار   DELETE /api/admin/users/:id
+// @صلاحية  خاص/مسؤول
+// هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
 exports.deleteUser = async (req, res) => {
     try {
         // منع الأدمن من حذف نفسه
@@ -130,9 +134,10 @@ exports.deleteUser = async (req, res) => {
     }
 };
 
-// @desc    Get all courses (with pagination and search)
-// @route   GET /api/admin/courses?page=1&limit=20&search=keyword
-// @access  Private/Admin
+// @وصف    جلب جميع الدورات (مع الترقيم والبحث)
+// @مسار   GET /api/admin/courses?page=1&limit=20&search=keyword
+// @صلاحية  خاص/مسؤول
+// هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
 exports.getCourses = async (req, res) => {
     try {
         const { page = 1, limit = 20, search } = req.query;
@@ -166,9 +171,10 @@ exports.getCourses = async (req, res) => {
     }
 };
 
-// @desc    Delete a course (with file cleanup)
-// @route   DELETE /api/admin/courses/:id
-// @access  Private/Admin
+// @وصف    حذف دورة (مع تنظيف الملفات)
+// @مسار   DELETE /api/admin/courses/:id
+// @صلاحية  خاص/مسؤول
+// هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
 exports.deleteCourse = async (req, res) => {
     const fs = require('fs');
     const path = require('path');
@@ -198,9 +204,10 @@ exports.deleteCourse = async (req, res) => {
     }
 };
 
-// @desc    Get all reviews (with pagination and search)
-// @route   GET /api/admin/reviews?page=1&limit=20&search=keyword
-// @access  Private/Admin
+// @وصف    جلب جميع المراجعات (مع الترقيم والبحث)
+// @مسار   GET /api/admin/reviews?page=1&limit=20&search=keyword
+// @صلاحية  خاص/مسؤول
+// هني نستقبل تقييم الرجال، عساه يعطينا خمس نجوم وما يكسر بخاطرنا
 exports.getReviews = async (req, res) => {
     try {
         const { page = 1, limit = 20 } = req.query;

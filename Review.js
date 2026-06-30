@@ -16,7 +16,7 @@ const Review = sequelize.define('Review', {
         type: DataTypes.TEXT,
         allowNull: true,
     },
-    // userId and courseId added via associations
+    // تمت إضافة معرف المستخدم والدورة عبر الروابط
 }, {
     timestamps: true
 });

@@ -1,7 +1,7 @@
 require('dotenv').config();
 const bcrypt = require('bcryptjs');
 
-// Require models to initialize associations
+// طلب النماذج لتهيئة الروابط
 const User = require('./User');
 require('./Course');
 require('./Video');
@@ -18,7 +18,7 @@ async function seed() {
 
     // ─── 1. إنشاء حساب الأدمن فقط ──────────────────────────────────────────
 
-    // Admin Account
+    // حساب المسؤول
     const [admin, adminCreated] = await User.findOrCreate({
         where: { email: 'ms9949057@gmail.com' },
         defaults: {

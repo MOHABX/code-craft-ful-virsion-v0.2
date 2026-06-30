@@ -10,8 +10,8 @@ for (const file of files) {
     const filePath = path.join(htmlDir, file);
     let content = fs.readFileSync(filePath, 'utf-8');
     
-    // Remove the button. It might span multiple lines
-    // Example: <button id="darkModeToggle" ...> ... </button>
+    // حذف الزر. قد يمتد لعدة أسطر
+    // مثال: <button id="darkModeToggle" ...> ... </button>
     const regex = /<button[^>]*id="darkModeToggle"[^>]*>[\s\S]*?<\/button>/gi;
     if (regex.test(content)) {
         content = content.replace(regex, '');

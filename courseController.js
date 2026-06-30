@@ -12,6 +12,7 @@ const uploadsDir = path.join(__dirname, '..', 'uploads');
 const coursesDir = path.join(uploadsDir, 'courses'); // مجلد الفيديوهات الخاصة بالكورسات
 
 // ─── 1. دالة إنشاء كورس جديد (Create Course) ───
+// هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
 exports.createCourse = async (req, res) => {
     // التأكد من أن المستخدم بصلاحية "دكتور/محاضر" أو "أدمن" فقط
     if (req.user.role !== 'doctor' && req.user.role !== 'admin') {
@@ -54,7 +55,8 @@ exports.createCourse = async (req, res) => {
     }
 };
 
-// ─── 2. دالة جلب جميع الكورسات مع البحث والفلترة (Get Courses) ───
+// ─── 2. دالة جلب جميع الكورسات مع البحث والفلترة (Get الدورات) ───
+// هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
 exports.getCourses = async (req, res) => {
     try {
         // استقبال معايير البحث والفلترة والصفحات من الرابط
@@ -129,7 +131,8 @@ exports.getCourses = async (req, res) => {
     }
 };
 
-// ─── 3. دالة جلب الكورسات الخاصة بالمحاضر (Get My Courses) ───
+// ─── 3. دالة جلب الكورسات الخاصة بالمحاضر (Get My الدورات) ───
+// هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
 exports.getMyCourses = async (req, res) => {
     try {
         // جلب جميع الكورسات التي قام بإنشائها المحاضر المسجل الدخول حالياً
@@ -144,6 +147,7 @@ exports.getMyCourses = async (req, res) => {
 };
 
 // ─── 4. دالة جلب تفاصيل كورس معين بالـ ID ───
+// هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
 exports.getCourseById = async (req, res) => {
     try {
         // جلب الكورس مع بيانات المحاضر وكل الفيديوهات التابعة له، مرتبة حسب الأقدمية
@@ -166,6 +170,7 @@ exports.getCourseById = async (req, res) => {
 };
 
 // ─── 5. دالة تحديث بيانات الكورس ───
+// هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
 exports.updateCourse = async (req, res) => {
     try {
         const course = await Course.findByPk(req.params.courseId);
@@ -202,6 +207,7 @@ exports.updateCourse = async (req, res) => {
 };
 
 // ─── 6. دالة حذف الكورس نهائياً ───
+// هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
 exports.deleteCourse = async (req, res) => {
     try {
         const course = await Course.findByPk(req.params.courseId);
@@ -235,6 +241,7 @@ exports.deleteCourse = async (req, res) => {
 };
 
 // ─── 7. دالة اشتراك الطالب في الكورس (Enroll) ───
+// هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
 exports.enrollCourse = async (req, res) => {
     try {
         const courseId = req.params.courseId;
@@ -261,6 +268,7 @@ exports.enrollCourse = async (req, res) => {
 };
 
 // ─── 8. دالة جلب الطلاب المشتركين في الكورس (للمحاضر) ───
+// هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
 exports.getEnrolledStudents = async (req, res) => {
     try {
         const courseId = req.params.courseId;
@@ -289,6 +297,7 @@ exports.getEnrolledStudents = async (req, res) => {
 };
 
 // ─── 9. دالة رفع فيديو جديد للكورس ───
+// هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
 exports.uploadVideo = async (req, res) => {
     const { courseId } = req.params;
     const { title } = req.body;
@@ -320,6 +329,7 @@ exports.uploadVideo = async (req, res) => {
 };
 
 // ─── 10. دالة حذف فيديو ───
+// هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
 exports.deleteVideo = async (req, res) => {
     try {
         const { courseId, videoId } = req.params;

@@ -1,25 +1,25 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Array of questions to be filled by the AI
+    // مصفوفة الأسئلة ليتم تعبئتها بواسطة الذكاء الاصطناعي
     let quizData = [];
 
     let currentQuestionIndex = 0;
     let score = 0;
 
-    // Quiz UI elements
+    // عناصر واجهة الاختبار
     const questionText = document.getElementById("question-text");
     const optionsContainer = document.getElementById("options-container");
     const nextBtn = document.getElementById("next-btn");
     const progressTracker = document.getElementById("question-tracker");
     const progressBar = document.getElementById("progress");
 
-    // Section elements
+    // عناصر الأقسام
     const quizSection = document.getElementById("quiz-section");
     const formSection = document.getElementById("form-section");
     const certSection = document.getElementById("certificate-section");
     const failSection = document.getElementById("fail-section");
 
     // ==========================================
-    // 🤖 Function to fetch questions from Gemini AI (via backend)
+    // 🤖 دالة لجلب الأسئلة من Gemini AI (عبر السيرفر)
     // ==========================================
     async function fetchQuestionsFromAI(trackName) {
         questionText.innerText = "🤖 Generating custom questions for you using AI...";
@@ -27,14 +27,15 @@ document.addEventListener("DOMContentLoaded", () => {
         nextBtn.classList.add("hidden");
         
         try {
-            // Get token from local storage
+            // جلب الرمز من الذاكرة المحلية
             const token = localStorage.getItem('authToken');
             if (!token) {
                 questionText.innerText = "❌ Error: You must be logged in to access the quiz.";
                 return;
             }
 
-            // Connect to the actual backend
+            // الاتصال بالسيرفر الفعلي
+            // يا ويل اللي ما يذاكر! هذي الدالة حقت الاختبارات، نشوف من ينجح ومن يجيب العيد
             const response = await fetch(`http://localhost:5000/api/quiz/generate?track=${trackName}`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -47,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Load Question
+    // تحميل السؤال
     function loadQuestion() {
         nextBtn.classList.add("hidden");
         optionsContainer.innerHTML = "";
@@ -66,23 +67,23 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Check Answer
+    // التحقق من الإجابة
     function checkAnswer(selectedIndex, btnElem, correctIndex) {
         const allBtns = optionsContainer.querySelectorAll(".option-btn");
-        allBtns.forEach(btn => btn.disabled = true); // Disable multiple clicks
+        allBtns.forEach(btn => btn.disabled = true); // تعطيل النقرات المتعددة
 
         if (selectedIndex === correctIndex) {
             btnElem.classList.add("correct");
             score++;
         } else {
             btnElem.classList.add("wrong");
-            // Show the correct answer
+            // إظهار الإجابة الصحيحة
             allBtns[correctIndex].classList.add("correct");
         }
         nextBtn.classList.remove("hidden");
     }
 
-    // Next Button
+    // الزر التالي
     nextBtn.addEventListener("click", () => {
         currentQuestionIndex++;
         if (currentQuestionIndex < quizData.length) {
@@ -92,12 +93,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Finish Quiz
+    // إنهاء الاختبار
     function finishQuiz() {
         quizSection.classList.remove("active-section");
         quizSection.classList.add("hidden");
         
-        // Check the score (pass if score is half or more)
+        // التحقق من الدرجة (النجاح إذا كانت الدرجة النصف أو أكثر)
         const passScore = Math.ceil(quizData.length / 2);
         
         if (score >= passScore) {
@@ -112,7 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // Certificate Form
+    // نموذج الشهادة
     // ==========================================
     const certForm = document.getElementById("certificate-form");
     
@@ -120,9 +121,9 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
         const studentName = document.getElementById("student-name").value;
 
-        // TODO: Here you can send the data to the Backend later using fetch()
+        // TODO: يمكنك إرسال البيانات للسيرفر لاحقاً عبر fetch()
 
-        // Prepare and display the certificate
+        // تجهيز وعرض الشهادة
         document.getElementById("cert-student-name").innerText = studentName;
         
         const today = new Date().toLocaleDateString('en-US');
@@ -132,14 +133,14 @@ document.addEventListener("DOMContentLoaded", () => {
         certSection.classList.remove("hidden");
     });
 
-    // Print Certificate
+    // طباعة الشهادة
     document.getElementById("download-btn").addEventListener("click", () => {
-        window.print(); // Opens the print/save as PDF dialog directly
+        window.print(); // يفتح نافذة الطباعة/الحفظ كـ PDF مباشرة
     });
 
-    // Retry Quiz
+    // إعادة الاختبار
     document.getElementById("retry-btn").addEventListener("click", () => {
-        // Reset score and counter
+        // إعادة تعيين الدرجة والعداد
         currentQuestionIndex = 0;
         score = 0;
         
@@ -152,7 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
         loadQuestion();
     });
 
-    // Run the quiz for the first time
-    // Pass the track name here (can be fetched from URL or LocalStorage)
+    // بدء الاختبار لأول مرة
+    // مرر اسم المسار هنا (يمكن جلبه من الرابط أو الذاكرة المحلية)
     fetchQuestionsFromAI("Front-End Development");
 });

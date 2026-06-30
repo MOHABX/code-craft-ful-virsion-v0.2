@@ -46,6 +46,7 @@ const notifyAdmins = async (subject, message) => {
 };
 
 // ─── 1. دالة تسجيل مستخدم جديد (Register) ───
+// يا ولد هذا الدرب للزوار الجدد، يسجلون علومهم عندنا عشان نصير ربع
 exports.registerUser = async (req, res) => {
     // استخراج بيانات المستخدم من الطلب
     const { name, email, phone, password, role } = req.body;
@@ -105,6 +106,7 @@ exports.registerUser = async (req, res) => {
 };
 
 // ─── 2. دالة التحقق من كود الـ OTP (Verify OTP) ───
+// هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
 exports.verifyOTP = async (req, res) => {
     const { email, otp } = req.body;
     if (!email || !otp) return res.status(400).json({ message: 'Email and OTP are required.' });
@@ -199,6 +201,7 @@ exports.verifyOTP = async (req, res) => {
 };
 
 // ─── 3. دالة إعادة إرسال كود التفعيل (Resend OTP) ───
+// هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
 exports.resendOTP = async (req, res) => {
     const { email } = req.body;
     if (!email) return res.status(400).json({ message: 'Email is required.' });
@@ -227,6 +230,7 @@ exports.resendOTP = async (req, res) => {
 };
 
 // ─── 4. دالة تسجيل الدخول (Login) ───
+// يا رفيقي هني بوابة الدخول، نشيك على هوية الرجال وندخله إذا علمه غانم
 exports.loginUser = async (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) return res.status(400).json({ message: 'Email and password are required.' });
@@ -264,7 +268,8 @@ exports.loginUser = async (req, res) => {
     }
 };
 
-// ─── 5. دالة تسجيل الخروج (Logout) ───
+// ─── 5. دالة تسجيل الخروج (تسجيل خروج) ───
+// هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
 exports.logoutUser = async (req, res) => {
     try {
         const token = req.cookies.refreshToken;
@@ -282,6 +287,7 @@ exports.logoutUser = async (req, res) => {
 };
 
 // ─── 6. دالة استرجاع بيانات المستخدم الحالي (Get Me) ───
+// هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
 exports.getMe = async (req, res) => {
     // إرجاع بيانات المستخدم (req.user يتم جلبه بواسطة ميدل وير الحماية protect)
     res.status(200).json({ success: true, data: req.user });
@@ -289,6 +295,7 @@ exports.getMe = async (req, res) => {
 
 // ─── 7. دالة تجديد الـ Access Token ───
 // هذه الدالة تعمل بالخلفية بدون إزعاج المستخدم لتجديد مفتاح دخوله متى ما انتهى
+// هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
 exports.refreshToken = async (req, res) => {
     const token = req.cookies.refreshToken;
     if (!token) return res.status(401).json({ message: 'No refresh token provided' });
@@ -331,6 +338,7 @@ exports.refreshToken = async (req, res) => {
 };
 
 // ─── 8. دالة مسح الحساب نهائياً ───
+// هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
 exports.deleteMe = async (req, res) => {
     try {
         const user = await User.findByPk(req.user.id);
@@ -343,6 +351,7 @@ exports.deleteMe = async (req, res) => {
 };
 
 // ─── 9. دالة تحديث بيانات الملف الشخصي ───
+// هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
 exports.updateDetails = async (req, res) => {
     try {
         const { name, bio, phone, email } = req.body;
@@ -363,6 +372,7 @@ exports.updateDetails = async (req, res) => {
 };
 
 // ─── 10. دالة تغيير كلمة المرور ───
+// الرجال ضيع مفتاحه! هني نضبط له كلمة سر جديدة عشان يرجع لداره
 exports.updatePassword = async (req, res) => {
     try {
         const { currentPassword, newPassword } = req.body;
@@ -383,6 +393,7 @@ exports.updatePassword = async (req, res) => {
 };
 
 // ─── 11. دالة استعادة كلمة المرور (Forgot Password) ───
+// هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
 exports.forgotPassword = async (req, res) => {
     const { email } = req.body;
     if (!email) return res.status(400).json({ message: 'Email is required' });
@@ -436,6 +447,7 @@ exports.forgotPassword = async (req, res) => {
 };
 
 // ─── 12. دالة إعادة تعيين كلمة المرور (Reset Password) ───
+// الرجال ضيع مفتاحه! هني نضبط له كلمة سر جديدة عشان يرجع لداره
 exports.resetPassword = async (req, res) => {
     try {
         // تشفير الرمز المرسل في الرابط للبحث عنه في قاعدة البيانات

@@ -47,14 +47,14 @@ percentText.innerText = width + '% Complete';
 },100);
 }
 
-// Submit
+// إرسال
 submitBtn.onclick = () => {
 
 const studentName = document.getElementById("studentName").value;
 const studentId = document.getElementById("studentId").value;
 const sidebarMessage = document.getElementById("sidebarMessage");
 
-// Get uploaded file name
+// جلب اسم الملف المرفوع
 const file = fileInput.files[0];
 const fileName = file ? file.name : "No file uploaded";
 

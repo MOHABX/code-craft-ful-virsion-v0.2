@@ -85,7 +85,7 @@
             flex: 1;
         }
 
-        /* Sidebar */
+        /* الشريط الجانبي */
         .dash-sidebar {
             width: 260px;
             background: #ffffff;
@@ -94,7 +94,7 @@
             flex-direction: column;
             padding: 20px 15px;
             height: calc(100vh - 100px);
-            /* Adjust to header height */
+            /* الضبط حسب ارتفاع الترويسة */
             position: sticky;
             top: 100px;
         }
@@ -141,7 +141,7 @@
         }
 
 
-        /* ===== Section Courses ===== */
+        /* ===== قسم الدورات ===== */
         .section {
             display: flex;
             justify-content: center;
@@ -218,7 +218,7 @@
             box-shadow: 0 0 15px #A78BFA;
         }
 
-        /* ===== Button Neon ===== */
+        /* ===== الزر النيون ===== */
         .view {
             text-decoration: none;
             color: #fff;
@@ -237,7 +237,7 @@
             box-shadow: 0 0 20px rgba(255, 0, 255, 0.8);
         }
 
-        /* ===== Footer ===== */
+        /* ===== التذييل (Footer) ===== */
         .footer {
             background: #1A1642;
             color: #FFFFFF;
@@ -305,7 +305,7 @@
             padding-left: 4px;
         }
 
-        /* Contact */
+        /* تواصل معنا */
         .contact-list {
             display: flex;
             flex-direction: column;
@@ -371,7 +371,7 @@
             opacity: 0.9;
         }
 
-        /* footer bottom */
+        /* أسفل التذييل */
         .footer-bottom {
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             margin-top: 30px;
@@ -410,14 +410,14 @@
 
 
             <div class="nav-auth-container" style="display: flex; align-items: center;">
-                <!-- Guest -->
+                <!-- زائر -->
                 <div class="guest-only acount" style="display: flex; gap: 10px;">
                     <button><a href="/html/login.html" style="color: inherit; text-decoration: none;">log
                             in</a></button>
                     <button><a href="/html/signup-st.html" style="color: inherit; text-decoration: none;">sign
                             up</a></button>
                 </div>
-                <!-- Student -->
+                <!-- طالب -->
                 <div class="student-only" style="display: flex; align-items: center; gap: 15px;">
                     <a href="/html/st-profile.html" style="display: flex; align-items: center;">
                         <img src="/img/circle-user-solid-full.svg" alt="Profile"
@@ -427,7 +427,7 @@
                         style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i
                             class="fas fa-sign-out-alt"></i></button>
                 </div>
-                <!-- Doctor -->
+                <!-- مدرب -->
                 <div class="doctor-only" style="display: flex; align-items: center; gap: 15px;">
                     <a href="/html/dr-dashboard.html" style="display: flex; align-items: center;">
                         <img src="/img/circle-user-solid-full.svg" alt="Profile"
@@ -437,7 +437,7 @@
                         style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i
                             class="fas fa-sign-out-alt"></i></button>
                 </div>
-                <!-- Admin -->
+                <!-- مسؤول -->
                 <div class="admin-only" style="display: flex; align-items: center; gap: 15px;">
                     <a href="/html/admin-dashboard.html" style="display: flex; align-items: center;">
                         <img src="/img/circle-user-solid-full.svg" alt="Profile"
@@ -448,7 +448,7 @@
                             class="fas fa-sign-out-alt"></i></button>
                 </div>
 
-                <!-- Dark Mode Toggle -->
+                <!-- تبديل الوضع الليلي -->
 
             </div>
 
@@ -456,7 +456,7 @@
         </nav>
     </header>
 
-    <!-- ===== Section Courses ===== -->
+    <!-- ===== قسم الدورات ===== -->
     <div class="dash-wrapper">
         <aside class="dash-sidebar">
             <nav class="sidebar-nav" id="sidebar-menu">
@@ -503,14 +503,14 @@
     <footer class="footer">
         <div class="footer-container">
 
-            <!-- Logo -->
+            <!-- الشعار -->
             <div class="footer-col">
                 <div class="logo">
                     <img src="../img/logo.png" alt="Logo">
                 </div>
             </div>
 
-            <!-- Links -->
+            <!-- الروابط -->
             <div class="footer-col">
                 <h5>Quick Links</h5>
                 <ul>
@@ -520,7 +520,7 @@
                 </ul>
             </div>
 
-            <!-- Contact -->
+            <!-- تواصل معنا -->
             <div class="footer-col">
                 <h5>Contact Us</h5>
                 <div class="contact-list">
@@ -536,7 +536,7 @@
                 </div>
             </div>
 
-            <!-- Form -->
+            <!-- النموذج -->
             <div class="footer-col">
                 <h5>Send Message</h5>
                 <form class="contact-form">
@@ -566,6 +566,7 @@
             const coursesContainer = document.getElementById('courses-container');
 
             try {
+                // هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
                 const response = await fetch('http://localhost:5000/api/users/my-courses', {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
@@ -573,7 +574,7 @@
                 const result = await response.json();
 
                 if (response.ok) {
-                    coursesContainer.innerHTML = '<div class="sub-title">Currently Enrolled Courses</div>'; // Reset and add title
+                    coursesContainer.innerHTML = '<div class="sub-title">Currently Enrolled Courses</div>'; // إعادة الضبط وإضافة عنوان
                     if (result.data.length === 0) {
                         coursesContainer.innerHTML += '<p>You are not enrolled in any courses yet. <a href="courses.html" style="color: #6C5CE7; font-weight: bold;">Explore courses</a>.</p>';
                         return;

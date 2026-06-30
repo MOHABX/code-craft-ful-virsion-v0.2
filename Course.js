@@ -25,7 +25,7 @@ const Course = sequelize.define('Course', {
         type: DataTypes.ENUM('Beginner', 'Intermediate', 'Advanced'),
         defaultValue: 'Beginner',
     },
-    // instructorId added via associations
+    // يتم إضافة معرف المدرب عبر الروابط
 });
 
 Course.hasMany(Video, { foreignKey: 'courseId', as: 'videos' });

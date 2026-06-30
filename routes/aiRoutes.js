@@ -3,9 +3,10 @@ const router = express.Router();
 const { chat } = require('../aiController');
 const { protect } = require('../middlewares/authMiddleware');
 
-// @route   POST /api/ai/chat
-// @desc    Chat with AI Assistant
-// @access  Private
+// @مسار   POST /api/ai/chat
+// @وصف    الدردشة مع المساعد الذكي
+// @صلاحية  خاص
+// يا خوي هذي تفتح درب للمراسيل في السيرفر، نستقبل الطلب ونقضي اللزوم
 router.post('/chat', protect, chat);
 
 module.exports = router;

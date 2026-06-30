@@ -67,7 +67,7 @@
             transform: rotateY(360deg);
         }
 
-        /* ===== Main Content Section ===== */
+        /* ===== قسم المحتوى الرئيسي ===== */
         .main-section {
             padding: 80px 20px;
             display: flex;
@@ -223,26 +223,26 @@
 
             
             <div class="nav-auth-container" style="display: flex; align-items: center;">
-                <!-- Guest -->
+                <!-- زائر -->
                 <div class="guest-only acount" style="display: flex; gap: 10px;">
                     <button><a href="/html/login.html" style="color: inherit; text-decoration: none;">log in</a></button>
                     <button><a href="/html/signup-st.html" style="color: inherit; text-decoration: none;">sign up</a></button>
                 </div>
-                <!-- Student -->
+                <!-- طالب -->
                 <div class="student-only" style="display: flex; align-items: center; gap: 15px;">
                     <a href="/html/st-profile.html" style="display: flex; align-items: center;">
                         <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
                     </a>
                     <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
                 </div>
-                <!-- Doctor -->
+                <!-- مدرب -->
                 <div class="doctor-only" style="display: flex; align-items: center; gap: 15px;">
                     <a href="/html/dr-dashboard.html" style="display: flex; align-items: center;">
                         <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
                     </a>
                     <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
                 </div>
-                <!-- Admin -->
+                <!-- مسؤول -->
                 <div class="admin-only" style="display: flex; align-items: center; gap: 15px;">
                     <a href="/html/admin-dashboard.html" style="display: flex; align-items: center;">
                         <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
@@ -250,7 +250,7 @@
                     <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
                 </div>
                 
-                <!-- Dark Mode Toggle -->
+                <!-- تبديل الوضع الليلي -->
                 
             </div>
 
@@ -355,6 +355,7 @@
 
             const certificatesContainer = document.getElementById('certificates-list');
             try {
+                // هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
                 const response = await fetch('http://localhost:5000/api/certificates/me', {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });

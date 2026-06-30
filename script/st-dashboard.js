@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    // Check auth immediately
+    // التحقق من المصادقة فوراً
     let userRes;
     try {
+        // يا رفيقي هني بوابة الدخول، نشيك على هوية الرجال وندخله إذا علمه غانم
         userRes = await fetch('/api/auth/me', { credentials: 'include' });
         if (!userRes.ok) {
             window.location.href = '/html/login.html';
@@ -12,8 +13,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         return;
     }
 
-    // 1. Fetch Dashboard Data
+    // 1. جلب بيانات لوحة التحكم
     try {
+        // هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
         const response = await fetch('/api/users/dashboard', {
             credentials: 'include'
         });
@@ -28,21 +30,22 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error('Error fetching dashboard data:', error);
     }
 
-    // Tab Navigation logic removed. The sidebar now uses real page links.
+    // تم إزالة منطق التبويبات. الشريط الجانبي يستخدم روابط حقيقية الآن.
 
-    // 3. Logout
+    // 3. تسجيل الخروج
     const btnLogout = document.getElementById('btn-logout-st');
     if (btnLogout) {
         btnLogout.addEventListener('click', async (e) => {
             e.preventDefault();
             try {
+                // هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
                 await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' });
             } catch(e) {}
             window.location.href = '/html/home.html';
         });
     }
 
-    // Fetch user details for profile chip
+    // جلب تفاصيل المستخدم للملف الشخصي
     try {
         const userData = await userRes.json();
         if (userRes.ok) {

@@ -30,7 +30,7 @@ const BlockedDevice = sequelize.define('BlockedDevice', {
 }, {
     tableName: 'blocked_devices',
     timestamps: true,
-    updatedAt: false, // only created_at is needed
+    updatedAt: false, // نحتاج فقط لتاريخ الإنشاء
     createdAt: 'createdAt'
 });
 

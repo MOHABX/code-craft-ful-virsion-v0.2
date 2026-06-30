@@ -4,6 +4,7 @@ const Course = require('./Course');
 const fs = require('fs');
 const path = require('path');
 
+// هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
 exports.uploadVideos = async (req, res) => {
     try {
         const courseId = req.params.courseId;
@@ -46,6 +47,7 @@ exports.uploadVideos = async (req, res) => {
     }
 };
 
+// هني المربط حق الفيديوهات، نشغل المقطع ونضبط الشاشة للربع
 exports.markVideoComplete = async (req, res) => {
     try {
         const video = await Video.findByPk(req.params.videoId);
@@ -63,6 +65,7 @@ exports.markVideoComplete = async (req, res) => {
     }
 };
 
+// هني المربط حق الفيديوهات، نشغل المقطع ونضبط الشاشة للربع
 exports.deleteVideo = async (req, res) => {
     try {
         const video = await Video.findByPk(req.params.videoId);

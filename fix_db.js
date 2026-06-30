@@ -1,7 +1,7 @@
 require('dotenv').config();
 const { sequelize } = require('./db');
 
-// Require all models to register associations before syncing
+// استدعاء جميع النماذج لتسجيل الروابط قبل المزامنة
 require('./User');
 require('./Course');
 require('./Video');
@@ -15,7 +15,7 @@ async function resetDB() {
         await sequelize.authenticate();
         console.log('Database connected.');
         
-        // Force sync drops all tables and recreates them in the correct dependency order
+        // المزامنة الإجبارية تحذف جميع الجداول وتعيد إنشائها بالترتيب الصحيح
         await sequelize.query('SET FOREIGN_KEY_CHECKS = 0;');
         await sequelize.sync({ force: true });
         await sequelize.query('SET FOREIGN_KEY_CHECKS = 1;');

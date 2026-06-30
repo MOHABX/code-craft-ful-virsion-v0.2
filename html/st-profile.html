@@ -13,7 +13,7 @@
 </head>
 
 <style>
-    /* Responsive styles for the dashboard layout */
+    /* أنماط متجاوبة لتخطيط لوحة التحكم */
     @media (max-width: 992px) {
         .dashboard {
             flex-direction: column;
@@ -27,7 +27,7 @@
 
 <body>
     <script src="../script/nav.js" defer></script>
-    <!-- NAVBAR -->
+    <!-- شريط التنقل -->
     <header>
         <nav>
 
@@ -44,26 +44,26 @@
 
                         
             <div class="nav-auth-container" style="display: flex; align-items: center;">
-                <!-- Guest -->
+                <!-- زائر -->
                 <div class="guest-only acount" style="display: flex; gap: 10px;">
                     <button><a href="/html/login.html" style="color: inherit; text-decoration: none;">log in</a></button>
                     <button><a href="/html/signup-st.html" style="color: inherit; text-decoration: none;">sign up</a></button>
                 </div>
-                <!-- Student -->
+                <!-- طالب -->
                 <div class="student-only" style="display: flex; align-items: center; gap: 15px;">
                     <a href="/html/st-profile.html" style="display: flex; align-items: center;">
                         <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
                     </a>
                     <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
                 </div>
-                <!-- Doctor -->
+                <!-- مدرب -->
                 <div class="doctor-only" style="display: flex; align-items: center; gap: 15px;">
                     <a href="/html/dr-dashboard.html" style="display: flex; align-items: center;">
                         <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
                     </a>
                     <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
                 </div>
-                <!-- Admin -->
+                <!-- مسؤول -->
                 <div class="admin-only" style="display: flex; align-items: center; gap: 15px;">
                     <a href="/html/admin-dashboard.html" style="display: flex; align-items: center;">
                         <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
@@ -71,14 +71,14 @@
                     <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
                 </div>
                 
-                <!-- Dark Mode Toggle -->
+                <!-- تبديل الوضع الليلي -->
                 
             </div>
 
 
         </nav>
     </header>
-    <!-- DASHBOARD -->
+    <!-- لوحة التحكم -->
     <div class="dash-wrapper">
       <aside class="dash-sidebar">
         <nav class="sidebar-nav">
@@ -105,7 +105,7 @@
         </div>
       </aside>
 
-        <!-- MAIN -->
+        <!-- الرئيسية -->
         <main class="dash-content">
 
             <!-- PROFILE (رجع كامل زي المطلوب) -->
@@ -148,18 +148,18 @@
         </main>
     </div>
 
-    <!-- FOOTER -->
+    <!-- التذييل -->
   <footer class="footer">
         <div class="footer-container">
 
-            <!-- Logo -->
+            <!-- الشعار -->
             <div class="footer-col">
                 <div class="logo">
                     <img src="../img/logo.png" alt="Logo">
                 </div>
             </div>
 
-            <!-- Links -->
+            <!-- الروابط -->
             <div class="footer-col">
                 <h5>Quick Links</h5>
                 <ul>
@@ -169,7 +169,7 @@
                 </ul>
             </div>
 
-            <!-- Contact -->
+            <!-- تواصل معنا -->
             <div class="footer-col">
                 <h5>Contact Us</h5>
                 <div class="contact-list">
@@ -185,7 +185,7 @@
                 </div>
             </div>
 
-            <!-- Form -->
+            <!-- النموذج -->
             <div class="footer-col" id="contact">
                 <h5>Send Message</h5>
                 <form class="contact-form">
@@ -203,7 +203,7 @@
         </div>
     </footer>
 
-    <!-- SCRIPT -->
+    <!-- السكريبت -->
     <script>
         const btn = document.getElementById('theme-switch');
         const icon = document.getElementById('theme-icon');
@@ -238,6 +238,7 @@
             }
 
             try {
+                // هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
                 const response = await fetch('http://localhost:5000/api/auth/me', {
                     headers: {
                         'Authorization': `Bearer ${token}`
@@ -254,6 +255,7 @@
                     }
 
                     // Fetch enrolled courses to populate the grid and count
+                    // هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
                     const coursesResponse = await fetch('http://localhost:5000/api/users/my-courses', {
                         headers: { 'Authorization': `Bearer ${token}` }
                     });
@@ -300,7 +302,7 @@
             }
         });
 
-        // Logout functionality
+        // تسجيل خروج functionality
         document.getElementById('logoutBtn').addEventListener('click', () => {
             localStorage.removeItem('authToken');
             alert("You have been logged out.");
@@ -322,6 +324,7 @@
             const token = localStorage.getItem('authToken');
 
             try {
+                // هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
                 const response = await fetch('http://localhost:5000/api/auth/me/photo', {
                     method: 'PUT',
                     headers: { 'Authorization': `Bearer ${token}` },

@@ -7,6 +7,7 @@ const UserVideoProgress = require('./UserVideoProgress'); // نموذج تقدم
 const Video = require('./Video'); // نموذج الفيديوهات
 
 // ─── 1. دالة توليد أسئلة الاختبار باستخدام الذكاء الاصطناعي ───
+// هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
 exports.generateQuiz = async (req, res) => {
     const track = req.query.track || 'Web Development'; // المسار المطلوب توليد الأسئلة له
     const courseId = req.query.courseId; // معرف الكورس في حال كان الاختبار مرتبطاً بكورس محدد
@@ -53,6 +54,7 @@ exports.generateQuiz = async (req, res) => {
 };
 
 // ─── 2. دالة تسليم إجابات الاختبار وحساب النتيجة ───
+// هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
 exports.submitQuiz = async (req, res) => {
     const { track, score, total, courseId } = req.body;
 
@@ -162,6 +164,7 @@ exports.submitQuiz = async (req, res) => {
 };
 
 // ─── 3. دالة جلب نتائج الاختبارات السابقة للطالب ───
+// يا ويل اللي ما يذاكر! هذي الدالة حقت الاختبارات، نشوف من ينجح ومن يجيب العيد
 exports.getQuizResults = async (req, res) => {
     try {
         const results = await QuizResult.findAll({

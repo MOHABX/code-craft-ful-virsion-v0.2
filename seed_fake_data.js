@@ -13,7 +13,7 @@ async function seedData() {
         
         console.log("Starting to seed dummy data...");
 
-        // Create Instructor
+        // إنشاء مدرب
         const instructorEmail = 'dr_ahmed@test.com';
         const instructorPass = 'password123';
         let [instructor, instCreated] = await User.findOrCreate({
@@ -32,7 +32,7 @@ async function seedData() {
             await instructor.save();
         }
         
-        // Create Student
+        // إنشاء طالب
         const studentEmail = 'ali_student@test.com';
         const studentPass = 'password123';
         let [student, studCreated] = await User.findOrCreate({
@@ -51,7 +51,7 @@ async function seedData() {
             await student.save();
         }
 
-        // Create Courses
+        // إنشاء دورات
         const c1 = await Course.create({
             title: 'Mastering React.js 2026',
             description: 'Complete guide to React from zero to hero.',
@@ -93,7 +93,7 @@ async function seedData() {
             courseId: c1.id
         });
         
-        // Enroll Student in c1
+        // تسجيل الطالب في الدورة
         await Enrollment.findOrCreate({
             where: { userId: student.id, courseId: c1.id }
         });

@@ -74,7 +74,7 @@
             width: 100%;
         }
 
-        /* --- Sidebar (معلق Sticky) --- */
+        /* --- الشريط الجانبي (معلق Sticky) --- */
         .sidebar {
             width: 260px;
             background-color: #0F0C29;
@@ -116,7 +116,7 @@
             border-left: 4px solid #FF00FF;
         }
 
-        /* --- Content Area --- */
+        /* --- منطقة المحتوى --- */
         .content-area { flex: 1; }
 
         .welcome-card {
@@ -209,7 +209,7 @@
             margin-top: 40px; padding-top: 20px; text-align: center; font-size: 14px; color: #888; 
         }
 
-        /* Mobile Responsive */
+        /* التوافق مع الجوال */
         @media (max-width: 992px) {
             .sidebar { display: none; }
             .main-layout { padding: 20px; }
@@ -367,8 +367,9 @@
                 return;
             }
 
-            // Fetch user data
+            // جلب بيانات المستخدم
             try {
+                // هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
                 const response = await fetch('http://localhost:5000/api/auth/me', {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
@@ -411,13 +412,14 @@
                 console.error('Failed to fetch user settings:', error);
             }
 
-            // Handle Settings Update (Name)
+            // معالجة تحديث الإعدادات (الاسم)
             const settingsForm = document.getElementById('settings-form');
             settingsForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 const name = document.getElementById('userName').value;
 
                 try {
+                    // هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
                     const response = await fetch('http://localhost:5000/api/auth/me/details', {
                         method: 'PUT',
                         headers: {
@@ -438,7 +440,7 @@
                 }
             });
 
-            // Handle Password Change
+            // معالجة تغيير كلمة المرور
             const passwordForm = document.getElementById('password-form');
             passwordForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
@@ -451,6 +453,7 @@
                 }
 
                 try {
+                    // هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
                     const response = await fetch('http://localhost:5000/api/auth/me/password', {
                         method: 'PUT',
                         headers: {
@@ -472,13 +475,14 @@
                 }
             });
 
-            // Handle Account Deletion
+            // معالجة حذف الحساب
             const deleteBtn = document.getElementById('deleteAccountBtn');
             deleteBtn.addEventListener('click', async () => {
                 const confirmation = confirm('Are you absolutely sure you want to delete your account? This action is irreversible.');
                 
                 if (confirmation) {
                     try {
+                        // هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
                         const deleteResponse = await fetch('http://localhost:5000/api/auth/me', {
                             method: 'DELETE',
                             headers: { 'Authorization': `Bearer ${token}` }

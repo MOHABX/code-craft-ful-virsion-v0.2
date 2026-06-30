@@ -13,18 +13,23 @@ const {
 } = require('../adminController');
 const Review = require('../Review');
 
-// All routes in this file are protected and for admins only
+// جميع المسارات في هذا الملف محمية وخاصة بالمسؤولين فقط
 router.use(protect, admin);
 
+// هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
 router.get('/stats', getStats);
 
+// هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
 router.get('/users', getUsers);
+// هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
 router.put('/users/:id', updateUser);
+// هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
 router.delete('/users/:id', deleteUser);
 
-// Impersonate User
+// انتحال شخصية مستخدم
 const User = require('../User');
 const jwt = require('jsonwebtoken');
+// هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
 router.get('/users/:id/impersonate', async (req, res) => {
     try {
         const user = await User.findByPk(req.params.id);
@@ -36,7 +41,7 @@ router.get('/users/:id/impersonate', async (req, res) => {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: 'lax',
-            maxAge: 1 * 60 * 60 * 1000 // 1 hour for impersonation
+            maxAge: 1 * 60 * 60 * 1000 // ساعة واحدة لانتحال الشخصية
         });
 
         res.status(200).json({ success: true, token, role: user.role, userId: user.id });
@@ -45,11 +50,15 @@ router.get('/users/:id/impersonate', async (req, res) => {
     }
 });
 
+// هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
 router.get('/courses', getCourses);
+// هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
 router.delete('/courses/:id', deleteCourse);
 
-// Admin Reviews Management
+// إدارة المراجعات للمسؤولين
+// هني نستقبل تقييم الرجال، عساه يعطينا خمس نجوم وما يكسر بخاطرنا
 router.get('/reviews', getReviews);
+// هني نستقبل تقييم الرجال، عساه يعطينا خمس نجوم وما يكسر بخاطرنا
 router.delete('/reviews/:id', async (req, res) => {
     try {
         const review = await Review.findByPk(req.params.id);

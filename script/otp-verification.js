@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = 'signup-st.html';
     }
 
-    // Auto focus next/prev input box
+    // التركيز التلقائي للحقل التالي/السابق
     inputs.forEach((input, index) => {
         input.addEventListener('input', (e) => {
             if (e.target.value.length === 1 && index < inputs.length - 1) {
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
         
-        // Handle Paste
+        // معالجة اللصق
         input.addEventListener('paste', (e) => {
             e.preventDefault();
             const pastedData = e.clipboardData.getData('text').slice(0, inputs.length);
@@ -68,6 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     resendBtn.addEventListener('click', async () => {
         try {
+            // هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
             const response = await fetch('/api/auth/resend-otp', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -101,6 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
+            // هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
             const response = await fetch('/api/auth/verify', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },

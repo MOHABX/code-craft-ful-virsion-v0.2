@@ -3,6 +3,7 @@ const Video = require('./Video');
 const UserVideoProgress = require('./UserVideoProgress');
 const { Op } = require('sequelize');
 
+// هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
 exports.issueCertificate = async (req, res) => {
     const { courseId, courseName } = req.body;
     const userId = req.user.id;
@@ -61,6 +62,7 @@ exports.issueCertificate = async (req, res) => {
     }
 };
 
+// هني نطبع الشهادة للناجحين، شهادة ترفع الراس وتبيض الوجه
 exports.getMyCertificates = async (req, res) => {
     try {
         const certificates = await Certificate.findAll({

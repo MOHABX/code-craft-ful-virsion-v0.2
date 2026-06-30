@@ -4,7 +4,7 @@ const User = require('../User');
 const protect = async (req, res, next) => {
     let token;
 
-    // Check cookies first, fallback to Authorization header
+    // التحقق من ملفات تعريف الارتباط أولاً، ثم ترويسة المصادقة
     if (req.cookies && req.cookies.accessToken) {
         token = req.cookies.accessToken;
     } else if (
@@ -17,10 +17,10 @@ const protect = async (req, res, next) => {
     if (token) {
         try {
 
-            // Verify token
+            // التحقق من الرمز
             const decoded = jwt.verify(token, process.env.JWT_SECRET || 'craftcode_secret');
 
-            // Get user data from the database and add it to the request
+            // جلب بيانات المستخدم من قاعدة البيانات وإضافتها للطلب
             req.user = await User.findByPk(decoded.id, {
                 attributes: { exclude: ['password'] }
             });

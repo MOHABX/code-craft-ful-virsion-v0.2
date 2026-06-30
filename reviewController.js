@@ -4,6 +4,7 @@ const Course = require('./Course');
 const Enrollment = require('./Enrollment');
 const { Op, fn, col } = require('sequelize');
 
+// هني نستقبل تقييم الرجال، عساه يعطينا خمس نجوم وما يكسر بخاطرنا
 exports.addOrUpdateReview = async (req, res) => {
     const { rating, comment } = req.body;
     const userId = req.user.id;
@@ -48,6 +49,7 @@ exports.addOrUpdateReview = async (req, res) => {
     }
 };
 
+// هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
 exports.getReviewsForCourse = async (req, res) => {
     try {
         const courseId = req.params.courseId;
@@ -91,6 +93,7 @@ exports.getReviewsForCourse = async (req, res) => {
     }
 };
 
+// هني نستقبل تقييم الرجال، عساه يعطينا خمس نجوم وما يكسر بخاطرنا
 exports.getMyReview = async (req, res) => {
     try {
         const review = await Review.findOne({
@@ -102,6 +105,7 @@ exports.getMyReview = async (req, res) => {
     }
 };
 
+// هني نستقبل تقييم الرجال، عساه يعطينا خمس نجوم وما يكسر بخاطرنا
 exports.deleteMyReview = async (req, res) => {
     try {
         const review = await Review.findOne({
@@ -116,6 +120,7 @@ exports.deleteMyReview = async (req, res) => {
     }
 };
 
+// هني نستقبل تقييم الرجال، عساه يعطينا خمس نجوم وما يكسر بخاطرنا
 exports.deleteReviewAdmin = async (req, res) => {
     if (req.user.role !== 'admin') return res.status(403).json({ message: 'Not authorized.' });
     try {

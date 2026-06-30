@@ -52,33 +52,43 @@ const uploadVideo = multer({ storage: videoStorage });
 // ─── مسارات الكورسات (Routes) ───────────────────────────────────────────────────────────────────
 
 // إنشاء كورس جديد (مسموح للمحاضر أو الأدمن فقط) - يمر على التحقق ثم رفع الصورة ثم الكنترولر
+// هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
 router.post('/', protect, uploadThumbnail.single('thumbnail'), courseController.createCourse);
 
 // جلب جميع الكورسات (متاح للعامة بدون تسجيل دخول)
+// هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
 router.get('/', courseController.getCourses);
 
 // جلب الكورسات التي قام المحاضر بإنشائها (خاص بالمحاضرين)
+// هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
 router.get('/mycourses', protect, courseController.getMyCourses);
 
 // جلب بيانات كورس معين (متاح للعامة لمشاهدة تفاصيل الكورس قبل الاشتراك)
+// هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
 router.get('/:courseId', courseController.getCourseById);
 
 // تحديث بيانات كورس معين (خاص بصاحب الكورس)
+// هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
 router.put('/:courseId', protect, uploadThumbnail.single('thumbnail'), courseController.updateCourse);
 
 // حذف كورس (مسموح لصاحب الكورس أو الأدمن)
+// هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
 router.delete('/:courseId', protect, courseController.deleteCourse);
 
 // اشتراك المستخدم في الكورس (يتطلب تسجيل الدخول)
+// هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
 router.post('/:courseId/enroll', protect, courseController.enrollCourse);
 
 // جلب قائمة الطلاب المشتركين في الكورس (خاص بصاحب الكورس)
+// هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
 router.get('/:courseId/students', protect, courseController.getEnrolledStudents);
 
 // رفع فيديو جديد داخل كورس معين (خاص بصاحب الكورس)
+// هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
 router.post('/:courseId/videos', protect, uploadVideo.single('video'), courseController.uploadVideo);
 
 // حذف فيديو من كورس (خاص بصاحب الكورس)
+// هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
 router.delete('/:courseId/videos/:videoId', protect, courseController.deleteVideo);
 
 module.exports = router;

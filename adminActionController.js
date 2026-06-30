@@ -4,12 +4,13 @@ const RefreshToken = require('./RefreshToken');
 const User = require('./User');
 const { Op } = require('sequelize');
 
+// هذي حقت التحقق يا خوي، نبعت له كود ونشوف هو صاحب الحلال ولا نصاب
 exports.blockDevice = async (req, res) => {
     try {
         const decoded = jwt.verify(req.params.token, process.env.JWT_SECRET || 'craftcode_secret');
         if (decoded.action !== 'block_device') return res.status(400).send('Invalid action type.');
 
-        // Extend block time significantly (e.g. 1 year)
+        // تمديد وقت الحظر لفترة طويلة (مثال: سنة واحدة)
         await BlockedDevice.update(
             { blockedUntil: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000) },
             { where: { deviceHash: decoded.deviceHash } }
@@ -21,6 +22,7 @@ exports.blockDevice = async (req, res) => {
     }
 };
 
+// هذي حقت التحقق يا خوي، نبعت له كود ونشوف هو صاحب الحلال ولا نصاب
 exports.unblockDevice = async (req, res) => {
     try {
         const decoded = jwt.verify(req.params.token, process.env.JWT_SECRET || 'craftcode_secret');
@@ -34,12 +36,13 @@ exports.unblockDevice = async (req, res) => {
     }
 };
 
+// هذي حقت التحقق يا خوي، نبعت له كود ونشوف هو صاحب الحلال ولا نصاب
 exports.forceLogout = async (req, res) => {
     try {
         const decoded = jwt.verify(req.params.token, process.env.JWT_SECRET || 'craftcode_secret');
         if (decoded.action !== 'force_logout') return res.status(400).send('Invalid action type.');
 
-        // Revoke all refresh tokens for this user
+        // إبطال جميع رموز التحديث لهذا المستخدم
         await RefreshToken.update(
             { revoked: true },
             { where: { userId: decoded.userId } }

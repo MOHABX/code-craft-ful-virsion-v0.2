@@ -1,3 +1,3 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    // All auth and UI logic have been moved to auth.js for RBAC support.
+    // تم نقل جميع منطق المصادقة والواجهة إلى auth.js لدعم الصلاحيات.
 });

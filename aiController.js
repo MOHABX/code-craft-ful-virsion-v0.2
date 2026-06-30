@@ -1,5 +1,6 @@
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 
+// هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
 exports.chat = async (req, res) => {
     try {
         const { message, context } = req.body;
@@ -13,7 +14,7 @@ exports.chat = async (req, res) => {
         }
 
         const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-        // We will use gemini-1.5-flash as the fast and capable model for general chat
+        // سنستخدم نموذج gemini-1.5-flash كنموذج سريع وقادر للدردشة العامة
         const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
         const systemPrompt = `You are an AI teaching assistant for the Craft Code e-learning platform. 

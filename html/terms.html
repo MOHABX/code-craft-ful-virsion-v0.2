@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">    
-  <!-- Google Font -->
+  <!-- خط جوجل -->
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
    
@@ -25,7 +25,7 @@
 background-color:#F8F9FF;
       }
 
-        /*style nav*/
+        /*style شريط التنقل*/
         header {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -134,7 +134,7 @@ background-color:#F8F9FF;
       margin-bottom: 20px;
     }
 
-    /* Table of Contents */
+    /* جدول المحتويات */
     .toc {
       background: #f0f4f8;
       padding: 15px;
@@ -155,7 +155,7 @@ background-color:#F8F9FF;
       text-decoration: underline;
     }
 
-    /* Scroll to top button */
+    /* زر التمرير للأعلى */
     .top-btn {
       position: fixed;
       bottom: 20px;
@@ -174,7 +174,7 @@ background-color:#F8F9FF;
       background: #1E40AF;
     }
 
-    /*style footer*/
+    /*style التذييل*/
 body{
     /* 🔥 الحل بتاع الفوتر */
     min-height:100vh;
@@ -182,7 +182,7 @@ body{
     flex-direction:column;
 }
 
-/* ===== Footer ===== */
+/* ===== التذييل (Footer) ===== */
 
 .footer{
     background:#1A1642;
@@ -245,7 +245,7 @@ ul li a:hover{
     padding-left:4px;
 }
 
-/* Contact */
+/* تواصل معنا */
 .contact-list{
     display:flex;
     flex-direction:column;
@@ -309,7 +309,7 @@ ul li a:hover{
     opacity:0.9;
 }
 
-/* footer bottom */
+/* أسفل التذييل */
 .footer-bottom{ 
     border-top:1px solid rgba(255,255,255,0.1); 
     margin-top:30px; 
@@ -332,7 +332,7 @@ ul li a:hover{
 </head>
 <body>
 
-    <!--nav-->
+    <!--شريط التنقل-->
     <header>
         <nav>
 
@@ -349,26 +349,26 @@ ul li a:hover{
 
                                     
             <div class="nav-auth-container" style="display: flex; align-items: center;">
-                <!-- Guest -->
+                <!-- زائر -->
                 <div class="guest-only acount" style="display: flex; gap: 10px;">
                     <button><a href="/html/login.html" style="color: inherit; text-decoration: none;">log in</a></button>
                     <button><a href="/html/signup-st.html" style="color: inherit; text-decoration: none;">sign up</a></button>
                 </div>
-                <!-- Student -->
+                <!-- طالب -->
                 <div class="student-only" style="display: flex; align-items: center; gap: 15px;">
                     <a href="/html/st-profile.html" style="display: flex; align-items: center;">
                         <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
                     </a>
                     <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
                 </div>
-                <!-- Doctor -->
+                <!-- مدرب -->
                 <div class="doctor-only" style="display: flex; align-items: center; gap: 15px;">
                     <a href="/html/dr-dashboard.html" style="display: flex; align-items: center;">
                         <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
                     </a>
                     <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
                 </div>
-                <!-- Admin -->
+                <!-- مسؤول -->
                 <div class="admin-only" style="display: flex; align-items: center; gap: 15px;">
                     <a href="/html/admin-dashboard.html" style="display: flex; align-items: center;">
                         <img src="/img/circle-user-solid-full.svg" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6C5CE7;">
@@ -376,7 +376,7 @@ ul li a:hover{
                     <button class="logout-btn" style="background:none; border:none; color:inherit; font-size: 20px; cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
                 </div>
                 
-                <!-- Dark Mode Toggle -->
+                <!-- تبديل الوضع الليلي -->
                 
             </div>
 
@@ -395,7 +395,7 @@ ul li a:hover{
       </p>
     </div>
 
-    <!-- Table of Contents -->
+    <!-- جدول المحتويات -->
     <div class="toc">
       <h3 >Contents</h3>
       <ul>
@@ -461,7 +461,7 @@ ul li a:hover{
 
   </div>
 
-  <!-- Scroll to top button -->
+  <!-- زر التمرير للأعلى -->
   <button onclick="scrollToTop()" class="top-btn">↑</button>
   <script>
     function scrollToTop() {
@@ -469,19 +469,19 @@ ul li a:hover{
     }
   </script>
 
-  <!--footer-->
+  <!--التذييل-->
   
 <footer class="footer">
     <div class="footer-container">
 
-        <!-- Logo -->
+        <!-- الشعار -->
         <div class="footer-col">
             <div class="logo">
                 <img src="../img/logo.png" alt="Logo">
             </div>
         </div>
 
-        <!-- Links -->
+        <!-- الروابط -->
         <div class="footer-col">
             <h5>Quick Links</h5>
             <ul>
@@ -491,7 +491,7 @@ ul li a:hover{
             </ul>
         </div>
 
-        <!-- Contact -->
+        <!-- تواصل معنا -->
         <div class="footer-col">
             <h5>Contact Us</h5>
             <div class="contact-list">
@@ -507,7 +507,7 @@ ul li a:hover{
             </div>
         </div>
 
-        <!-- Form -->
+        <!-- النموذج -->
         <div class="footer-col">
             <h5>Send Message</h5>
             <form class="contact-form">
@@ -524,7 +524,7 @@ ul li a:hover{
 </footer>
 
 
-<!--script nav-->
+<!--سكريبت شريط التنقل-->
 <script>
     const themeBtn = document.getElementById('theme-switch');
     const themeIcon = document.getElementById('theme-icon');

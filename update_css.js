@@ -4,7 +4,7 @@ const path = require('path');
 const cssPath = path.join('c:\\Users\\mohab\\Desktop\\Craft-code-main v1.3\\style', 'style.css');
 
 const cssToAppend = `
-/* RBAC Utility Classes */
+/* كلاسات الصلاحيات (RBAC) */
 .hidden { display: none !important; }
 
 body.role-guest .student-only, 

@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-/* ========== BASE STYLES ========== */
+/* ========== الأنماط الأساسية ========== */
 body { 
     margin: 0;
     padding: 0;
@@ -22,13 +22,13 @@ body {
     flex-direction: column;
 }
 
-/* Dark Mode */
+/* الوضع الليلي */
 body.dark-mode-active { 
     background-color: #0a0a14; 
     color: #ffffff; 
 }
 
-/* ========== NEW NAVBAR STYLES (MERGED) ========== */
+/* ========== أنماط شريط التنقل الجديدة ========== */
 header {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -94,7 +94,7 @@ nav {
     transform: rotateY(360deg);
 }
 
-/* Dark mode button inside navbar (added to match original functionality) */
+/* زر الوضع الليلي داخل شريط التنقل */
 #theme-switch { 
     background: rgba(255, 255, 255, 0.1); 
     border: none; 
@@ -110,7 +110,7 @@ nav {
     color: #6C5CE7;
 }
 
-/* ===== Profile Section ===== */
+/* ===== قسم الملف الشخصي ===== */
 .profile {
     max-width: 1100px;
     margin: 50px auto;
@@ -150,7 +150,7 @@ body.dark-mode-active .profile-card {
     margin-top: 10px;
 }
 
-/* ===== Courses ===== */
+/* ===== الدورات ===== */
 .section {
     margin-top: 40px;
 }
@@ -187,7 +187,7 @@ body.dark-mode-active .course {
     text-decoration: none;
 }
 
-/* ===== Dashboard ===== */
+/* ===== لوحة التحكم ===== */
 .dashboard {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -210,7 +210,7 @@ body.dark-mode-active .chart-box {
     color: #6C5CE7;
 }
 
-/* ===== Footer ===== */
+/* ===== التذييل (Footer) ===== */
 .footer {
     background: #1A1642;
     color: #FFFFFF;
@@ -334,7 +334,7 @@ ul li a:hover {
     color: #ccc; 
 }
 
-/* Responsive */
+/* متجاوب مع الشاشات */
 @media (max-width: 768px) {
     .profile-card {
         flex-direction: column;
@@ -366,7 +366,7 @@ ul li a:hover {
 </head>
 <body>
 
-<!-- ===== NEW NAVBAR (MERGED) ===== -->
+<!-- ===== شريط التنقل الجديد ===== -->
 <header>
     <nav>
         <a class="logo" href="#">CodeCraft</a>
@@ -393,7 +393,7 @@ ul li a:hover {
     </nav>
 </header>
 
-<!-- ===== PROFILE CONTENT ===== -->
+<!-- ===== محتوى الملف الشخصي ===== -->
 <div class="dash-wrapper">
     <aside class="dash-sidebar">
       <nav class="sidebar-nav" id="sidebar-menu">
@@ -427,11 +427,11 @@ ul li a:hover {
             <span class="badge">Top Instructor</span>
         </div>
         <div class="profile-actions">
-            <button id="logoutBtn" class="logout-btn">Logout</button>
+            <button id="logoutBtn" class="logout-btn">تسجيل خروج</button>
         </div>
     </div>
 
-    <!-- Course Creation -->
+    <!-- إنشاء دورة -->
     <div class="section">
         <h2>Create New Course</h2>
         <form id="create-course-form" class="course-form">
@@ -441,19 +441,19 @@ ul li a:hover {
         </form>
     </div>
 
-    <!-- Courses -->
+    <!-- الدورات -->
     <div class="section">
-        <h2>My Courses</h2>
+        <h2>My الدورات</h2>
         <div class="courses" id="courses-list">
             <p>Loading your courses...</p>
         </div>
     </div>
 
-    <!-- Dashboard Charts -->
+    <!-- مخططات لوحة التحكم -->
     <div class="section">
         <div class="dashboard">
             <div class="chart-box">
-                <h3>Students per Course</h3>
+                <h3>طالبs per Course</h3>
                 <canvas id="studentsChart"></canvas>
             </div>
             <div class="chart-box">
@@ -466,31 +466,31 @@ ul li a:hover {
     </main>
 </div>
 
-<!-- ===== FOOTER ===== -->
-<footer class="footer">
-    <div class="footer-container">
-        <div class="footer-col">
+<!-- ===== التذييل ===== -->
+<التذييل class="التذييل">
+    <div class="التذييل-container">
+        <div class="التذييل-col">
             <div class="logo">
-                <img src="../img/logo.png" alt="Logo">
+                <img src="../img/logo.png" alt="الشعار">
             </div>
         </div>
-        <div class="footer-col">
-            <h5>Quick Links</h5>
+        <div class="التذييل-col">
+            <h5>Quick الروابط</h5>
             <ul>
                 <li><a href="./home.html">Home</a></li> 
                 <li><a href="./home.html#contact">Support</a></li>
                 <li><a href="./terms.html">Terms & Conditions</a></li>
             </ul>
         </div>
-        <div class="footer-col">
-            <h5>Contact Us</h5>
+        <div class="التذييل-col">
+            <h5>تواصل معنا Us</h5>
             <div class="contact-list">
                 <a href="https://wa.me/201104895301" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
                 <a href="tel:+201104895301"><i class="fas fa-phone"></i> Call Us</a>
                 <a href="mailto:mohamedleqaa13@gmail.com"><i class="fas fa-envelope"></i> Email</a>
             </div>
         </div>
-        <div class="footer-col">
+        <div class="التذييل-col">
             <h5>Send Message</h5>
             <form class="contact-form">
                 <input type="text" placeholder="Your Name" required>
@@ -500,27 +500,27 @@ ul li a:hover {
             </form>
         </div>
     </div>
-    <div class="footer-bottom">
+    <div class="التذييل-bottom">
         Copyright © 2026 CODECRAFT. All rights reserved.
     </div>
-</footer>
+</التذييل>
 
-<!-- Student List Modal -->
+<!-- نافذة قائمة الطلاب -->
 <div id="studentsModal" class="modal">
     <div class="modal-content">
         <span class="close-btn">&times;</span>
-        <h2>Enrolled Students for <span id="modalCourseTitle"></span></h2>
-        <div id="modalStudentList">
-            <!-- Student list will be populated here -->
+        <h2>Enrolled طالبs for <span id="modalCourseTitle"></span></h2>
+        <div id="modalطالبList">
+            <!-- سيتم عرض قائمة الطلاب هنا -->
         </div>
     </div>
 </div>
 
-<!-- CHARTS & SCRIPTS -->
+<!-- المخططات والسكريبتات -->
 <script src="../script/chart.js"></script>
-<script src="../script/nav.js" defer></script>
+<script src="../script/شريط التنقل.js" defer></script>
 <style>
-    /* Modal Styles */
+    /* أنماط النافذة المنبثقة (Modal) */
     .modal {
         display: none; 
         position: fixed; 
@@ -568,7 +568,7 @@ ul li a:hover {
     .btn-upload { padding: 8px 12px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; }
     .profile-img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; background: linear-gradient(135deg, #6C5CE7, #FF00FF); }
 
-    /* Student List in Modal */
+    /* قائمة الطلاب في النافذة */
     .student-list { list-style: none; padding: 0; max-height: 400px; overflow-y: auto; }
     .student-list li {
         display: flex;
@@ -587,11 +587,11 @@ ul li a:hover {
     .student-list .enroll-date { font-size: 0.85em; color: #555; }
     body.dark-mode-active .student-list .enroll-date { color: #bbb; }
 
-    /* View Students Button */
+    /* زر عرض الطلاب */
     .btn-view-students { padding: 8px 12px; background: #17a2b8; color: white; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px; }
 </style>
 <script>
-    // Charts
+    // المخططات
     new Chart(document.getElementById('studentsChart'), {
         type: 'bar',
         data: {
@@ -614,7 +614,7 @@ ul li a:hover {
         }
     });
 
-    // Dark Mode Toggle (works with new navbar button)
+    // تبديل الوضع الليلي (يعمل مع زر الشريط الجديد)
     const themeBtn = document.getElementById('theme-switch');
     const themeIcon = document.getElementById('theme-icon');
 
@@ -624,7 +624,7 @@ ul li a:hover {
         themeIcon.classList.replace(isDark ? 'fa-moon' : 'fa-sun', isDark ? 'fa-sun' : 'fa-moon');
     };
 
-    // --- DYNAMIC DATA SCRIPT ---
+    // --- سكريبت البيانات الديناميكية ---
     document.addEventListener('DOMContentLoaded', async () => {
         const token = localStorage.getItem('authToken');
         if (!token) {
@@ -634,6 +634,7 @@ ul li a:hover {
         }
 
         try {
+            // هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
             const response = await fetch('http://localhost:5000/api/auth/me', {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -646,7 +647,7 @@ ul li a:hover {
                     document.getElementById('userAvatar').src = `http://localhost:5000${data.profilePic}`;
                 }
                 
-                // Fetch and display courses
+                // جلب وعرض الدورات
                 fetchInstructorCourses(token);
             } else {
                 localStorage.removeItem('authToken');
@@ -657,14 +658,14 @@ ul li a:hover {
         }
     });
 
-    // Logout
+    // تسجيل خروج
     document.getElementById('logoutBtn').addEventListener('click', () => {
         localStorage.removeItem('authToken');
         alert("You have been logged out.");
         window.location.href = 'login.html';
     });
 
-    // Avatar Upload
+    // رفع الصورة الشخصية
     document.querySelector('.avatar-upload').addEventListener('click', () => document.getElementById('avatarInput').click());
     document.getElementById('avatarInput').addEventListener('change', async (event) => {
         const file = event.target.files[0];
@@ -672,6 +673,7 @@ ul li a:hover {
         const formData = new FormData();
         formData.append('avatar', file);
         const token = localStorage.getItem('authToken');
+        // هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
         const response = await fetch('http://localhost:5000/api/auth/me/photo', {
             method: 'PUT',
             headers: { 'Authorization': `Bearer ${token}` },
@@ -687,13 +689,14 @@ ul li a:hover {
         }
     });
 
-    // Course Creation
+    // إنشاء دورة
     document.getElementById('create-course-form').addEventListener('submit', async (e) => {
         e.preventDefault();
         const title = document.getElementById('courseTitle').value;
         const description = document.getElementById('courseDescription').value;
         const token = localStorage.getItem('authToken');
 
+        // هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
         const response = await fetch('http://localhost:5000/api/courses', {
             method: 'POST',
             headers: {
@@ -706,7 +709,7 @@ ul li a:hover {
         const result = await response.json();
         if (response.ok) {
             alert(`Course "${result.data.title}" created successfully!`);
-            addCourseToList(result.data); // Dynamically add the new course
+            addCourseToList(result.data); // إضافة الدورة الجديدة ديناميكياً
             e.target.reset();
         } else {
             alert(result.message || 'Failed to create course.');
@@ -716,7 +719,7 @@ ul li a:hover {
     function addCourseToList(course) {
         const coursesListContainer = document.getElementById('courses-list');
         
-        // If the "no courses yet" message is present, remove it
+        // إزالة رسالة 'لا توجد دورات' إن وُجدت
         const noCoursesP = coursesListContainer.querySelector('p');
         if (noCoursesP) {
             noCoursesP.remove();
@@ -745,10 +748,11 @@ ul li a:hover {
         courseEl.querySelector('.btn-view-students').addEventListener('click', handleViewStudentsClick);
     }
 
-    // --- NEW: Fetch and Display Instructor's Courses ---
+    // --- NEW: Fetch and Display Instructor's الدورات ---
     async function fetchInstructorCourses(token) {
         const coursesListContainer = document.getElementById('courses-list');
         try {
+            // هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
             const response = await fetch('http://localhost:5000/api/courses/mycourses', {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -828,6 +832,7 @@ ul li a:hover {
         submitButton.disabled = true;
 
         try {
+            // هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
             const response = await fetch(`http://localhost:5000/api/videos/upload/${courseId}`, {
                 method: 'POST',
                 headers: { 'Authorization': `Bearer ${token}` },
@@ -858,6 +863,7 @@ ul li a:hover {
         button.textContent = 'Deleting...';
         
         try {
+            // هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
             const response = await fetch(`http://localhost:5000/api/courses/${courseId}/videos/${videoId}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${token}` }
@@ -878,7 +884,7 @@ ul li a:hover {
         }
     }
 
-    // --- NEW: Modal and Student List Logic ---
+    // --- NEW: Modal and طالب List Logic ---
     const modal = document.getElementById('studentsModal');
     const closeBtn = modal.querySelector('.close-btn');
     closeBtn.onclick = () => { modal.style.display = 'none'; };
@@ -901,6 +907,7 @@ ul li a:hover {
 
         const token = localStorage.getItem('authToken');
         try {
+            // هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
             const response = await fetch(`http://localhost:5000/api/courses/${courseId}/students`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });

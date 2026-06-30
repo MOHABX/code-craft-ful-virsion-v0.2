@@ -3,16 +3,20 @@ const router = express.Router();
 const { protect } = require('../middlewares/authMiddleware');
 const userController = require('../userController');
 
-// Get courses enrolled by the logged-in user
+// جلب الدورات التي اشترك بها المستخدم
+// هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
 router.get('/my-courses', protect, userController.getMyCourses);
 
-// Get user's completed videos for a specific course
+// جلب الفيديوهات المكتملة للمستخدم لدورة معينة
+// هذي الدالة تجيب علوم الدورات والكورسات، عشان الربع يستفيدون ويتعلمون
 router.get('/progress/:courseId', protect, userController.getCourseProgress);
 
-// Get public instructor profile with their courses + avg ratings
+// جلب الملف الشخصي العام للمدرب مع دوراته والتقييمات
+// هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
 router.get('/instructor/:id', userController.getInstructorProfile);
 
-// Get logged-in user's dashboard stats
+// جلب إحصائيات لوحة التحكم للمستخدم
+// هني نجيب ملف الرجال وعلومه الشخصية، عشان نعرف مع مين نسولف
 router.get('/dashboard', protect, userController.getDashboardStats);
 
 module.exports = router;
